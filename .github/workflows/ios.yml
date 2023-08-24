@@ -6,9 +6,7 @@ jobs:
  build-and-test:
   runs-on: macos-latest
   
- steps:
-  - uses: actions/checkout@v2
-  - name: Select Xcode
-    run: sudo Xcode-select -switch /Applications/Xcode_14.3.1.app
-  - name: Build & Test
-    run: xcodebuild clean build test -workspace ProjectName.xcworkspace -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.4'
+  steps:
+   - uses: actions/checkout@v2
+   - run: sudo Xcode-select -switch /Applications/Xcode_14.3.1.app
+   - run: xcodebuild clean build test -workspace ProjectName.xcworkspace -scheme SchemeName -destination 'platform=iOS Simulator,name=iPhone 14 Pro Max,OS=16.4'
