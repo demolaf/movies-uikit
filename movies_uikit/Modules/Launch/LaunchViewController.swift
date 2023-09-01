@@ -12,12 +12,26 @@ protocol LaunchViewDelegate: AnyView {}
 
 class LaunchViewController: UIViewController, LaunchViewDelegate {
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Loading application, please wait..."
+        label.textColor = .label
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 20)
+        return label
+    }()
+    
     var presenter: AnyPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
+        view.backgroundColor = .gray
+        view.addSubview(titleLabel)
+        
+        titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 150)
+        titleLabel.center = view.center
         
         (presenter as? LaunchPresenter)?.initialize()
     }

@@ -15,6 +15,7 @@ class HomeRouter: HomeRouterDelegate {
     var entry: EntryPoint?
     
     static func route() -> AnyRouter {
+        print("initializing home route")
         let router = HomeRouter()
         
         // Assign VIP
@@ -35,7 +36,7 @@ class HomeRouter: HomeRouterDelegate {
         
         // setup router entry with specific view controller
         router.entry = view
-        
+        print("finished initializing home route")
         return router
     }
     

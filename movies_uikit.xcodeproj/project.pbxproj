@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70DB192A9960230024FE23 /* AppRouter.swift */; };
+		7ECCCACC2A999A1B005F1138 /* HomeBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCACB2A999A1B005F1138 /* HomeBarButtonItems.swift */; };
 		7EEAAD722A9920950087AF46 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD712A9920950087AF46 /* HomeViewController.swift */; };
-		7EEAAD752A9923390087AF46 /* HeaderMovieItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD742A9923390087AF46 /* HeaderMovieItemView.swift */; };
+		7EEAAD752A9923390087AF46 /* HeaderMovieItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD742A9923390087AF46 /* HeaderMovieItemViewCell.swift */; };
 		7EEAAD792A99321C0087AF46 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD782A99321C0087AF46 /* HomeRouter.swift */; };
 		7EEAAD7D2A9934110087AF46 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD7C2A9934110087AF46 /* HomeInteractor.swift */; };
 		7EEAAD7F2A9934400087AF46 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD7E2A9934400087AF46 /* HomePresenter.swift */; };
@@ -26,8 +27,9 @@
 
 /* Begin PBXFileReference section */
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		7ECCCACB2A999A1B005F1138 /* HomeBarButtonItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarButtonItems.swift; sourceTree = "<group>"; };
 		7EEAAD712A9920950087AF46 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		7EEAAD742A9923390087AF46 /* HeaderMovieItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMovieItemView.swift; sourceTree = "<group>"; };
+		7EEAAD742A9923390087AF46 /* HeaderMovieItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderMovieItemViewCell.swift; sourceTree = "<group>"; };
 		7EEAAD782A99321C0087AF46 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		7EEAAD7C2A9934110087AF46 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		7EEAAD7E2A9934400087AF46 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -113,6 +115,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7EC468962A9EDB2800B6D28F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7EEAAD5D2A98E1710087AF46 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +165,7 @@
 		7EEAAD622A98E1FC0087AF46 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				7EC468962A9EDB2800B6D28F /* Extensions */,
 				7EEAAD762A9930A50087AF46 /* Components */,
 				7EEAAD732A9922FF0087AF46 /* Views */,
 				7EEAAD712A9920950087AF46 /* HomeViewController.swift */,
@@ -166,7 +176,8 @@
 		7EEAAD732A9922FF0087AF46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7EEAAD742A9923390087AF46 /* HeaderMovieItemView.swift */,
+				7EEAAD742A9923390087AF46 /* HeaderMovieItemViewCell.swift */,
+				7ECCCACB2A999A1B005F1138 /* HomeBarButtonItems.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,9 +322,10 @@
 				7EEAAD822A993A140087AF46 /* ViperProtocols.swift in Sources */,
 				7EEAAD8A2A993CC80087AF46 /* LaunchInteractor.swift in Sources */,
 				7EEAAD882A993CA00087AF46 /* LaunchRouter.swift in Sources */,
+				7ECCCACC2A999A1B005F1138 /* HomeBarButtonItems.swift in Sources */,
 				7EEAAD7D2A9934110087AF46 /* HomeInteractor.swift in Sources */,
 				7EEAAD8C2A993CD20087AF46 /* LaunchPresenter.swift in Sources */,
-				7EEAAD752A9923390087AF46 /* HeaderMovieItemView.swift in Sources */,
+				7EEAAD752A9923390087AF46 /* HeaderMovieItemViewCell.swift in Sources */,
 				7EEAAD722A9920950087AF46 /* HomeViewController.swift in Sources */,
 				7EEAAD862A993C6D0087AF46 /* LaunchViewController.swift in Sources */,
 				7EEAAD7F2A9934400087AF46 /* HomePresenter.swift in Sources */,
@@ -464,8 +476,7 @@
 				INFOPLIST_FILE = movies_uikit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -491,8 +502,7 @@
 				INFOPLIST_FILE = movies_uikit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

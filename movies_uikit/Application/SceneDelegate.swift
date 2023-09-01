@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         // NOTE: you can change this to use any view controller
-        let initialVC = Routes.launch.vc
+        let initialVC = Routes.home.vc
         
         // Set root view controller to be navigation controller
         let navigationController = UINavigationController(rootViewController: initialVC)
