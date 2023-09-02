@@ -1,5 +1,5 @@
 //
-//  ViperProtocols.swift
+//  AppProtocols.swift
 //  movies_uikit
 //
 //  Created by Ademola Fadumo on 25/08/2023.
@@ -27,10 +27,10 @@ typealias EntryPoint = AnyView & UIViewController
 protocol AnyRouter {
     // this is how we tell our app delegate that this is the entry for our application
     var entry: EntryPoint? { get }
-    
+
     static func route() -> AnyRouter
-    
+
     func push(to route: Routes, from vc: UIViewController)
-    
+
     func pop(from vc: UIViewController)
 }
