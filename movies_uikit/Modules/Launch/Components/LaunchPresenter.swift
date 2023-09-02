@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol LaunchPresenterDelegate: AnyPresenter {
+protocol LaunchPresenterDelegate: AnyPresenter, AnyObject {
     func initialize()
 }
 
@@ -17,17 +17,17 @@ protocol LaunchPresenterDelegate: AnyPresenter {
 /// - Calls methods in the `Router`
 class LaunchPresenter: LaunchPresenterDelegate {
     var view: AnyView?
-    
+
     var router: AnyRouter?
-    
+
     var interactor: AnyInteractor?
-    
+
     func initialize() {
         print("Initializing launch")
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let vc = self.view as? UIViewController
-            
+
             if let vc = vc {
                 self.router?.push(to: Routes.home, from: vc)
             }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LaunchInteractorDelegate: AnyInteractor {}
+protocol LaunchInteractorDelegate: AnyInteractor, AnyObject {}
 
 /// - Calls methods in `Repositories`
 class LaunchInteractor: LaunchInteractorDelegate {
