@@ -11,26 +11,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         print("Here is tmdb api key \(Environment.tmdbApiKey)")
-        
-        // NOTE: you can change this to use any view controller
-        let initialVC = Routes.home.vc
-        
-        // Set root view controller to be navigation controller
-        let navigationController = UINavigationController(rootViewController: initialVC)
-        
-        // set main window root view controller to navigation controller
+
+        // Set root view controller to be main tab bar controller
+        let tabBarController = MainTabBarViewController()
+
+        // set main window root view controller to main tab bar controller
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = navigationController
-        
+        window.rootViewController = tabBarController
+
         //
         self.window = window
         window.makeKeyAndVisible()
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let navigationController = window?.rootViewController as?
+                UINavigationController else {
+            return
+        }
+
+        for context in URLContexts {
+            if context.url.scheme == "movies-uikit" && context.url.absoluteString.localizedCaseInsensitiveContains("authenticate") {
+                (UIApplication.shared.delegate as? AppDelegate)?.repositoryProvider.authRepository.getSessionId { success in
+                    if success {
+                        navigationController.pushViewController(Routes.home.vc, animated: true)
+                    }
+                }
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -61,6 +74,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
 }
-
