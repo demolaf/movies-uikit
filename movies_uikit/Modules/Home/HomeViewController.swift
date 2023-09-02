@@ -41,9 +41,15 @@ class HomeViewController: UIViewController, HomeViewDelegate {
     private var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
             return HomeViewController.createSectionLayout(section: sectionIndex)})
+        
         collectionView.register(HeaderMovieItemViewCell.self, forCellWithReuseIdentifier: HeaderMovieItemViewCell.identifier)
+        
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        
+        collectionView.register(HomeViewHeaderCollectionResuableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HomeViewHeaderCollectionResuableView.identifier)
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         return collectionView
     }()
     
@@ -127,6 +133,15 @@ extension HomeViewController {
 // MARK: - UICollectionView Delegate & DataSource
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let type = self.sections[indexPath.section]
@@ -154,12 +169,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
     }
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeViewHeaderCollectionResuableView.identifier, for: indexPath) as? HomeViewHeaderCollectionResuableView else {
+            return UICollectionReusableView()
+        }
+        return headerView
     }
     
     static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {
@@ -207,6 +221,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             // Section
             let section = NSCollectionLayoutSection(group: group)
+            
+            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                          heightDimension: .absolute(50.0))
+            let header = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: footerHeaderSize,
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top)
+            
+            section.boundarySupplementaryItems = [header]
+            
             section.orthogonalScrollingBehavior = .continuous
             return section
         }

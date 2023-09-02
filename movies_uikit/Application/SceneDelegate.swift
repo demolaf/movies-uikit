@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
+        print("Here is tmdb api key \(Environment.tmdbApiKey)")
+        
         // NOTE: you can change this to use any view controller
         let initialVC = Routes.home.vc
         
