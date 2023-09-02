@@ -197,7 +197,7 @@
 		7E70DB3D2A996DE70024FE23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7EEB76C52AA377CB009634FB /* Requests */,
+				7EEB76C52AA377CB009634FB /* Request */,
 				7EEB76C42AA377C0009634FB /* Response */,
 			);
 			path = Model;
@@ -435,12 +435,12 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		7EEB76C52AA377CB009634FB /* Requests */ = {
+		7EEB76C52AA377CB009634FB /* Request */ = {
 			isa = PBXGroup;
 			children = (
 				7EEB76BD2AA2E28B009634FB /* CreateSession.swift */,
 			);
-			path = Requests;
+			path = Request;
 			sourceTree = "<group>";
 		};
 		7EF4AFB02A82DC970001B902 = {
