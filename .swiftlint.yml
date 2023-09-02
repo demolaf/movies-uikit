@@ -1,0 +1,7 @@
+excluded:
+  - Carthage
+
+disabled_rules:
+  - orphaned_doc_comment
+  - line_length
+  - identifier_name
