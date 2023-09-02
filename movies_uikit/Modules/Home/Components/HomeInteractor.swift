@@ -7,10 +7,19 @@
 
 import Foundation
 
-protocol HomeInteractorDelegate: AnyInteractor {
-    // func getUsers()
+protocol HomeInteractorDelegate: AnyInteractor, AnyObject {
+     func getPopularMovies()
 }
 
 class HomeInteractor: HomeInteractorDelegate {
     var presenter: AnyPresenter?
+
+    var moviesRepository: MoviesRepository?
+
+    func getPopularMovies() {
+        moviesRepository?.getPopularMovies(completion: { [weak self] movies in
+            debugPrint("Movies \(movies)")
+            (self?.presenter as? HomePresenter)?.interactorDidFetchMovies(with: movies)
+        })
+    }
 }

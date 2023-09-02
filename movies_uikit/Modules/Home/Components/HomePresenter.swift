@@ -7,14 +7,22 @@
 
 import Foundation
 
-protocol HomePresenterDelegate: AnyPresenter {
-    // func interactorDidFetchUsers(with result: Result<[User], Error>)
+protocol HomePresenterDelegate: AnyPresenter, AnyObject {
+    func interactorDidFetchMovies(with movies: [Movie])
 }
 
 class HomePresenter: HomePresenterDelegate {
     var router: AnyRouter?
-    
-    var interactor: AnyInteractor?
-    
+
+    var interactor: AnyInteractor? {
+        didSet {
+            (interactor as? HomeInteractor)?.getPopularMovies()
+        }
+    }
+
     var view: AnyView?
+
+    func interactorDidFetchMovies(with movies: [Movie]) {
+        (view as? HomeViewController)?.update(with: movies)
+    }
 }
