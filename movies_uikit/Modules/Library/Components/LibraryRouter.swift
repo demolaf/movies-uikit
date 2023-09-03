@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 
-protocol LibraryRouterDelegate: AnyRouter, AnyObject {}
+protocol LibraryRouterDelegate: AnyObject {
+    var entry: EntryPoint? { get }
+}
 
 class LibraryRouter: LibraryRouterDelegate {
 
     var entry: EntryPoint?
 
-    static func route() -> AnyRouter {
+    static func route() -> LibraryRouter {
         print("initializing tvshows route")
         let router = LibraryRouter()
 
@@ -28,7 +30,10 @@ class LibraryRouter: LibraryRouterDelegate {
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.moviesRepository = (UIApplication.shared.delegate as? AppDelegate)?.repositoryProvider.moviesRepository
+        interactor.moviesRepository =
+        (UIApplication.shared.delegate as? AppDelegate)?
+            .repositoryProvider
+            .moviesRepository
 
         // setup presenter with router, view and interactor
         presenter.router = router

@@ -7,22 +7,25 @@
 
 import Foundation
 
-protocol LibraryPresenterDelegate: AnyPresenter, AnyObject {
+protocol LibraryPresenterDelegate: AnyObject {
+    var view: LibraryViewDelegate? { get set }
+    var interactor: LibraryInteractorDelegate? { get set }
+    var router: LibraryRouterDelegate? { get set }
+
+    func initialize()
     func interactorDidFetchMovies(with movies: [Movie])
 }
 
 class LibraryPresenter: LibraryPresenterDelegate {
-    var router: AnyRouter?
+    var router: LibraryRouterDelegate?
+    var interactor: LibraryInteractorDelegate?
+    var view: LibraryViewDelegate?
 
-    var interactor: AnyInteractor? {
-        didSet {
-            (interactor as? LibraryInteractor)?.getPopularMovies()
-        }
+    func initialize() {
+        interactor?.getPopularMovies()
     }
 
-    var view: AnyView?
-
     func interactorDidFetchMovies(with movies: [Movie]) {
-        (view as? LibraryViewController)?.update(with: movies)
+        view?.update(with: movies)
     }
 }

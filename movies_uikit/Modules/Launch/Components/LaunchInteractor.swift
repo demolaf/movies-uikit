@@ -7,9 +7,11 @@
 
 import Foundation
 
-protocol LaunchInteractorDelegate: AnyInteractor, AnyObject {}
+protocol LaunchInteractorDelegate: AnyObject {
+    var presenter: LaunchPresenterDelegate? { get set }
+}
 
 /// - Calls methods in `Repositories`
 class LaunchInteractor: LaunchInteractorDelegate {
-    var presenter: AnyPresenter?
+    var presenter: LaunchPresenterDelegate?
 }

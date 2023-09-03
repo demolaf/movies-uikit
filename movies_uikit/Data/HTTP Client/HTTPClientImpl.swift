@@ -9,12 +9,22 @@ import Alamofire
 
 class HTTPClientImpl: HTTPClient {
 
-    func get<ResponseType: Decodable>(url: URL?, headers: HTTPHeaders?, parameters: Parameters?, response: ResponseType.Type, completion: @escaping (Result<ResponseType, Error>) -> Void) -> DataRequest? {
+    func get<ResponseType: Decodable>(
+        url: URL?,
+        headers: HTTPHeaders?,
+        parameters: Parameters?,
+        response: ResponseType.Type,
+        completion: @escaping (Result<ResponseType, Error>
+        ) -> Void) -> DataRequest? {
         guard let url = url else {
             return nil
         }
 
-        let request = AF.request(url, method: HTTPMethod.get, parameters: parameters, headers: headers).responseDecodable(of: ResponseType.self) { response in
+        let request = AF.request(
+            url, method: HTTPMethod.get,
+            parameters: parameters,
+            headers: headers
+        ).responseDecodable(of: ResponseType.self) { response in
             switch response.result {
             case .success(let responseObject):
                 completion(.success(responseObject))
@@ -27,12 +37,22 @@ class HTTPClientImpl: HTTPClient {
         return request
     }
 
-    func post<ResponseType: Decodable>(url: URL?, parameters: Encodable, response: ResponseType.Type, completion: @escaping (Result<ResponseType, Error>) -> Void) -> DataRequest? {
+    func post<ResponseType: Decodable>(
+        url: URL?,
+        parameters: Encodable,
+        response: ResponseType.Type,
+        completion: @escaping (Result<ResponseType, Error>
+        ) -> Void) -> DataRequest? {
         guard let url = url else {
             return nil
         }
 
-        let request = AF.request(url, method: HTTPMethod.post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: ResponseType.self) { response in
+        let request = AF.request(
+            url,
+            method: HTTPMethod.post,
+            parameters: parameters,
+            encoder: JSONParameterEncoder.default)
+            .responseDecodable(of: ResponseType.self) { response in
             switch response.result {
             case .success(let responseObject):
                 completion(.success(responseObject))

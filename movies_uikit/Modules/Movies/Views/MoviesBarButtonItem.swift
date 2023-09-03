@@ -1,5 +1,5 @@
 //
-//  LeadingBarButtonItem.swift
+//  MoviesBarButtonItem.swift
 //  movies_uikit
 //
 //  Created by Ademola Fadumo on 26/08/2023.
@@ -8,20 +8,20 @@
 import Foundation
 import UIKit
 
-class LeadingBarButtonItem: UIBarButtonItem {
+class MoviesBarButtonItem: UIBarButtonItem {
 
-    let leadingIcon: UIImageView = {
+    private let leadingIcon: UIImageView = {
         let drawerIcon = UIImageView(image: UIImage(systemName: "ellipsis"))
         drawerIcon.tintColor = .label
         return drawerIcon
     }()
 
-    let navBarTitle: UILabel = {
+    private let navBarTitle: UILabel = {
         //
         let navBarTitle = UILabel()
 
         //
-        let firstText = "Play"
+        let firstText = "Watch"
         let secondText = "Movies"
 
         //
@@ -31,8 +31,18 @@ class LeadingBarButtonItem: UIBarButtonItem {
 
         //
         let attributedString = NSMutableAttributedString(string: title)
-        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.label, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24, weight: .regular)], range: NSRange(firstTextRange, in: title))
-        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24, weight: .regular)], range: NSRange(secondTextRange, in: title))
+        attributedString.addAttributes(
+            [NSAttributedString.Key.foregroundColor: UIColor.label,
+             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 32, weight: .bold)
+            ],
+            range: NSRange(firstTextRange, in: title)
+        )
+        attributedString.addAttributes(
+            [NSAttributedString.Key.foregroundColor: UIColor.red,
+             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 32, weight: .bold)
+            ],
+            range: NSRange(secondTextRange, in: title)
+        )
         navBarTitle.attributedText = attributedString
 
         return navBarTitle
@@ -53,7 +63,6 @@ class LeadingBarButtonItem: UIBarButtonItem {
     }
 
     func setupView() {
-        stackView.addArrangedSubview(leadingIcon)
         stackView.addArrangedSubview(navBarTitle)
 
         self.customView = stackView

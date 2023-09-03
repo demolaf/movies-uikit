@@ -7,11 +7,13 @@
 
 import UIKit
 
-protocol LoginViewDelegate: AnyView, AnyObject {}
+protocol LoginViewDelegate: AnyObject {
+    var presenter: LoginPresenterDelegate? { get set }
+}
 
 class LoginViewController: UIViewController, LoginViewDelegate {
 
-    var presenter: AnyPresenter?
+    var presenter: LoginPresenterDelegate?
 
     private let loginButton: UIButton = {
         let button = UIButton()
@@ -34,6 +36,8 @@ class LoginViewController: UIViewController, LoginViewDelegate {
         view.addSubview(loginButton)
 
         loginButton.addTarget(self, action: #selector(something), for: .touchUpInside)
+
+        presenter?.initialize()
     }
 
     override func viewDidLayoutSubviews() {

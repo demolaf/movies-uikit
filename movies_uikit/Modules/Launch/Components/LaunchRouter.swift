@@ -8,14 +8,20 @@
 import Foundation
 import UIKit
 
-protocol LaunchRouterDelegate: AnyRouter, AnyObject {}
+protocol LaunchRouterDelegate: AnyObject {
+    var entry: EntryPoint? { get }
+
+    func push(to route: Routes, from vc: UIViewController)
+
+    func pop(from vc: UIViewController)
+}
 
 /// - Handles navigation between view controllers
 class LaunchRouter: LaunchRouterDelegate {
 
     var entry: EntryPoint?
 
-    static func route() -> AnyRouter {
+    static func route() -> LaunchRouter {
         let router = LaunchRouter()
 
         // Assign VIP
@@ -37,7 +43,6 @@ class LaunchRouter: LaunchRouterDelegate {
         // setup router entry with specific view controller
         router.entry = view
 
-        print("Finished setting up launch route")
         return router
     }
 

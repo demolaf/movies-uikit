@@ -8,14 +8,16 @@
 import Foundation
 import UIKit
 
-protocol LoginRouterDelegate: AnyRouter, AnyObject {}
+protocol LoginRouterDelegate: AnyObject {
+    var entry: EntryPoint? { get }
+}
 
 /// - Handles navigation between view controllers
 class LoginRouter: LoginRouterDelegate {
 
     var entry: EntryPoint?
 
-    static func route() -> AnyRouter {
+    static func route() -> LoginRouter {
         let router = LoginRouter()
 
         // Assign VIP

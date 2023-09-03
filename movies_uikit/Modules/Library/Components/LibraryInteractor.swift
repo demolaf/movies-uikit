@@ -7,19 +7,16 @@
 
 import Foundation
 
-protocol LibraryInteractorDelegate: AnyInteractor, AnyObject {
+protocol LibraryInteractorDelegate: AnyObject {
+     var presenter: LibraryPresenterDelegate? { get set }
+
      func getPopularMovies()
 }
 
 class LibraryInteractor: LibraryInteractorDelegate {
-    var presenter: AnyPresenter?
+    var presenter: LibraryPresenterDelegate?
 
     var moviesRepository: MoviesRepository?
 
-    func getPopularMovies() {
-        moviesRepository?.getPopularMovies(completion: { [weak self] movies in
-            debugPrint("Movies \(movies)")
-            (self?.presenter as? LibraryPresenter)?.interactorDidFetchMovies(with: movies)
-        })
-    }
+    func getPopularMovies() {}
 }

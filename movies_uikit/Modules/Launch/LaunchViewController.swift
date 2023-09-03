@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-protocol LaunchViewDelegate: AnyView, AnyObject {}
+protocol LaunchViewDelegate: AnyObject {
+    var presenter: LaunchPresenterDelegate? { get set }
+}
 
 class LaunchViewController: UIViewController, LaunchViewDelegate {
 
@@ -22,7 +24,7 @@ class LaunchViewController: UIViewController, LaunchViewDelegate {
         return label
     }()
 
-    var presenter: AnyPresenter?
+    var presenter: LaunchPresenterDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,6 @@ class LaunchViewController: UIViewController, LaunchViewDelegate {
         titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 150)
         titleLabel.center = view.center
 
-        (presenter as? LaunchPresenter)?.initialize()
+        presenter?.initialize()
     }
 }

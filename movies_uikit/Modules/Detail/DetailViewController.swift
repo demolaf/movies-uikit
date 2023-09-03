@@ -7,18 +7,21 @@
 
 import UIKit
 
-protocol DetailViewDelegate: AnyView, AnyObject {
+protocol DetailViewDelegate: AnyObject {
+    var presenter: DetailPresenterDelegate? { get set }
+
     func update(with movies: [Movie])
 }
 
 class DetailViewController: UIViewController, DetailViewDelegate {
 
-    var presenter: AnyPresenter?
+    var presenter: DetailPresenterDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        presenter?.initialize()
     }
 
     func update(with movies: [Movie]) {

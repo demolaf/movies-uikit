@@ -18,10 +18,37 @@ class MoviesAPI {
         self.localStorage = localStorage
     }
 
-    func getPopularMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
+    func getPopularMovies(
+        completion: @escaping (Result<[Movie], Error>) -> Void
+    ) {
         var headers = HTTPHeaders()
         headers.add(name: "Authorization", value: "Bearer \(HTTPConstants.Auth.tmdbAuthToken)")
-        httpClient.get(url: HTTPConstants.Endpoints.getPopularShows.url, headers: headers, parameters: nil, response: PopularMoviesResponse.self) { result in
+        httpClient.get(
+            url: HTTPConstants.Endpoints.getPopularShows(typeOfShow: "movie").url,
+            headers: headers,
+            parameters: nil,
+            response: PopularMoviesResponse.self
+        ) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.results))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getPopularTVShows(
+        completion: @escaping (Result<[TVShow], Error>) -> Void
+    ) {
+        var headers = HTTPHeaders()
+        headers.add(name: "Authorization", value: "Bearer \(HTTPConstants.Auth.tmdbAuthToken)")
+        httpClient.get(
+            url: HTTPConstants.Endpoints.getPopularShows(typeOfShow: "tv").url,
+            headers: headers,
+            parameters: nil,
+            response: PopularTVShowsResponse.self
+        ) { result in
             switch result {
             case .success(let response):
                 completion(.success(response.results))

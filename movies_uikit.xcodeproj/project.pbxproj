@@ -27,6 +27,8 @@
 		7E0807F62AA4122600E6E5C2 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807F52AA4122600E6E5C2 /* DetailRouter.swift */; };
 		7E0807F82AA4122F00E6E5C2 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807F72AA4122F00E6E5C2 /* DetailInteractor.swift */; };
 		7E0807FA2AA4125100E6E5C2 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */; };
+		7E0807FD2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */; };
+		7E1B87672AA42FA70023A20D /* PopularTVShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */; };
 		7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70DB192A9960230024FE23 /* AppRouter.swift */; };
 		7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; };
 		7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -44,7 +46,7 @@
 		7EC468D52AA2AEB800B6D28F /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468D42AA2AEB800B6D28F /* AuthAPI.swift */; };
 		7EC468D72AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */; };
 		7EC468DB2AA2C38600B6D28F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468DA2AA2C38600B6D28F /* Environment.swift */; };
-		7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItems.swift */; };
+		7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */; };
 		7EEAAD722A9920950087AF46 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD712A9920950087AF46 /* MoviesViewController.swift */; };
 		7EEAAD752A9923390087AF46 /* PopularShowsItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD742A9923390087AF46 /* PopularShowsItemViewCell.swift */; };
 		7EEAAD792A99321C0087AF46 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD782A99321C0087AF46 /* MoviesRouter.swift */; };
@@ -111,6 +113,8 @@
 		7E0807F52AA4122600E6E5C2 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		7E0807F72AA4122F00E6E5C2 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsBarButtonItem.swift; sourceTree = "<group>"; };
+		7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTVShowsResponse.swift; sourceTree = "<group>"; };
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
@@ -126,7 +130,7 @@
 		7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionResuableView.swift; sourceTree = "<group>"; };
 		7EC468D82AA2C29200B6D28F /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		7EC468DA2AA2C38600B6D28F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesBarButtonItems.swift; sourceTree = "<group>"; };
+		7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesBarButtonItem.swift; sourceTree = "<group>"; };
 		7EEAAD712A9920950087AF46 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		7EEAAD742A9923390087AF46 /* PopularShowsItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularShowsItemViewCell.swift; sourceTree = "<group>"; };
 		7EEAAD782A99321C0087AF46 /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				7E0807E62AA40EFF00E6E5C2 /* Components */,
+				7E0807FB2AA423F300E6E5C2 /* Views */,
 				7E0807DF2AA40C1200E6E5C2 /* TVShowsViewController.swift */,
 			);
 			path = "TV Shows";
@@ -257,6 +262,14 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		7E0807FB2AA423F300E6E5C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7E70DB3D2A996DE70024FE23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,7 +303,6 @@
 			isa = PBXGroup;
 			children = (
 				7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */,
-				7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItems.swift */,
 				7E0807DC2AA3F9CE00E6E5C2 /* NewAndRecommendedCollectionViewCell.swift */,
 				7EEAAD742A9923390087AF46 /* PopularShowsItemViewCell.swift */,
 			);
@@ -421,6 +433,7 @@
 		7EEAAD732A9922FF0087AF46 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -496,6 +509,7 @@
 				7EEB76BF2AA2E376009634FB /* CreateSessionResponse.swift */,
 				7EEB76C22AA2ED57009634FB /* RequestTokenResponse.swift */,
 				7EEB76C62AA37819009634FB /* PopularMoviesResponse.swift */,
+				7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -661,6 +675,7 @@
 				7EC468DB2AA2C38600B6D28F /* Environment.swift in Sources */,
 				7E0807F12AA410CD00E6E5C2 /* LibraryInteractor.swift in Sources */,
 				7EEB76C02AA2E376009634FB /* CreateSessionResponse.swift in Sources */,
+				7E0807FD2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift in Sources */,
 				7E0807EF2AA410C000E6E5C2 /* LibraryRouter.swift in Sources */,
 				7E0807E02AA40C1200E6E5C2 /* TVShowsViewController.swift in Sources */,
 				7EC468D22AA2AE0200B6D28F /* LocalStorage.swift in Sources */,
@@ -670,6 +685,7 @@
 				7E0807D32AA3AD7000E6E5C2 /* DetailViewController.swift in Sources */,
 				7EEAAD8A2A993CC80087AF46 /* LaunchInteractor.swift in Sources */,
 				7EC468C62AA2AAAD00B6D28F /* HTTPConstants.swift in Sources */,
+				7E1B87672AA42FA70023A20D /* PopularTVShowsResponse.swift in Sources */,
 				7EC468D32AA2AE0200B6D28F /* LocalStorageImpl.swift in Sources */,
 				7EEB76B92AA2D928009634FB /* LoginRouter.swift in Sources */,
 				7E0807EC2AA40F4000E6E5C2 /* TVShowsPresenter.swift in Sources */,
@@ -678,7 +694,7 @@
 				7EEAAD882A993CA00087AF46 /* LaunchRouter.swift in Sources */,
 				7EC468C52AA2AAAD00B6D28F /* HTTPClient.swift in Sources */,
 				7EC468C42AA2AAAD00B6D28F /* HTTPClientImpl.swift in Sources */,
-				7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItems.swift in Sources */,
+				7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */,
 				7EEB76CB2AA3830D009634FB /* MoviesRepositoryImpl.swift in Sources */,
 				7E0807DD2AA3F9CE00E6E5C2 /* NewAndRecommendedCollectionViewCell.swift in Sources */,
 				7EEAAD7D2A9934110087AF46 /* MoviesInteractor.swift in Sources */,

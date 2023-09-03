@@ -7,22 +7,27 @@
 
 import Foundation
 
-protocol DetailPresenterDelegate: AnyPresenter, AnyObject {
+protocol DetailPresenterDelegate: AnyObject {
+    var view: DetailViewDelegate? { get set }
+    var interactor: DetailInteractorDelegate? { get set }
+    var router: DetailRouterDelegate? { get set }
+
+    func initialize()
     func interactorDidFetchMovies(with movies: [Movie])
 }
 
 class DetailPresenter: DetailPresenterDelegate {
-    var router: AnyRouter?
+    var router: DetailRouterDelegate?
 
-    var interactor: AnyInteractor? {
-        didSet {
-            (interactor as? DetailInteractor)?.getPopularMovies()
-        }
+    var interactor: DetailInteractorDelegate?
+
+    var view: DetailViewDelegate?
+
+    func initialize() {
+        interactor?.getPopularMovies()
     }
 
-    var view: AnyView?
-
     func interactorDidFetchMovies(with movies: [Movie]) {
-        (view as? DetailViewController)?.update(with: movies)
+        view?.update(with: movies)
     }
 }

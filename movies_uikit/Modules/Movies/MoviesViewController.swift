@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 
-enum ShowsSectionType {
+enum MoviesSectionType {
     case popular(movies: [Movie])
     case new
     case recommended
 }
 
-protocol MoviesViewDelegate: AnyView, AnyObject {
+protocol MoviesViewDelegate: AnyObject {
+    var presenter: MoviesPresenterDelegate? { get set }
+
     func update(with movies: [Movie])
 }
 
@@ -23,29 +25,44 @@ class MoviesViewController: UIViewController, MoviesViewDelegate {
     // MARK: Views
 
     private let leadingBarButtonItems: [UIBarButtonItem] = {
-        let barButtonItem = LeadingBarButtonItem()
+        let barButtonItem = MoviesBarButtonItem()
         return [barButtonItem]
     }()
 
     private let trailingBarButtonItems: [UIBarButtonItem] = {
-        let searchBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: MoviesViewController.self, action: #selector(searchBarButtonItemPressed))
-        let castBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "display"), style: .plain, target: MoviesViewController.self, action: #selector(castBarButtonItemPressed))
+        let searchBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "magnifyingglass"),
+            style: .plain,
+            target: MoviesViewController.self,
+            action: #selector(searchBarButtonItemPressed)
+        )
 
         searchBarButtonItem.tintColor = .label
-        castBarButtonItem.tintColor = .label
 
-        return [castBarButtonItem, searchBarButtonItem]
+        return [searchBarButtonItem]
     }()
 
     private var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
             return MoviesViewController.createSectionLayout(section: sectionIndex)})
 
-        collectionView.register(PopularShowsItemViewCell.self, forCellWithReuseIdentifier: PopularShowsItemViewCell.reuseId)
+        collectionView.register(
+            PopularShowsItemViewCell.self,
+            forCellWithReuseIdentifier: PopularShowsItemViewCell.reuseId
+        )
 
-        collectionView.register(NewAndRecommendedCollectionViewCell.self, forCellWithReuseIdentifier: NewAndRecommendedCollectionViewCell.reuseId)
+        collectionView.register(
+            NewAndRecommendedCollectionViewCell.self,
+            forCellWithReuseIdentifier: NewAndRecommendedCollectionViewCell.reuseId
+        )
 
-        collectionView.register(HeaderCollectionResuableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionResuableView.reuseId)
+        collectionView.register(
+            HeaderCollectionResuableView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: HeaderCollectionResuableView.reuseId
+        )
 
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -54,9 +71,9 @@ class MoviesViewController: UIViewController, MoviesViewDelegate {
 
     // MARK: Properties
 
-    var presenter: AnyPresenter?
+    var presenter: MoviesPresenterDelegate?
 
-    private var sections = [ShowsSectionType]()
+    private var sections = [MoviesSectionType]()
 
     // MARK: Initialization
 
@@ -66,6 +83,8 @@ class MoviesViewController: UIViewController, MoviesViewDelegate {
         setupViewAppearance()
         initializeSubviews()
         setupCollectionViews()
+
+        presenter?.initialize()
     }
 
     override func viewDidLayoutSubviews() {
@@ -90,20 +109,16 @@ class MoviesViewController: UIViewController, MoviesViewDelegate {
         configureCellData(popularMovies: movies)
     }
 
+    // TODO: Should I move this out of here and into presenter?
     private func configureCellData(popularMovies: [Movie]) {
-        print("Got here? \(popularMovies.count)")
         sections.append(.popular(movies: popularMovies))
         sections.append(.new)
         sections.append(.recommended)
-        print("Got here? \(sections.count)")
         collectionView.reloadData()
     }
 
     @objc
     private func searchBarButtonItemPressed() {}
-
-    @objc
-    private func castBarButtonItemPressed() {}
 }
 
 // MARK: Appearance
@@ -122,10 +137,20 @@ extension MoviesViewController {
 
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 36),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 36
+            ),
+            collectionView.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor,
+                constant: 24
+            ),
+            collectionView.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor
+            ),
+            collectionView.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            )
         ])
     }
 }
@@ -134,14 +159,19 @@ extension MoviesViewController {
 
 extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(
+        in collectionView: UICollectionView
+    ) -> Int {
         return sections.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         let section = sections[section]
         switch section {
-        case .popular(movies: let movies):
+        case .popular(let movies):
             return movies.count
         case .new:
             return 10
@@ -150,13 +180,20 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt
+        indexPath: IndexPath
+    ) -> UICollectionViewCell {
 
         let type = self.sections[indexPath.section]
 
         switch type {
         case .popular(let movies):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularShowsItemViewCell.reuseId, for: indexPath) as? PopularShowsItemViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PopularShowsItemViewCell.reuseId,
+                for: indexPath
+            ) as? PopularShowsItemViewCell else {
                 return UICollectionViewCell()
             }
 
@@ -164,13 +201,19 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             cell.configureViewData(movie: movie)
             return cell
         case .new:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularShowsItemViewCell.reuseId, for: indexPath) as? PopularShowsItemViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PopularShowsItemViewCell.reuseId,
+                for: indexPath
+            ) as? PopularShowsItemViewCell else {
                 return UICollectionViewCell()
             }
             cell.configureViewData(movie: nil)
             return cell
         case .recommended:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularShowsItemViewCell.reuseId, for: indexPath) as? PopularShowsItemViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: PopularShowsItemViewCell.reuseId,
+                for: indexPath
+            ) as? PopularShowsItemViewCell else {
                 return UICollectionViewCell()
             }
             cell.configureViewData(movie: nil)
@@ -179,21 +222,31 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
     }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCollectionResuableView.reuseId, for: indexPath) as? HeaderCollectionResuableView else {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: HeaderCollectionResuableView.reuseId,
+            for: indexPath
+        ) as? HeaderCollectionResuableView else {
             return UICollectionReusableView()
         }
         return headerView
     }
 
-    static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {
+    static func createSectionLayout(
+        section: Int
+    ) -> NSCollectionLayoutSection {
         switch section {
         case 0:
             // Item
             let item = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(
                     widthDimension: .absolute(320),
-                    heightDimension: .absolute(225)
+                    heightDimension: .absolute(250)
                 )
             )
 
@@ -232,12 +285,16 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             // Section
             let section = NSCollectionLayoutSection(group: group)
 
-            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                          heightDimension: .absolute(50.0))
+            let footerHeaderSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .absolute(50.0)
+            )
+
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: footerHeaderSize,
                 elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top)
+                alignment: .top
+            )
 
             section.boundarySupplementaryItems = [header]
 

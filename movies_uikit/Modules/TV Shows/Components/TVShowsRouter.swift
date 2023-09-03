@@ -8,14 +8,15 @@
 import Foundation
 import UIKit
 
-protocol TVShowsRouterDelegate: AnyRouter, AnyObject {}
+protocol TVShowsRouterDelegate: AnyObject {
+    var entry: EntryPoint? { get }
+}
 
 class TVShowsRouter: TVShowsRouterDelegate {
 
     var entry: EntryPoint?
 
-    static func route() -> AnyRouter {
-        print("initializing tvshows route")
+    static func route() -> TVShowsRouter {
         let router = TVShowsRouter()
 
         // Assign VIP
@@ -28,7 +29,10 @@ class TVShowsRouter: TVShowsRouterDelegate {
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.moviesRepository = (UIApplication.shared.delegate as? AppDelegate)?.repositoryProvider.moviesRepository
+        interactor.moviesRepository =
+        (UIApplication.shared.delegate as? AppDelegate)?
+            .repositoryProvider
+            .moviesRepository
 
         // setup presenter with router, view and interactor
         presenter.router = router
@@ -37,7 +41,6 @@ class TVShowsRouter: TVShowsRouterDelegate {
 
         // setup router entry with specific view controller
         router.entry = view
-        print("finished initializing tvshows route")
         return router
     }
 

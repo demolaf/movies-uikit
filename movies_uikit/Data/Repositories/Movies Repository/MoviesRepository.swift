@@ -9,4 +9,5 @@ import Foundation
 
 protocol MoviesRepository {
     func getPopularMovies(completion: @escaping ([Movie]) -> Void)
+    func getPopularTVShows(completion: @escaping ([TVShow]) -> Void)
 }

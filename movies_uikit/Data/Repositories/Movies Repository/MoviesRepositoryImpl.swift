@@ -25,4 +25,16 @@ class MoviesRepositoryImpl: MoviesRepository {
             }
         }
     }
+
+    func getPopularTVShows(completion: @escaping ([TVShow]) -> Void) {
+        moviesAPI.getPopularTVShows { result in
+            switch result {
+            case .success(let tvShows):
+                completion(tvShows)
+            case .failure(let error):
+                debugPrint("Failed to fetch tvShows \(error)")
+                completion([])
+            }
+        }
+    }
 }

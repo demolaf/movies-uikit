@@ -10,10 +10,21 @@ import Alamofire
 protocol HTTPClient {
     /// GET Method
     @discardableResult
-    func get<ResponseType: Decodable>(url: URL?, headers: HTTPHeaders?, parameters: Parameters?, response: ResponseType.Type, completion: @escaping (Result<ResponseType, Error>) -> Void) -> DataRequest?
+    func get<ResponseType: Decodable>(
+        url: URL?,
+        headers: HTTPHeaders?,
+        parameters: Parameters?,
+        response: ResponseType.Type,
+        completion: @escaping (Result<ResponseType, Error>) -> Void
+    ) -> DataRequest?
 
     /// POST Method
     @discardableResult
-    func post<ResponseType: Decodable>(url: URL?, parameters: Encodable, response: ResponseType.Type, completion: @escaping (Result<ResponseType, Error>) -> Void) -> DataRequest?
+    func post<ResponseType: Decodable>(
+        url: URL?,
+        parameters: Encodable,
+        response: ResponseType.Type,
+        completion: @escaping (Result<ResponseType, Error>) -> Void
+    ) -> DataRequest?
 
 }

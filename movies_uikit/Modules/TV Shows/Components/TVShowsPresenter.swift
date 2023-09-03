@@ -7,22 +7,25 @@
 
 import Foundation
 
-protocol TVShowsPresenterDelegate: AnyPresenter, AnyObject {
-    func interactorDidFetchMovies(with movies: [Movie])
+protocol TVShowsPresenterDelegate: AnyObject {
+    var view: TVShowsViewDelegate? { get set }
+    var interactor: TVShowsInteractorDelegate? { get set }
+    var router: TVShowsRouterDelegate? { get set }
+
+    func initialize()
+    func interactorDidFetchTVShows(with tvShows: [TVShow])
 }
 
 class TVShowsPresenter: TVShowsPresenterDelegate {
-    var router: AnyRouter?
+    var router: TVShowsRouterDelegate?
+    var interactor: TVShowsInteractorDelegate?
+    var view: TVShowsViewDelegate?
 
-    var interactor: AnyInteractor? {
-        didSet {
-            (interactor as? TVShowsInteractor)?.getPopularMovies()
-        }
+    func initialize() {
+        interactor?.getPopularTVShows()
     }
 
-    var view: AnyView?
-
-    func interactorDidFetchMovies(with movies: [Movie]) {
-        (view as? TVShowsViewController)?.update(with: movies)
+    func interactorDidFetchTVShows(with tvShows: [TVShow]) {
+        view?.update(with: tvShows)
     }
 }

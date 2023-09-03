@@ -25,7 +25,7 @@ class HTTPConstants {
         case getRequestToken
         case login
         case webAuth
-        case getPopularShows
+        case getPopularShows(typeOfShow: String)
         case getNewShows
         case getRecommendedShows
 
@@ -39,8 +39,8 @@ class HTTPConstants {
                 return Endpoints.baseUrlPrefix + "/authentication/token/validate_with_login" + Endpoints.apiKeyParam
             case .webAuth:
                 return "https://www.themoviedb.org/authenticate/\(Auth.requestToken)?redirect_to=movies-uikit:authenticate"
-            case .getPopularShows:
-                return Endpoints.baseUrlPrefix + "/movie/popular"
+            case .getPopularShows(let type):
+                return Endpoints.baseUrlPrefix + "/\(type)/popular"
             case .getNewShows:
                 return ""
             case .getRecommendedShows:

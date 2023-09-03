@@ -27,8 +27,7 @@ class PopularShowsItemViewCell: UICollectionViewCell {
     private let subtitleStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.spacing = 24
+        stack.alignment = .top
         stack.distribution = .equalSpacing
         return stack
     }()
@@ -36,7 +35,7 @@ class PopularShowsItemViewCell: UICollectionViewCell {
     private let titleLabelView: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.sizeToFit()
         label.numberOfLines = 0
         return label
@@ -44,17 +43,21 @@ class PopularShowsItemViewCell: UICollectionViewCell {
 
     private let ratingLabelView: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = .label
+        label.numberOfLines = 0
         label.sizeToFit()
         return label
     }()
 
     private let imageView: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.layer.masksToBounds = true
-        image.layer.cornerRadius = 8
-        return image
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        imageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     // MARK: Initialization
@@ -93,19 +96,32 @@ class PopularShowsItemViewCell: UICollectionViewCell {
         headerMovieItemStackView.addArrangedSubview(imageView)
         headerMovieItemStackView.addArrangedSubview(subtitleStackView)
 
-        addSubview(headerMovieItemStackView)
+        self.contentView.addSubview(headerMovieItemStackView)
     }
 
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            headerMovieItemStackView.topAnchor.constraint(equalTo: self.topAnchor),
-            headerMovieItemStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            headerMovieItemStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            headerMovieItemStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            headerMovieItemStackView.topAnchor.constraint(
+                equalTo: self.contentView.topAnchor
+            ),
+            headerMovieItemStackView.leadingAnchor.constraint(
+                equalTo: self.contentView.leadingAnchor
+            ),
+            headerMovieItemStackView.trailingAnchor.constraint(
+                equalTo: self.contentView.trailingAnchor
+            ),
+            headerMovieItemStackView.bottomAnchor.constraint(
+                equalTo: self.contentView.bottomAnchor
+            )
         ])
     }
 
-    private func setupCellAppearance() {}
+    private func setupCellAppearance() {
+//        imageView.layer.shadowOpacity = 0.75
+//        imageView.layer.shadowOffset = CGSize(width: 0, height: 3)
+//        imageView.layer.shadowRadius = 3.0
+//        imageView.layer.isGeometryFlipped = false
+    }
 
     // MARK: Public Methods
 
@@ -114,6 +130,19 @@ class PopularShowsItemViewCell: UICollectionViewCell {
             self.titleLabelView.text = movie.originalTitle
             self.ratingLabelView.text = "\(movie.voteAverage)/10"
             self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(movie.posterPath)")!)
+            return
+        }
+
+        self.titleLabelView.text = "N/A"
+        self.ratingLabelView.text = "0/10"
+        self.imageView.image = UIImage(systemName: "photo")
+    }
+
+    func configureViewData(tv: TVShow?) {
+        if let tv = tv {
+            self.titleLabelView.text = tv.originalName
+            self.ratingLabelView.text = "\(tv.voteAverage)/10"
+            self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(tv.posterPath)")!)
             return
         }
 

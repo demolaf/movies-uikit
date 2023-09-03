@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 
-protocol DetailRouterDelegate: AnyRouter, AnyObject {}
+protocol DetailRouterDelegate: AnyObject {
+    var entry: EntryPoint? { get }
+}
 
 class DetailRouter: DetailRouterDelegate {
 
     var entry: EntryPoint?
 
-    static func route() -> AnyRouter {
+    static func route() -> DetailRouter {
         print("initializing tvshows route")
         let router = DetailRouter()
 
@@ -28,7 +30,10 @@ class DetailRouter: DetailRouterDelegate {
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.moviesRepository = (UIApplication.shared.delegate as? AppDelegate)?.repositoryProvider.moviesRepository
+        interactor.moviesRepository =
+        (UIApplication.shared.delegate as? AppDelegate)?
+            .repositoryProvider
+            .moviesRepository
 
         // setup presenter with router, view and interactor
         presenter.router = router

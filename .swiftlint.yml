@@ -3,5 +3,8 @@ excluded:
 
 disabled_rules:
   - orphaned_doc_comment
-  - line_length
   - identifier_name
+
+line_length:
+  ignores_urls: true
+  ignores_comments: true

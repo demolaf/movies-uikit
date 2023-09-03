@@ -15,7 +15,9 @@ class LocalStorageImpl: LocalStorage {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL ?? "No realm path")
     }
 
-    func create<ObjectType: Object>(object: ObjectType, realmUpdatePolicy: Realm.UpdatePolicy) {
+    func create<ObjectType: Object>(
+        object: ObjectType, realmUpdatePolicy: Realm.UpdatePolicy
+    ) {
         do {
             try realm?.write {
                 realm?.add(object, update: realmUpdatePolicy)
@@ -25,7 +27,10 @@ class LocalStorageImpl: LocalStorage {
         }
     }
 
-    func read<ObjectType: Object>(object: ObjectType.Type, completion: @escaping (ObjectType?, Error?) -> Void) {
+    func read<ObjectType: Object>(
+        object: ObjectType.Type,
+        completion: @escaping (ObjectType?, Error?) -> Void
+    ) {
         do {
             try realm?.write {
                 let object = realm?.object(ofType: ObjectType.self, forPrimaryKey: ObjectType.primaryKey())
@@ -37,7 +42,10 @@ class LocalStorageImpl: LocalStorage {
         }
     }
 
-    func readAll<ObjectType: Object>(object: ObjectType.Type, completion: @escaping (Results<ObjectType>?, Error?) -> Void) {
+    func readAll<ObjectType: Object>(
+        object: ObjectType.Type,
+        completion: @escaping (Results<ObjectType>?, Error?) -> Void
+    ) {
         do {
             try realm?.write {
                 let results = realm?.objects(ObjectType.self)

@@ -8,7 +8,11 @@
 import Foundation
 import UIKit
 
-protocol LaunchPresenterDelegate: AnyPresenter, AnyObject {
+protocol LaunchPresenterDelegate: AnyObject {
+    var view: LaunchViewDelegate? { get set }
+    var interactor: LaunchInteractorDelegate? { get set }
+    var router: LaunchRouterDelegate? { get set }
+
     func initialize()
 }
 
@@ -16,16 +20,15 @@ protocol LaunchPresenterDelegate: AnyPresenter, AnyObject {
 /// - Calls methods in the `Interactor` triggered by the `View`
 /// - Calls methods in the `Router`
 class LaunchPresenter: LaunchPresenterDelegate {
-    var view: AnyView?
+    var view: LaunchViewDelegate?
 
-    var router: AnyRouter?
+    var router: LaunchRouterDelegate?
 
-    var interactor: AnyInteractor?
+    var interactor: LaunchInteractorDelegate?
 
     func initialize() {
-        print("Initializing launch")
         // TODO: Handle authentication here, check if signed in or not
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             let vc = self.view as? UIViewController
 
             if let vc = vc {

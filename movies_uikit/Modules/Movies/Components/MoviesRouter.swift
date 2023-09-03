@@ -8,14 +8,15 @@
 import Foundation
 import UIKit
 
-protocol MoviesRouterDelegate: AnyRouter, AnyObject {}
+protocol MoviesRouterDelegate: AnyObject {
+    var entry: EntryPoint? { get }
+}
 
 class MoviesRouter: MoviesRouterDelegate {
 
     var entry: EntryPoint?
 
-    static func route() -> AnyRouter {
-        print("initializing movies route")
+    static func route() -> MoviesRouter {
         let router = MoviesRouter()
 
         // Assign VIP
@@ -28,7 +29,10 @@ class MoviesRouter: MoviesRouterDelegate {
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.moviesRepository = (UIApplication.shared.delegate as? AppDelegate)?.repositoryProvider.moviesRepository
+        interactor.moviesRepository =
+        (UIApplication.shared.delegate as? AppDelegate)?
+            .repositoryProvider
+            .moviesRepository
 
         // setup presenter with router, view and interactor
         presenter.router = router
@@ -37,7 +41,6 @@ class MoviesRouter: MoviesRouterDelegate {
 
         // setup router entry with specific view controller
         router.entry = view
-        print("finished initializing movies route")
         return router
     }
 
