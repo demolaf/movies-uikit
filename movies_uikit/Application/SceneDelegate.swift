@@ -17,12 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         print("Here is tmdb api key \(Environment.tmdbApiKey)")
 
-        // Set root view controller to be main tab bar controller
-        let tabBarController = MainTabBarViewController()
+        // Set root view controller to be launch vc
+        let initalVC = Routes.launch.vc
 
         // set main window root view controller to main tab bar controller
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = tabBarController
+        window.rootViewController = UINavigationController(rootViewController: initalVC)
 
         //
         self.window = window
@@ -39,7 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if context.url.scheme == "movies-uikit" && context.url.absoluteString.localizedCaseInsensitiveContains("authenticate") {
                 (UIApplication.shared.delegate as? AppDelegate)?.repositoryProvider.authRepository.getSessionId { success in
                     if success {
-                        navigationController.pushViewController(Routes.home.vc, animated: true)
+                        navigationController.pushViewController(Routes.mainTab.vc, animated: true)
                     }
                 }
             }

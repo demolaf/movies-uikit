@@ -24,12 +24,12 @@ class LaunchPresenter: LaunchPresenterDelegate {
 
     func initialize() {
         print("Initializing launch")
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        // TODO: Handle authentication here, check if signed in or not
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
             let vc = self.view as? UIViewController
 
             if let vc = vc {
-                self.router?.push(to: Routes.home, from: vc)
+                self.router?.push(to: Routes.mainTab, from: vc)
             }
         }
     }

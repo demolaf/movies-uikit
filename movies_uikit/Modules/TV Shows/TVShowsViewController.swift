@@ -1,17 +1,17 @@
 //
-//  LibraryViewController.swift
+//  TVShowsViewController.swift
 //  movies_uikit
 //
-//  Created by Ademola Fadumo on 02/09/2023.
+//  Created by Ademola Fadumo on 03/09/2023.
 //
 
 import UIKit
 
-protocol LibraryViewDelegate: AnyView, AnyObject {
+protocol TVShowsViewDelegate: AnyView, AnyObject {
     func update(with movies: [Movie])
 }
 
-class LibraryViewController: UIViewController, LibraryViewDelegate {
+class TVShowsViewController: UIViewController, TVShowsViewDelegate {
 
     var presenter: AnyPresenter?
 
@@ -19,7 +19,6 @@ class LibraryViewController: UIViewController, LibraryViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = .systemBackground
     }
 
     func update(with movies: [Movie]) {

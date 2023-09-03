@@ -27,6 +27,9 @@ class LaunchViewController: UIViewController, LaunchViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationItem.setHidesBackButton(true, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         view.backgroundColor = .gray
         view.addSubview(titleLabel)
 

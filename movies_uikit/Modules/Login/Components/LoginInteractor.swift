@@ -21,8 +21,7 @@ class LoginInteractor: LoginInteractorDelegate {
     func loginWithWebAuth() {
         authRepository?.getRequestToken(completion: { success in
             if success {
-                let url = APIConstants.Endpoints.webAuth.url
-                print(url)
+                let url = HTTPConstants.Endpoints.webAuth.url
                 UIApplication.shared.open(url!, options: [:], completionHandler: nil)
             }
         })

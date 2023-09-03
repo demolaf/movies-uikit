@@ -1,5 +1,5 @@
 //
-//  HomePresenter.swift
+//  MoviesPresenter.swift
 //  movies_uikit
 //
 //  Created by Ademola Fadumo on 25/08/2023.
@@ -7,22 +7,22 @@
 
 import Foundation
 
-protocol HomePresenterDelegate: AnyPresenter, AnyObject {
+protocol MoviesPresenterDelegate: AnyPresenter, AnyObject {
     func interactorDidFetchMovies(with movies: [Movie])
 }
 
-class HomePresenter: HomePresenterDelegate {
+class MoviesPresenter: MoviesPresenterDelegate {
     var router: AnyRouter?
 
     var interactor: AnyInteractor? {
         didSet {
-            (interactor as? HomeInteractor)?.getPopularMovies()
+            (interactor as? MoviesInteractor)?.getPopularMovies()
         }
     }
 
     var view: AnyView?
 
     func interactorDidFetchMovies(with movies: [Movie]) {
-        (view as? HomeViewController)?.update(with: movies)
+        (view as? MoviesViewController)?.update(with: movies)
     }
 }

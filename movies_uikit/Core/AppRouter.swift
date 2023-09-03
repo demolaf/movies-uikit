@@ -12,7 +12,9 @@ import UIKit
 enum Routes: String {
     case launch = "/launch"
     case login = "/login"
-    case home = "/home"
+    case mainTab = "/mainTab"
+    case movies = "/movies"
+    case tvShows = "/tvShows"
     case library = "/library"
 
     var vc: UIViewController {
@@ -21,8 +23,12 @@ enum Routes: String {
             return LaunchRouter.route().entry!
         case .login:
             return LoginRouter.route().entry!
-        case .home:
-            return HomeRouter.route().entry!
+        case .mainTab:
+            return MainTabBarViewController()
+        case .movies:
+            return MoviesRouter.route().entry!
+        case .tvShows:
+            return TVShowsRouter.route().entry!
         case .library:
             return LibraryViewController()
         }

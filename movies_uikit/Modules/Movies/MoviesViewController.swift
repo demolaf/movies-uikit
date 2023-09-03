@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  MoviesViewController.swift
 //  movies_uikit
 //
 //  Created by Ademola Fadumo on 25/08/2023.
@@ -8,17 +8,17 @@
 import Foundation
 import UIKit
 
-enum HomeItemSectionType {
+enum ShowsSectionType {
     case popular(movies: [Movie])
     case new
     case recommended
 }
 
-protocol HomeViewDelegate: AnyView, AnyObject {
+protocol MoviesViewDelegate: AnyView, AnyObject {
     func update(with movies: [Movie])
 }
 
-class HomeViewController: UIViewController, HomeViewDelegate {
+class MoviesViewController: UIViewController, MoviesViewDelegate {
 
     // MARK: Views
 
@@ -28,8 +28,8 @@ class HomeViewController: UIViewController, HomeViewDelegate {
     }()
 
     private let trailingBarButtonItems: [UIBarButtonItem] = {
-        let searchBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: HomeViewController.self, action: #selector(searchBarButtonItemPressed))
-        let castBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "display"), style: .plain, target: HomeViewController.self, action: #selector(castBarButtonItemPressed))
+        let searchBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: MoviesViewController.self, action: #selector(searchBarButtonItemPressed))
+        let castBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "display"), style: .plain, target: MoviesViewController.self, action: #selector(castBarButtonItemPressed))
 
         searchBarButtonItem.tintColor = .label
         castBarButtonItem.tintColor = .label
@@ -39,11 +39,11 @@ class HomeViewController: UIViewController, HomeViewDelegate {
 
     private var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
-            return HomeViewController.createSectionLayout(section: sectionIndex)})
+            return MoviesViewController.createSectionLayout(section: sectionIndex)})
 
-        collectionView.register(HeaderMovieItemViewCell.self, forCellWithReuseIdentifier: HeaderMovieItemViewCell.reuseId)
+        collectionView.register(PopularShowsItemViewCell.self, forCellWithReuseIdentifier: PopularShowsItemViewCell.reuseId)
 
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(NewAndRecommendedCollectionViewCell.self, forCellWithReuseIdentifier: NewAndRecommendedCollectionViewCell.reuseId)
 
         collectionView.register(HeaderCollectionResuableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderCollectionResuableView.reuseId)
 
@@ -56,7 +56,7 @@ class HomeViewController: UIViewController, HomeViewDelegate {
 
     var presenter: AnyPresenter?
 
-    private var sections = [HomeItemSectionType]()
+    private var sections = [ShowsSectionType]()
 
     // MARK: Initialization
 
@@ -108,7 +108,7 @@ class HomeViewController: UIViewController, HomeViewDelegate {
 
 // MARK: Appearance
 
-extension HomeViewController {
+extension MoviesViewController {
 
     private func setupViewAppearance() {
         //
@@ -132,7 +132,7 @@ extension HomeViewController {
 
 // MARK: - UICollectionView Delegate & DataSource
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
@@ -156,7 +156,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
         switch type {
         case .popular(let movies):
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderMovieItemViewCell.reuseId, for: indexPath) as? HeaderMovieItemViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularShowsItemViewCell.reuseId, for: indexPath) as? PopularShowsItemViewCell else {
                 return UICollectionViewCell()
             }
 
@@ -164,13 +164,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.configureViewData(movie: movie)
             return cell
         case .new:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderMovieItemViewCell.reuseId, for: indexPath) as? HeaderMovieItemViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularShowsItemViewCell.reuseId, for: indexPath) as? PopularShowsItemViewCell else {
                 return UICollectionViewCell()
             }
             cell.configureViewData(movie: nil)
             return cell
         case .recommended:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderMovieItemViewCell.reuseId, for: indexPath) as? HeaderMovieItemViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PopularShowsItemViewCell.reuseId, for: indexPath) as? PopularShowsItemViewCell else {
                 return UICollectionViewCell()
             }
             cell.configureViewData(movie: nil)

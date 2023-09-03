@@ -13,18 +13,18 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let homeVC = Routes.home.vc
+        let moviesVC = Routes.movies.vc
+        let tvShowsVC = Routes.tvShows.vc
         let libraryVC = Routes.library.vc
 
-        homeVC.navigationItem.largeTitleDisplayMode = .always
-        libraryVC.navigationItem.largeTitleDisplayMode = .always
+        let nav1 = UINavigationController(rootViewController: moviesVC)
+        let nav2 = UINavigationController(rootViewController: tvShowsVC)
+        let nav3 = UINavigationController(rootViewController: libraryVC)
 
-        let nav1 = UINavigationController(rootViewController: homeVC)
-        let nav2 = UINavigationController(rootViewController: libraryVC)
+        nav1.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "house"), tag: 1)
+        nav2.tabBarItem = UITabBarItem(title: "TV Shows", image: UIImage(systemName: "building.columns"), tag: 1)
+        nav3.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "building.columns"), tag: 1)
 
-        nav1.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 1)
-        nav2.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "building.columns"), tag: 1)
-
-        setViewControllers([nav1, nav2], animated: false)
+        setViewControllers([nav1, nav2, nav3], animated: false)
     }
 }

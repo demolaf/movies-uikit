@@ -1,5 +1,5 @@
 //
-//  HomeRouter.swift
+//  MoviesRouter.swift
 //  movies_uikit
 //
 //  Created by Ademola Fadumo on 25/08/2023.
@@ -8,20 +8,20 @@
 import Foundation
 import UIKit
 
-protocol HomeRouterDelegate: AnyRouter, AnyObject {}
+protocol MoviesRouterDelegate: AnyRouter, AnyObject {}
 
-class HomeRouter: HomeRouterDelegate {
+class MoviesRouter: MoviesRouterDelegate {
 
     var entry: EntryPoint?
 
     static func route() -> AnyRouter {
-        print("initializing home route")
-        let router = HomeRouter()
+        print("initializing movies route")
+        let router = MoviesRouter()
 
         // Assign VIP
-        let view = HomeViewController()
-        let presenter = HomePresenter()
-        let interactor = HomeInteractor()
+        let view = MoviesViewController()
+        let presenter = MoviesPresenter()
+        let interactor = MoviesInteractor()
 
         // setup view controller with presenter
         view.presenter = presenter
@@ -37,7 +37,7 @@ class HomeRouter: HomeRouterDelegate {
 
         // setup router entry with specific view controller
         router.entry = view
-        print("finished initializing home route")
+        print("finished initializing movies route")
         return router
     }
 

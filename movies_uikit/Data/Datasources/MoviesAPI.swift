@@ -20,8 +20,8 @@ class MoviesAPI {
 
     func getPopularMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
         var headers = HTTPHeaders()
-        headers.add(name: "Authorization", value: "Bearer \(APIConstants.Auth.tmdbAuthToken)")
-        httpClient.get(url: APIConstants.Endpoints.getPopularMovies.url, headers: headers, parameters: nil, response: PopularMoviesResponse.self) { result in
+        headers.add(name: "Authorization", value: "Bearer \(HTTPConstants.Auth.tmdbAuthToken)")
+        httpClient.get(url: HTTPConstants.Endpoints.getPopularShows.url, headers: headers, parameters: nil, response: PopularMoviesResponse.self) { result in
             switch result {
             case .success(let response):
                 completion(.success(response.results))

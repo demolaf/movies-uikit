@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 import SDWebImage
 
-class HeaderMovieItemViewCell: UICollectionViewCell {
-    static let reuseId = "HeaderMovieItemViewCell"
+class PopularShowsItemViewCell: UICollectionViewCell {
+    static let reuseId = "PopularShowsItemViewCell"
 
     // MARK: Views
 

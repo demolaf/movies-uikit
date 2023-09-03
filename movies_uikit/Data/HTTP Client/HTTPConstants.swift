@@ -6,7 +6,7 @@
 
 import Foundation
 
-class APIConstants {
+class HTTPConstants {
     struct Auth {
         static let tmdbAPIKey = Environment.tmdbApiKey
         static let tmdbAuthToken = Environment.tmdbAuthToken
@@ -25,7 +25,9 @@ class APIConstants {
         case getRequestToken
         case login
         case webAuth
-        case getPopularMovies
+        case getPopularShows
+        case getNewShows
+        case getRecommendedShows
 
         var stringValue: String {
             switch self {
@@ -37,8 +39,12 @@ class APIConstants {
                 return Endpoints.baseUrlPrefix + "/authentication/token/validate_with_login" + Endpoints.apiKeyParam
             case .webAuth:
                 return "https://www.themoviedb.org/authenticate/\(Auth.requestToken)?redirect_to=movies-uikit:authenticate"
-            case .getPopularMovies:
+            case .getPopularShows:
                 return Endpoints.baseUrlPrefix + "/movie/popular"
+            case .getNewShows:
+                return ""
+            case .getRecommendedShows:
+                return ""
             }
         }
 
