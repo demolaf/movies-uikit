@@ -13,7 +13,9 @@ protocol MoviesPresenterDelegate: AnyObject {
     var router: MoviesRouterDelegate? { get set }
 
     func initialize()
-    func interactorDidFetchMovies(with movies: [Movie])
+    func interactorDidFetchPopularMovies(with movies: [Movie])
+    func interactorDidFetchNewMovies(with movies: [Movie])
+    func interactorDidFetchUpcomingMovies(with movies: [Movie])
 }
 
 class MoviesPresenter: MoviesPresenterDelegate {
@@ -23,9 +25,19 @@ class MoviesPresenter: MoviesPresenterDelegate {
 
     func initialize() {
         interactor?.getPopularMovies()
+        interactor?.getNewMovies()
+        interactor?.getUpcomingMovies()
     }
 
-    func interactorDidFetchMovies(with movies: [Movie]) {
-        view?.update(with: movies)
+    func interactorDidFetchPopularMovies(with movies: [Movie]) {
+        view?.update(popularMovies: movies)
+    }
+
+    func interactorDidFetchNewMovies(with movies: [Movie]) {
+        view?.update(newMovies: movies)
+    }
+
+    func interactorDidFetchUpcomingMovies(with movies: [Movie]) {
+        view?.update(upcomingMovies: movies)
     }
 }

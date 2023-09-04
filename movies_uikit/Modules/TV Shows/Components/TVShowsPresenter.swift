@@ -13,7 +13,9 @@ protocol TVShowsPresenterDelegate: AnyObject {
     var router: TVShowsRouterDelegate? { get set }
 
     func initialize()
-    func interactorDidFetchTVShows(with tvShows: [TVShow])
+    func interactorDidFetchPopularTVShows(with tvShows: [TVShow])
+    func interactorDidFetchTopRatedTVShows(with tvShows: [TVShow])
+    func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow])
 }
 
 class TVShowsPresenter: TVShowsPresenterDelegate {
@@ -23,9 +25,19 @@ class TVShowsPresenter: TVShowsPresenterDelegate {
 
     func initialize() {
         interactor?.getPopularTVShows()
+        interactor?.getTopRatedTVShows()
+        interactor?.getOnTheAirTVShows()
     }
 
-    func interactorDidFetchTVShows(with tvShows: [TVShow]) {
-        view?.update(with: tvShows)
+    func interactorDidFetchPopularTVShows(with tvShows: [TVShow]) {
+        view?.update(popularTVShows: tvShows)
+    }
+
+    func interactorDidFetchTopRatedTVShows(with tvShows: [TVShow]) {
+        view?.update(topRatedTVShows: tvShows)
+    }
+
+    func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow]) {
+        view?.update(onTheAirTVShows: tvShows)
     }
 }

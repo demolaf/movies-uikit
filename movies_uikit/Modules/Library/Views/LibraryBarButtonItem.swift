@@ -1,16 +1,16 @@
 //
-//  TVShowsBarButtonItem.swift
+//  LibraryBarButtonItem.swift
 //  movies_uikit
 //
-//  Created by Ademola Fadumo on 03/09/2023.
+//  Created by Ademola Fadumo on 04/09/2023.
 //
 
 import UIKit
 
-class TVShowsBarButtonItem: UIBarButtonItem {
+class LibraryBarButtonItem: UIBarButtonItem {
     private let navBarTitle: UILabel = {
         let navBarTitle = UILabel()
-        navBarTitle.text = "TV Shows"
+        navBarTitle.text = "Library"
         navBarTitle.font = .appFont(ofSize: 32, weight: .bold)
         navBarTitle.translatesAutoresizingMaskIntoConstraints = false
         return navBarTitle

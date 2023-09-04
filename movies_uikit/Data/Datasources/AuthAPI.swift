@@ -15,6 +15,7 @@ class AuthAPI {
     }
 
     func getRequestToken(completion: @escaping (Bool) -> Void) {
+
         httpClient.get(
             url: HTTPConstants.Endpoints.getRequestToken.url,
             headers: nil,

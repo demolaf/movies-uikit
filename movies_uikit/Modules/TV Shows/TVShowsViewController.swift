@@ -10,13 +10,15 @@ import UIKit
 protocol TVShowsViewDelegate: AnyObject {
     var presenter: TVShowsPresenterDelegate? { get set }
 
-    func update(with tvShows: [TVShow])
+    func update(popularTVShows: [TVShow])
+    func update(topRatedTVShows: [TVShow])
+    func update(onTheAirTVShows: [TVShow])
 }
 
 enum TVSectionType {
     case popular(tvShows: [TVShow])
-    case new
-    case recommended
+    case topRated(tvShows: [TVShow])
+    case onTheAir(tvShows: [TVShow])
 }
 
 class TVShowsViewController: UIViewController, TVShowsViewDelegate {
@@ -28,20 +30,20 @@ class TVShowsViewController: UIViewController, TVShowsViewDelegate {
         return [barButtonItem]
     }()
 
-    private var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
-            return MoviesViewController.createSectionLayout(section: sectionIndex)})
+                return self.createSectionLayout(section: sectionIndex)})
 
         collectionView.register(
-            PopularShowsItemViewCell.self,
-            forCellWithReuseIdentifier: PopularShowsItemViewCell.reuseId
+            CarouselItemCollectionViewCell.self,
+            forCellWithReuseIdentifier: CarouselItemCollectionViewCell.reuseId
         )
 
         collectionView.register(
-            NewAndRecommendedCollectionViewCell.self,
-            forCellWithReuseIdentifier: NewAndRecommendedCollectionViewCell.reuseId
+            SubSectionItemCollectionViewCell.self,
+            forCellWithReuseIdentifier: SubSectionItemCollectionViewCell.reuseId
         )
 
         collectionView.register(
@@ -91,14 +93,18 @@ class TVShowsViewController: UIViewController, TVShowsViewDelegate {
         collectionView.dataSource = self
     }
 
-    func update(with tvShows: [TVShow]) {
-        configureCellData(popularTVShows: tvShows)
+    func update(popularTVShows: [TVShow]) {
+        sections.append(.popular(tvShows: popularTVShows))
+        collectionView.reloadData()
     }
 
-    private func configureCellData(popularTVShows: [TVShow]) {
-        sections.append(.popular(tvShows: popularTVShows))
-        sections.append(.new)
-        sections.append(.recommended)
+    func update(topRatedTVShows: [TVShow]) {
+        sections.append(.topRated(tvShows: topRatedTVShows))
+        collectionView.reloadData()
+    }
+
+    func update(onTheAirTVShows: [TVShow]) {
+        sections.append(.onTheAir(tvShows: onTheAirTVShows))
         collectionView.reloadData()
     }
 
@@ -155,10 +161,10 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
         switch section {
         case .popular(let tvShows):
             return tvShows.count
-        case .new:
-            return 10
-        case .recommended:
-            return 10
+        case .topRated(let tvShows):
+            return tvShows.count
+        case .onTheAir(let tvShows):
+            return tvShows.count
         }
     }
 
@@ -173,32 +179,36 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
         switch type {
         case .popular(let tvShows):
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PopularShowsItemViewCell.reuseId,
+                withReuseIdentifier: CarouselItemCollectionViewCell.reuseId,
                 for: indexPath
-            ) as? PopularShowsItemViewCell else {
+            ) as? CarouselItemCollectionViewCell else {
                 return UICollectionViewCell()
             }
 
             let tvShow = tvShows[indexPath.row]
             cell.configureViewData(tv: tvShow)
             return cell
-        case .new:
+        case .topRated(let tvShows):
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PopularShowsItemViewCell.reuseId,
+                withReuseIdentifier: SubSectionItemCollectionViewCell.reuseId,
                 for: indexPath
-            ) as? PopularShowsItemViewCell else {
+            ) as? SubSectionItemCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.configureViewData(tv: nil)
+
+            let tvShow = tvShows[indexPath.row]
+            cell.configureViewData(tv: tvShow)
             return cell
-        case .recommended:
+        case .onTheAir(let tvShows):
             guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: PopularShowsItemViewCell.reuseId,
+                withReuseIdentifier: SubSectionItemCollectionViewCell.reuseId,
                 for: indexPath
-            ) as? PopularShowsItemViewCell else {
+            ) as? SubSectionItemCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.configureViewData(tv: nil)
+
+            let tvShow = tvShows[indexPath.row]
+            cell.configureViewData(tv: tvShow)
             return cell
         }
 
@@ -216,14 +226,28 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
         ) as? HeaderCollectionResuableView else {
             return UICollectionReusableView()
         }
+
+        let section = sections[indexPath.section]
+
+        switch section {
+        case .popular: break
+        case .topRated:
+            headerView.configureHeaderLeadingText(leadingText: "Top Rated")
+        case .onTheAir:
+            headerView.configureHeaderLeadingText(leadingText: "On The Air")
+        }
+
         return headerView
     }
 
-    static func createSectionLayout(
+    func createSectionLayout(
         section: Int
     ) -> NSCollectionLayoutSection {
-        switch section {
-        case 0:
+
+        let type = sections[section]
+
+        switch type {
+        case .popular:
             // Item
             let item = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(
@@ -237,7 +261,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
             let group = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(
                     widthDimension: .absolute(320),
-                    heightDimension: .absolute(300)
+                    heightDimension: .absolute(275)
                 ),
                 subitems: [item]
             )
@@ -246,7 +270,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
             return section
-        default:
+        case .topRated, .onTheAir:
             // Item
             let item = NSCollectionLayoutItem(
                 layoutSize: NSCollectionLayoutSize(
@@ -259,7 +283,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
             let group = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(
                     widthDimension: .absolute(150),
-                    heightDimension: .absolute(300)
+                    heightDimension: .absolute(275)
                 ),
                 subitems: [item]
             )

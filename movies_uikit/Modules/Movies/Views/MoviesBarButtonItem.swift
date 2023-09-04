@@ -33,13 +33,13 @@ class MoviesBarButtonItem: UIBarButtonItem {
         let attributedString = NSMutableAttributedString(string: title)
         attributedString.addAttributes(
             [NSAttributedString.Key.foregroundColor: UIColor.label,
-             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 32, weight: .bold)
+             NSAttributedString.Key.font: UIFont.appFont(ofSize: 32, weight: .bold)
             ],
             range: NSRange(firstTextRange, in: title)
         )
         attributedString.addAttributes(
             [NSAttributedString.Key.foregroundColor: UIColor.red,
-             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 32, weight: .bold)
+             NSAttributedString.Key.font: UIFont.appFont(ofSize: 32, weight: .bold)
             ],
             range: NSRange(secondTextRange, in: title)
         )

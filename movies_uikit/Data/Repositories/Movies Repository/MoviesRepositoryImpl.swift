@@ -14,8 +14,10 @@ class MoviesRepositoryImpl: MoviesRepository {
         self.moviesAPI = moviesAPI
     }
 
-    func getPopularMovies(completion: @escaping ([Movie]) -> Void) {
-        moviesAPI.getPopularMovies { result in
+    func getMovies(categoryType: String, completion: @escaping ([Movie]) -> Void) {
+        moviesAPI.getMovies(
+            categoryType: categoryType
+        ) { result in
             switch result {
             case .success(let movies):
                 completion(movies)
@@ -26,8 +28,10 @@ class MoviesRepositoryImpl: MoviesRepository {
         }
     }
 
-    func getPopularTVShows(completion: @escaping ([TVShow]) -> Void) {
-        moviesAPI.getPopularTVShows { result in
+    func getTVShows(categoryType: String, completion: @escaping ([TVShow]) -> Void) {
+        moviesAPI.getTVShows(
+            categoryType: categoryType
+        ) { result in
             switch result {
             case .success(let tvShows):
                 completion(tvShows)

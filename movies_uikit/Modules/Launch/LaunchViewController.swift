@@ -20,7 +20,7 @@ class LaunchViewController: UIViewController, LaunchViewDelegate {
         label.textColor = .label
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 20)
+        label.font = .appFont(ofSize: 20)
         return label
     }()
 

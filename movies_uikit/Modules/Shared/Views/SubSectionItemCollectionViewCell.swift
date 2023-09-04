@@ -1,20 +1,18 @@
 //
-//  HeaderMovieItemView.swift
+//  SubSectionItemCollectionViewCell.swift
 //  movies_uikit
 //
-//  Created by Ademola Fadumo on 25/08/2023.
+//  Created by Ademola Fadumo on 03/09/2023.
 //
 
-import Foundation
 import UIKit
-import SDWebImage
 
-class PopularShowsItemViewCell: UICollectionViewCell {
-    static let reuseId = "PopularShowsItemViewCell"
+class SubSectionItemCollectionViewCell: UICollectionViewCell {
+    static let reuseId = "SubSectionItemCollectionViewCell"
 
     // MARK: Views
 
-    private let headerMovieItemStackView: UIStackView = {
+    private let rootStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 16
@@ -24,29 +22,12 @@ class PopularShowsItemViewCell: UICollectionViewCell {
         return stack
     }()
 
-    private let subtitleStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .top
-        stack.distribution = .equalSpacing
-        return stack
-    }()
-
     private let titleLabelView: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .appFont(ofSize: 14, weight: .regular)
         label.sizeToFit()
         label.numberOfLines = 0
-        return label
-    }()
-
-    private let ratingLabelView: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .label
-        label.numberOfLines = 0
-        label.sizeToFit()
         return label
     }()
 
@@ -77,7 +58,6 @@ class PopularShowsItemViewCell: UICollectionViewCell {
         super.prepareForReuse()
 
         self.titleLabelView.text = ""
-        self.ratingLabelView.text = ""
         self.imageView.image = nil
     }
 
@@ -90,27 +70,24 @@ class PopularShowsItemViewCell: UICollectionViewCell {
     // MARK: Private Methods
 
     private func initializeSubViews() {
-        subtitleStackView.addArrangedSubview(titleLabelView)
-        subtitleStackView.addArrangedSubview(ratingLabelView)
+        rootStackView.addArrangedSubview(imageView)
+        rootStackView.addArrangedSubview(titleLabelView)
 
-        headerMovieItemStackView.addArrangedSubview(imageView)
-        headerMovieItemStackView.addArrangedSubview(subtitleStackView)
-
-        self.contentView.addSubview(headerMovieItemStackView)
+        self.contentView.addSubview(rootStackView)
     }
 
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            headerMovieItemStackView.topAnchor.constraint(
+            rootStackView.topAnchor.constraint(
                 equalTo: self.contentView.topAnchor
             ),
-            headerMovieItemStackView.leadingAnchor.constraint(
+            rootStackView.leadingAnchor.constraint(
                 equalTo: self.contentView.leadingAnchor
             ),
-            headerMovieItemStackView.trailingAnchor.constraint(
+            rootStackView.trailingAnchor.constraint(
                 equalTo: self.contentView.trailingAnchor
             ),
-            headerMovieItemStackView.bottomAnchor.constraint(
+            rootStackView.bottomAnchor.constraint(
                 equalTo: self.contentView.bottomAnchor
             )
         ])
@@ -128,26 +105,22 @@ class PopularShowsItemViewCell: UICollectionViewCell {
     func configureViewData(movie: Movie?) {
         if let movie = movie {
             self.titleLabelView.text = movie.originalTitle
-            self.ratingLabelView.text = "\(movie.voteAverage)/10"
             self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(movie.posterPath)")!)
             return
         }
 
         self.titleLabelView.text = "N/A"
-        self.ratingLabelView.text = "0/10"
         self.imageView.image = UIImage(systemName: "photo")
     }
 
     func configureViewData(tv: TVShow?) {
         if let tv = tv {
             self.titleLabelView.text = tv.originalName
-            self.ratingLabelView.text = "\(tv.voteAverage)/10"
             self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(tv.posterPath)")!)
             return
         }
 
         self.titleLabelView.text = "N/A"
-        self.ratingLabelView.text = "0/10"
         self.imageView.image = UIImage(systemName: "photo")
     }
 }

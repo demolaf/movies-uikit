@@ -13,18 +13,17 @@ class HeaderCollectionResuableView: UICollectionReusableView {
 
     private let leadingTextLabel: UILabel = {
        let label = UILabel()
-        label.text = "What's new"
         label.textColor = .label
-        label.font = .systemFont(ofSize: 18, weight: .regular)
+        label.font = .appFont(ofSize: 18, weight: .semibold)
         label.sizeToFit()
         return label
     }()
 
     private let trailingButton: UIButton = {
         let button = UIButton()
-        button.setTitle("View all", for: .normal)
         let attribute = AttributedString()
-        // attribute.font = .systemFont(ofSize: 14, weight: .medium)
+        button.setTitle("View all", for: .normal)
+        // attribute.font = .appFont(ofSize: 14, weight: .medium)
         button.configuration?.attributedTitle = attribute
         button.setTitleColor(.systemRed, for: .normal)
         button.sizeToFit()
@@ -73,5 +72,9 @@ class HeaderCollectionResuableView: UICollectionReusableView {
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+    }
+
+    func configureHeaderLeadingText(leadingText: String) {
+        leadingTextLabel.text = leadingText
     }
 }

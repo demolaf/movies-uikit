@@ -28,7 +28,7 @@ class LaunchPresenter: LaunchPresenterDelegate {
 
     func initialize() {
         // TODO: Handle authentication here, check if signed in or not
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             let vc = self.view as? UIViewController
 
             if let vc = vc {

@@ -16,7 +16,7 @@
 		7E0807D32AA3AD7000E6E5C2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807D22AA3AD7000E6E5C2 /* DetailViewController.swift */; };
 		7E0807D92AA3ED8B00E6E5C2 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807D82AA3ED8B00E6E5C2 /* UserRepository.swift */; };
 		7E0807DB2AA3ED9800E6E5C2 /* UserRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807DA2AA3ED9800E6E5C2 /* UserRepositoryImpl.swift */; };
-		7E0807DD2AA3F9CE00E6E5C2 /* NewAndRecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807DC2AA3F9CE00E6E5C2 /* NewAndRecommendedCollectionViewCell.swift */; };
+		7E0807DD2AA3F9CE00E6E5C2 /* SubSectionItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807DC2AA3F9CE00E6E5C2 /* SubSectionItemCollectionViewCell.swift */; };
 		7E0807E02AA40C1200E6E5C2 /* TVShowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807DF2AA40C1200E6E5C2 /* TVShowsViewController.swift */; };
 		7E0807E82AA40F2500E6E5C2 /* TVShowsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807E72AA40F2500E6E5C2 /* TVShowsInteractor.swift */; };
 		7E0807EA2AA40F3500E6E5C2 /* TVShowsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807E92AA40F3500E6E5C2 /* TVShowsRouter.swift */; };
@@ -29,6 +29,26 @@
 		7E0807FA2AA4125100E6E5C2 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */; };
 		7E0807FD2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */; };
 		7E1B87672AA42FA70023A20D /* PopularTVShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */; };
+		7E1B87692AA53DBB0023A20D /* LibrarySectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */; };
+		7E1B876C2AA54AEF0023A20D /* LibraryBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */; };
+		7E1B87702AA56F960023A20D /* LibraryTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */; };
+		7E1B87722AA57A9E0023A20D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87712AA57A9E0023A20D /* Colors.swift */; };
+		7E1B87742AA57AA40023A20D /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87732AA57AA40023A20D /* Fonts.swift */; };
+		7E1B87832AA57B6E0023A20D /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87762AA57B6E0023A20D /* Montserrat-SemiBold.ttf */; };
+		7E1B87842AA57B6E0023A20D /* Montserrat-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87772AA57B6E0023A20D /* Montserrat-Light.ttf */; };
+		7E1B87852AA57B6E0023A20D /* Montserrat-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87782AA57B6E0023A20D /* Montserrat-MediumItalic.ttf */; };
+		7E1B87862AA57B6E0023A20D /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87792AA57B6E0023A20D /* Montserrat-LightItalic.ttf */; };
+		7E1B87872AA57B6E0023A20D /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B877A2AA57B6E0023A20D /* Montserrat-ExtraLightItalic.ttf */; };
+		7E1B87882AA57B6E0023A20D /* Montserrat-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B877B2AA57B6E0023A20D /* Montserrat-BoldItalic.ttf */; };
+		7E1B87892AA57B6E0023A20D /* Montserrat-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B877C2AA57B6E0023A20D /* Montserrat-BlackItalic.ttf */; };
+		7E1B878A2AA57B6E0023A20D /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B877D2AA57B6E0023A20D /* Montserrat-Medium.ttf */; };
+		7E1B878B2AA57B6E0023A20D /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B877E2AA57B6E0023A20D /* Montserrat-Bold.ttf */; };
+		7E1B878C2AA57B6E0023A20D /* Montserrat-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B877F2AA57B6E0023A20D /* Montserrat-SemiBoldItalic.ttf */; };
+		7E1B878D2AA57B6E0023A20D /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87802AA57B6E0023A20D /* Montserrat-ExtraLight.ttf */; };
+		7E1B878E2AA57B6E0023A20D /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87812AA57B6E0023A20D /* Montserrat-Black.ttf */; };
+		7E1B878F2AA57B6E0023A20D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87822AA57B6E0023A20D /* Montserrat-Regular.ttf */; };
+		7E1B87922AA588950023A20D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87912AA588950023A20D /* Colors.xcassets */; };
+		7E1B87942AA58F680023A20D /* LibrarySectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */; };
 		7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70DB192A9960230024FE23 /* AppRouter.swift */; };
 		7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; };
 		7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -48,7 +68,7 @@
 		7EC468DB2AA2C38600B6D28F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468DA2AA2C38600B6D28F /* Environment.swift */; };
 		7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */; };
 		7EEAAD722A9920950087AF46 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD712A9920950087AF46 /* MoviesViewController.swift */; };
-		7EEAAD752A9923390087AF46 /* PopularShowsItemViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD742A9923390087AF46 /* PopularShowsItemViewCell.swift */; };
+		7EEAAD752A9923390087AF46 /* CarouselItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD742A9923390087AF46 /* CarouselItemCollectionViewCell.swift */; };
 		7EEAAD792A99321C0087AF46 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD782A99321C0087AF46 /* MoviesRouter.swift */; };
 		7EEAAD7D2A9934110087AF46 /* MoviesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD7C2A9934110087AF46 /* MoviesInteractor.swift */; };
 		7EEAAD7F2A9934400087AF46 /* MoviesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD7E2A9934400087AF46 /* MoviesPresenter.swift */; };
@@ -102,7 +122,7 @@
 		7E0807D22AA3AD7000E6E5C2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7E0807D82AA3ED8B00E6E5C2 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		7E0807DA2AA3ED9800E6E5C2 /* UserRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImpl.swift; sourceTree = "<group>"; };
-		7E0807DC2AA3F9CE00E6E5C2 /* NewAndRecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAndRecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
+		7E0807DC2AA3F9CE00E6E5C2 /* SubSectionItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSectionItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E0807DF2AA40C1200E6E5C2 /* TVShowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsViewController.swift; sourceTree = "<group>"; };
 		7E0807E72AA40F2500E6E5C2 /* TVShowsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsInteractor.swift; sourceTree = "<group>"; };
 		7E0807E92AA40F3500E6E5C2 /* TVShowsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsRouter.swift; sourceTree = "<group>"; };
@@ -115,6 +135,26 @@
 		7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsBarButtonItem.swift; sourceTree = "<group>"; };
 		7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTVShowsResponse.swift; sourceTree = "<group>"; };
+		7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySectionViewController.swift; sourceTree = "<group>"; };
+		7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryBarButtonItem.swift; sourceTree = "<group>"; };
+		7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTabBarView.swift; sourceTree = "<group>"; };
+		7E1B87712AA57A9E0023A20D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		7E1B87732AA57AA40023A20D /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		7E1B87762AA57B6E0023A20D /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		7E1B87772AA57B6E0023A20D /* Montserrat-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.ttf"; sourceTree = "<group>"; };
+		7E1B87782AA57B6E0023A20D /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
+		7E1B87792AA57B6E0023A20D /* Montserrat-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.ttf"; sourceTree = "<group>"; };
+		7E1B877A2AA57B6E0023A20D /* Montserrat-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		7E1B877B2AA57B6E0023A20D /* Montserrat-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.ttf"; sourceTree = "<group>"; };
+		7E1B877C2AA57B6E0023A20D /* Montserrat-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BlackItalic.ttf"; sourceTree = "<group>"; };
+		7E1B877D2AA57B6E0023A20D /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		7E1B877E2AA57B6E0023A20D /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		7E1B877F2AA57B6E0023A20D /* Montserrat-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		7E1B87802AA57B6E0023A20D /* Montserrat-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.ttf"; sourceTree = "<group>"; };
+		7E1B87812AA57B6E0023A20D /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		7E1B87822AA57B6E0023A20D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		7E1B87912AA588950023A20D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySectionTableViewCell.swift; sourceTree = "<group>"; };
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
@@ -132,7 +172,7 @@
 		7EC468DA2AA2C38600B6D28F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesBarButtonItem.swift; sourceTree = "<group>"; };
 		7EEAAD712A9920950087AF46 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
-		7EEAAD742A9923390087AF46 /* PopularShowsItemViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularShowsItemViewCell.swift; sourceTree = "<group>"; };
+		7EEAAD742A9923390087AF46 /* CarouselItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EEAAD782A99321C0087AF46 /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
 		7EEAAD7C2A9934110087AF46 /* MoviesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesInteractor.swift; sourceTree = "<group>"; };
 		7EEAAD7E2A9934400087AF46 /* MoviesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesPresenter.swift; sourceTree = "<group>"; };
@@ -190,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				7E0807ED2AA410AE00E6E5C2 /* Components */,
+				7E1B876A2AA542290023A20D /* Views */,
 				7E0807CF2AA3A2EF00E6E5C2 /* LibraryViewController.swift */,
 			);
 			path = Library;
@@ -218,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				7EF4AFC52A82DC980001B902 /* Assets.xcassets */,
+				7E1B87912AA588950023A20D /* Colors.xcassets */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -270,6 +312,45 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7E1B876A2AA542290023A20D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */,
+				7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */,
+				7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */,
+				7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7E1B87752AA57B1E0023A20D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7E1B87902AA57BB30023A20D /* Montserrat */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		7E1B87902AA57BB30023A20D /* Montserrat */ = {
+			isa = PBXGroup;
+			children = (
+				7E1B87812AA57B6E0023A20D /* Montserrat-Black.ttf */,
+				7E1B877C2AA57B6E0023A20D /* Montserrat-BlackItalic.ttf */,
+				7E1B877E2AA57B6E0023A20D /* Montserrat-Bold.ttf */,
+				7E1B877B2AA57B6E0023A20D /* Montserrat-BoldItalic.ttf */,
+				7E1B87802AA57B6E0023A20D /* Montserrat-ExtraLight.ttf */,
+				7E1B877A2AA57B6E0023A20D /* Montserrat-ExtraLightItalic.ttf */,
+				7E1B87772AA57B6E0023A20D /* Montserrat-Light.ttf */,
+				7E1B87792AA57B6E0023A20D /* Montserrat-LightItalic.ttf */,
+				7E1B877D2AA57B6E0023A20D /* Montserrat-Medium.ttf */,
+				7E1B87782AA57B6E0023A20D /* Montserrat-MediumItalic.ttf */,
+				7E1B87822AA57B6E0023A20D /* Montserrat-Regular.ttf */,
+				7E1B87762AA57B6E0023A20D /* Montserrat-SemiBold.ttf */,
+				7E1B877F2AA57B6E0023A20D /* Montserrat-SemiBoldItalic.ttf */,
+			);
+			path = Montserrat;
+			sourceTree = "<group>";
+		};
 		7E70DB3D2A996DE70024FE23 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,8 +384,8 @@
 			isa = PBXGroup;
 			children = (
 				7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */,
-				7E0807DC2AA3F9CE00E6E5C2 /* NewAndRecommendedCollectionViewCell.swift */,
-				7EEAAD742A9923390087AF46 /* PopularShowsItemViewCell.swift */,
+				7E0807DC2AA3F9CE00E6E5C2 /* SubSectionItemCollectionViewCell.swift */,
+				7EEAAD742A9923390087AF46 /* CarouselItemCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -387,7 +468,10 @@
 		7EEAAD5E2A98E1770087AF46 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7E1B87752AA57B1E0023A20D /* Fonts */,
 				7E0807D52AA3AEE600E6E5C2 /* Assets */,
+				7E1B87712AA57A9E0023A20D /* Colors.swift */,
+				7E1B87732AA57AA40023A20D /* Fonts.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -614,8 +698,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1B87892AA57B6E0023A20D /* Montserrat-BlackItalic.ttf in Resources */,
+				7E1B878E2AA57B6E0023A20D /* Montserrat-Black.ttf in Resources */,
+				7E1B87882AA57B6E0023A20D /* Montserrat-BoldItalic.ttf in Resources */,
+				7E1B878F2AA57B6E0023A20D /* Montserrat-Regular.ttf in Resources */,
+				7E1B87852AA57B6E0023A20D /* Montserrat-MediumItalic.ttf in Resources */,
+				7E1B87842AA57B6E0023A20D /* Montserrat-Light.ttf in Resources */,
+				7E1B87862AA57B6E0023A20D /* Montserrat-LightItalic.ttf in Resources */,
+				7E1B87832AA57B6E0023A20D /* Montserrat-SemiBold.ttf in Resources */,
+				7E1B878C2AA57B6E0023A20D /* Montserrat-SemiBoldItalic.ttf in Resources */,
+				7E1B878A2AA57B6E0023A20D /* Montserrat-Medium.ttf in Resources */,
+				7E1B878D2AA57B6E0023A20D /* Montserrat-ExtraLight.ttf in Resources */,
 				7EF4AFC92A82DC980001B902 /* LaunchScreen.storyboard in Resources */,
 				7EF4AFC62A82DC980001B902 /* Assets.xcassets in Resources */,
+				7E1B87922AA588950023A20D /* Colors.xcassets in Resources */,
+				7E1B878B2AA57B6E0023A20D /* Montserrat-Bold.ttf in Resources */,
+				7E1B87872AA57B6E0023A20D /* Montserrat-ExtraLightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,6 +784,7 @@
 				7EEAAD8A2A993CC80087AF46 /* LaunchInteractor.swift in Sources */,
 				7EC468C62AA2AAAD00B6D28F /* HTTPConstants.swift in Sources */,
 				7E1B87672AA42FA70023A20D /* PopularTVShowsResponse.swift in Sources */,
+				7E1B87702AA56F960023A20D /* LibraryTabBarView.swift in Sources */,
 				7EC468D32AA2AE0200B6D28F /* LocalStorageImpl.swift in Sources */,
 				7EEB76B92AA2D928009634FB /* LoginRouter.swift in Sources */,
 				7E0807EC2AA40F4000E6E5C2 /* TVShowsPresenter.swift in Sources */,
@@ -696,19 +795,22 @@
 				7EC468C42AA2AAAD00B6D28F /* HTTPClientImpl.swift in Sources */,
 				7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */,
 				7EEB76CB2AA3830D009634FB /* MoviesRepositoryImpl.swift in Sources */,
-				7E0807DD2AA3F9CE00E6E5C2 /* NewAndRecommendedCollectionViewCell.swift in Sources */,
+				7E0807DD2AA3F9CE00E6E5C2 /* SubSectionItemCollectionViewCell.swift in Sources */,
 				7EEAAD7D2A9934110087AF46 /* MoviesInteractor.swift in Sources */,
 				7EEAAD8C2A993CD20087AF46 /* LaunchPresenter.swift in Sources */,
+				7E1B87722AA57A9E0023A20D /* Colors.swift in Sources */,
 				7EEB76AE2AA2D2AB009634FB /* LoginViewController.swift in Sources */,
+				7E1B87742AA57AA40023A20D /* Fonts.swift in Sources */,
 				7E0807F32AA410D600E6E5C2 /* LibraryPresenter.swift in Sources */,
 				7E0807EA2AA40F3500E6E5C2 /* TVShowsRouter.swift in Sources */,
 				7EEB76B02AA2D436009634FB /* RepositoryProvider.swift in Sources */,
 				7EEB76BB2AA2D931009634FB /* LoginPresenter.swift in Sources */,
+				7E1B87942AA58F680023A20D /* LibrarySectionTableViewCell.swift in Sources */,
 				7EEB76B22AA2D48F009634FB /* AuthRepository.swift in Sources */,
 				7EC468D72AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift in Sources */,
 				7E0807D02AA3A2EF00E6E5C2 /* LibraryViewController.swift in Sources */,
 				7EEB76C72AA37819009634FB /* PopularMoviesResponse.swift in Sources */,
-				7EEAAD752A9923390087AF46 /* PopularShowsItemViewCell.swift in Sources */,
+				7EEAAD752A9923390087AF46 /* CarouselItemCollectionViewCell.swift in Sources */,
 				7EEAAD722A9920950087AF46 /* MoviesViewController.swift in Sources */,
 				7E0807DB2AA3ED9800E6E5C2 /* UserRepositoryImpl.swift in Sources */,
 				7E0807D92AA3ED8B00E6E5C2 /* UserRepository.swift in Sources */,
@@ -716,12 +818,14 @@
 				7EC468CE2AA2ADD500B6D28F /* MoviesAPI.swift in Sources */,
 				7EEAAD7F2A9934400087AF46 /* MoviesPresenter.swift in Sources */,
 				7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */,
+				7E1B87692AA53DBB0023A20D /* LibrarySectionViewController.swift in Sources */,
 				7E0807FA2AA4125100E6E5C2 /* DetailPresenter.swift in Sources */,
 				7EF4AFBD2A82DC970001B902 /* AppDelegate.swift in Sources */,
 				7EF4AFBF2A82DC970001B902 /* SceneDelegate.swift in Sources */,
 				7EEB76C32AA2ED57009634FB /* RequestTokenResponse.swift in Sources */,
 				7E0807F82AA4122F00E6E5C2 /* DetailInteractor.swift in Sources */,
 				7EEB76BE2AA2E28B009634FB /* CreateSession.swift in Sources */,
+				7E1B876C2AA54AEF0023A20D /* LibraryBarButtonItem.swift in Sources */,
 				7E0807F62AA4122600E6E5C2 /* DetailRouter.swift in Sources */,
 				7EEAAD792A99321C0087AF46 /* MoviesRouter.swift in Sources */,
 				7EC468CC2AA2ADC700B6D28F /* UserAPI.swift in Sources */,

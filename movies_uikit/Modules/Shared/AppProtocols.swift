@@ -8,6 +8,19 @@
 import Foundation
 import UIKit
 
+typealias EntryPoint = UIViewController
+
+// protocol AnyRouter {
+//    // this is how we tell our app delegate that this is the entry for our application
+//    var entry: EntryPoint? { get }
+//
+//    static func route() -> AnyRouter
+//
+//    func push(to route: Routes, from vc: UIViewController)
+//
+//    func pop(from vc: UIViewController)
+// }
+//
 // protocol AnyView {
 //    var presenter: AnyPresenter? { get set }
 // }
@@ -22,15 +35,4 @@ import UIKit
 //    var router: AnyRouter? { get set }
 // }
 //
-typealias EntryPoint = UIViewController
 //
-// protocol AnyRouter {
-//    // this is how we tell our app delegate that this is the entry for our application
-//    var entry: EntryPoint? { get }
-//
-//    static func route() -> AnyRouter
-//
-//    func push(to route: Routes, from vc: UIViewController)
-//
-//    func pop(from vc: UIViewController)
-// }

@@ -18,13 +18,18 @@ class MoviesAPI {
         self.localStorage = localStorage
     }
 
-    func getPopularMovies(
+    func getMovies(
+        categoryType: String,
         completion: @escaping (Result<[Movie], Error>) -> Void
     ) {
         var headers = HTTPHeaders()
         headers.add(name: "Authorization", value: "Bearer \(HTTPConstants.Auth.tmdbAuthToken)")
+
         httpClient.get(
-            url: HTTPConstants.Endpoints.getPopularShows(typeOfShow: "movie").url,
+            url: HTTPConstants.Endpoints.getShows(
+                showType: "movie",
+                categoryType: categoryType
+            ).url,
             headers: headers,
             parameters: nil,
             response: PopularMoviesResponse.self
@@ -38,13 +43,18 @@ class MoviesAPI {
         }
     }
 
-    func getPopularTVShows(
+    func getTVShows(
+        categoryType: String,
         completion: @escaping (Result<[TVShow], Error>) -> Void
     ) {
         var headers = HTTPHeaders()
         headers.add(name: "Authorization", value: "Bearer \(HTTPConstants.Auth.tmdbAuthToken)")
+
         httpClient.get(
-            url: HTTPConstants.Endpoints.getPopularShows(typeOfShow: "tv").url,
+            url: HTTPConstants.Endpoints.getShows(
+                showType: "tv",
+                categoryType: categoryType
+            ).url,
             headers: headers,
             parameters: nil,
             response: PopularTVShowsResponse.self

@@ -8,9 +8,11 @@
 import Foundation
 
 protocol TVShowsInteractorDelegate: AnyObject {
-    var presenter: TVShowsPresenterDelegate? { get set }
+     var presenter: TVShowsPresenterDelegate? { get set }
 
      func getPopularTVShows()
+     func getTopRatedTVShows()
+     func getOnTheAirTVShows()
 }
 
 class TVShowsInteractor: TVShowsInteractorDelegate {
@@ -19,9 +21,29 @@ class TVShowsInteractor: TVShowsInteractorDelegate {
     var moviesRepository: MoviesRepository?
 
     func getPopularTVShows() {
-        moviesRepository?.getPopularTVShows(completion: { [weak self] tvShows in
+        moviesRepository?.getTVShows(
+            categoryType: "popular",
+            completion: { [weak self] tvShows in
             debugPrint("TVShows \(tvShows)")
-            self?.presenter?.interactorDidFetchTVShows(with: tvShows)
+            self?.presenter?.interactorDidFetchPopularTVShows(with: tvShows)
+        })
+    }
+
+    func getTopRatedTVShows() {
+        moviesRepository?.getTVShows(
+            categoryType: "top_rated",
+            completion: { [weak self] tvShows in
+            debugPrint("TVShows \(tvShows)")
+            self?.presenter?.interactorDidFetchTopRatedTVShows(with: tvShows)
+        })
+    }
+
+    func getOnTheAirTVShows() {
+        moviesRepository?.getTVShows(
+            categoryType: "on_the_air",
+            completion: { [weak self] tvShows in
+            debugPrint("TVShows \(tvShows)")
+            self?.presenter?.interactorDidFetchOnTheAirTVShows(with: tvShows)
         })
     }
 }
