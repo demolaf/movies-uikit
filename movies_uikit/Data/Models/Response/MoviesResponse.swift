@@ -1,16 +1,16 @@
 //
-//  PopularTVShowsResponse.swift
+//  MoviesResponse.swift
 //  movies_uikit
 //
-//  Created by Ademola Fadumo on 03/09/2023.
+//  Created by Ademola Fadumo on 02/09/2023.
 //
 
 import Foundation
 
-// MARK: - PopularTVShowsResponse
-struct PopularTVShowsResponse: Codable {
+// MARK: - MoviesResponse
+struct MoviesResponse: Decodable {
     let page: Int
-    let results: [TVShow]
+    let results: [Movie]
     let totalPages, totalResults: Int
 
     enum CodingKeys: String, CodingKey {
@@ -20,29 +20,29 @@ struct PopularTVShowsResponse: Codable {
     }
 }
 
-// MARK: - Result
-struct TVShow: Codable {
-    let backdropPath, firstAirDate: String
+// MARK: - Movie
+struct Movie: Codable {
+    let adult: Bool
+    let backdropPath: String
     let genreIDS: [Int]
     let id: Int
-    let name: String
-    let originCountry: [String]
-    let originalLanguage, originalName, overview: String
+    let originalTitle, overview: String
     let popularity: Double
-    let posterPath: String
+    let posterPath, releaseDate, title: String
+    let video: Bool
     let voteAverage: Double
     let voteCount: Int
 
     enum CodingKeys: String, CodingKey {
+        case adult
         case backdropPath = "backdrop_path"
-        case firstAirDate = "first_air_date"
         case genreIDS = "genre_ids"
-        case id, name
-        case originCountry = "origin_country"
-        case originalLanguage = "original_language"
-        case originalName = "original_name"
+        case id
+        case originalTitle = "original_title"
         case overview, popularity
         case posterPath = "poster_path"
+        case releaseDate = "release_date"
+        case title, video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
