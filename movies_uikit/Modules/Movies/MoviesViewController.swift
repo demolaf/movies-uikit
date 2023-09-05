@@ -233,6 +233,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let section = sections[indexPath.section]
+
         switch section {
         case .popular(movies: let movies):
             self.presenter?.movieItemTapped(movie: movies[indexPath.row])
@@ -241,7 +242,6 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case .upcoming(movies: let movies):
             self.presenter?.movieItemTapped(movie: movies[indexPath.row])
         }
-
     }
 
     func collectionView(

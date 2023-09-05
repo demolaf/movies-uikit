@@ -15,6 +15,8 @@ class DetailHeaderView: UIView {
         stackView.spacing = 24
         stackView.alignment = .fill
         stackView.distribution = .fill
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -22,8 +24,7 @@ class DetailHeaderView: UIView {
     private let topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 24
-        stackView.alignment = .fill
+        stackView.alignment = .leading
         stackView.distribution = .fill
         return stackView
     }()
@@ -34,20 +35,19 @@ class DetailHeaderView: UIView {
         stackView.spacing = 24
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.backgroundColor = .blue
         return stackView
     }()
-    
+
     private let subTitleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 12
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         return stackView
     }()
 
-    private let itemImageView: UIImageView = {
+    private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -55,10 +55,10 @@ class DetailHeaderView: UIView {
         return imageView
     }()
 
-    private let itemTitle: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.text = "Marvel's Avengers: Infinity War"
+        label.text = "Marvel's Avengers: Infinity War, Only the beginning"
         label.font = .appFont(ofSize: 24, weight: .semibold)
         label.numberOfLines = 2
         return label
@@ -72,7 +72,7 @@ class DetailHeaderView: UIView {
         label.numberOfLines = 1
         return label
     }()
-    
+
     private let releaseDateLabel: UILabel = {
         let label = UILabel()
         label.text = "2018, 148 mins"
@@ -107,12 +107,20 @@ class DetailHeaderView: UIView {
         return button
     }()
 
+    private let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.grayscale300
+        view.heightAnchor.constraint(equalToConstant: 1.5).isActive = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         initializeSubviews()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -120,24 +128,27 @@ class DetailHeaderView: UIView {
     }
 
     required init?(coder: NSCoder) {
-        fatalError()
+        super.init(coder: coder)
     }
 
     private func initializeSubviews() {
-        self.addSubview(itemImageView)
+        self.clipsToBounds = true
+
+        self.addSubview(posterImageView)
         self.addSubview(rootStackView)
 
         //
         rootStackView.addArrangedSubview(topStackView)
         rootStackView.addArrangedSubview(bottomStackView)
+        rootStackView.addArrangedSubview(separator)
 
         //
-        topStackView.addArrangedSubview(itemTitle)
-        
+        topStackView.addArrangedSubview(titleLabel)
+
         //
         bottomStackView.addArrangedSubview(subTitleStackView)
         bottomStackView.addArrangedSubview(watchNowButton)
-        
+
         //
         subTitleStackView.addArrangedSubview(genreLabel)
         subTitleStackView.addArrangedSubview(releaseDateLabel)
@@ -145,22 +156,40 @@ class DetailHeaderView: UIView {
 
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            itemImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            itemImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            itemImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            itemImageView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.65),
-            rootStackView.topAnchor.constraint(equalTo: self.itemImageView.bottomAnchor, constant: 24),
-            rootStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
-            rootStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
-//            rootStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -24)
+            //
+            posterImageView.topAnchor.constraint(equalTo: self.topAnchor),
+            posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            posterImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            posterImageView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.7),
+
+            //
+            rootStackView.topAnchor.constraint(equalTo: self.posterImageView.bottomAnchor),
+            rootStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            rootStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            rootStackView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.3)
         ])
     }
 
     func configureViewData(movie: Movie?) {
         if let movie = movie {
-            self.itemImageView.sd_setImage(
+            self.titleLabel.text = movie.originalTitle
+            self.releaseDateLabel.text = movie.releaseDate
+            self.posterImageView.sd_setImage(
                 with: HTTPConstants.Endpoints.posterPath(
                     url: movie.backdropPath,
+                    quality: "original"
+                ).url
+            )
+        }
+    }
+
+    func configureViewData(tvShow: TVShow?) {
+        if let tvShow = tvShow {
+            self.titleLabel.text = tvShow.originalName
+            self.releaseDateLabel.text = tvShow.firstAirDate
+            self.posterImageView.sd_setImage(
+                with: HTTPConstants.Endpoints.posterPath(
+                    url: tvShow.backdropPath,
                     quality: "original"
                 ).url
             )

@@ -50,7 +50,7 @@ class MoviesPresenter: MoviesPresenterDelegate {
             let detailVC = Routes.detail.vc as? DetailViewController
 
             if let detailVC = detailVC {
-                detailVC.movie = movie
+                detailVC.initializeViewData(movie: movie, tvShow: nil)
                 detailVC.hidesBottomBarWhenPushed = true
                 self.router?.push(to: detailVC, from: vc)
             }

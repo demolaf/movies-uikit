@@ -51,6 +51,17 @@
 		7E1B87942AA58F680023A20D /* LibrarySectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */; };
 		7E1B87972AA684D00023A20D /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87962AA684D00023A20D /* DetailHeaderView.swift */; };
 		7E1B87992AA6853C0023A20D /* RecommendedBasedOnItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */; };
+		7E320BB12AA746790048750F /* DetailDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BB02AA746790048750F /* DetailDescriptionView.swift */; };
+		7E320BB82AA7901E0048750F /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BB42AA7901E0048750F /* LoginInteractor.swift */; };
+		7E320BB92AA7901E0048750F /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BB52AA7901E0048750F /* LoginPresenter.swift */; };
+		7E320BBA2AA7901E0048750F /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BB62AA7901E0048750F /* LoginRouter.swift */; };
+		7E320BBB2AA7901E0048750F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BB72AA7901E0048750F /* LoginViewController.swift */; };
+		7E320BBD2AA7903F0048750F /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BBC2AA7903F0048750F /* AuthAPI.swift */; };
+		7E320BC02AA790550048750F /* CreateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BBF2AA790550048750F /* CreateSession.swift */; };
+		7E320BC32AA790600048750F /* RequestTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC12AA790600048750F /* RequestTokenResponse.swift */; };
+		7E320BC42AA790600048750F /* CreateSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC22AA790600048750F /* CreateSessionResponse.swift */; };
+		7E320BC82AA790690048750F /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC62AA790690048750F /* AuthRepositoryImpl.swift */; };
+		7E320BC92AA790690048750F /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC72AA790690048750F /* AuthRepository.swift */; };
 		7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70DB192A9960230024FE23 /* AppRouter.swift */; };
 		7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; };
 		7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -65,7 +76,6 @@
 		7EC468CE2AA2ADD500B6D28F /* MoviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468CD2AA2ADD500B6D28F /* MoviesAPI.swift */; };
 		7EC468D22AA2AE0200B6D28F /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468D02AA2AE0200B6D28F /* LocalStorage.swift */; };
 		7EC468D32AA2AE0200B6D28F /* LocalStorageImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468D12AA2AE0200B6D28F /* LocalStorageImpl.swift */; };
-		7EC468D52AA2AEB800B6D28F /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468D42AA2AEB800B6D28F /* AuthAPI.swift */; };
 		7EC468D72AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */; };
 		7EC468DB2AA2C38600B6D28F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468DA2AA2C38600B6D28F /* Environment.swift */; };
 		7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */; };
@@ -79,16 +89,7 @@
 		7EEAAD882A993CA00087AF46 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD872A993CA00087AF46 /* LaunchRouter.swift */; };
 		7EEAAD8A2A993CC80087AF46 /* LaunchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD892A993CC80087AF46 /* LaunchInteractor.swift */; };
 		7EEAAD8C2A993CD20087AF46 /* LaunchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD8B2A993CD20087AF46 /* LaunchPresenter.swift */; };
-		7EEB76AE2AA2D2AB009634FB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76AD2AA2D2AB009634FB /* LoginViewController.swift */; };
 		7EEB76B02AA2D436009634FB /* RepositoryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76AF2AA2D436009634FB /* RepositoryProvider.swift */; };
-		7EEB76B22AA2D48F009634FB /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76B12AA2D48F009634FB /* AuthRepository.swift */; };
-		7EEB76B42AA2D49A009634FB /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76B32AA2D49A009634FB /* AuthRepositoryImpl.swift */; };
-		7EEB76B72AA2D920009634FB /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76B62AA2D920009634FB /* LoginInteractor.swift */; };
-		7EEB76B92AA2D928009634FB /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76B82AA2D928009634FB /* LoginRouter.swift */; };
-		7EEB76BB2AA2D931009634FB /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76BA2AA2D931009634FB /* LoginPresenter.swift */; };
-		7EEB76BE2AA2E28B009634FB /* CreateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76BD2AA2E28B009634FB /* CreateSession.swift */; };
-		7EEB76C02AA2E376009634FB /* CreateSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76BF2AA2E376009634FB /* CreateSessionResponse.swift */; };
-		7EEB76C32AA2ED57009634FB /* RequestTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76C22AA2ED57009634FB /* RequestTokenResponse.swift */; };
 		7EEB76C72AA37819009634FB /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76C62AA37819009634FB /* MoviesResponse.swift */; };
 		7EEB76C92AA38303009634FB /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76C82AA38303009634FB /* MoviesRepository.swift */; };
 		7EEB76CB2AA3830D009634FB /* MoviesRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76CA2AA3830D009634FB /* MoviesRepositoryImpl.swift */; };
@@ -159,6 +160,17 @@
 		7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySectionTableViewCell.swift; sourceTree = "<group>"; };
 		7E1B87962AA684D00023A20D /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedBasedOnItemView.swift; sourceTree = "<group>"; };
+		7E320BB02AA746790048750F /* DetailDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDescriptionView.swift; sourceTree = "<group>"; };
+		7E320BB42AA7901E0048750F /* LoginInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		7E320BB52AA7901E0048750F /* LoginPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		7E320BB62AA7901E0048750F /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		7E320BB72AA7901E0048750F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7E320BBC2AA7903F0048750F /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
+		7E320BBF2AA790550048750F /* CreateSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSession.swift; sourceTree = "<group>"; };
+		7E320BC12AA790600048750F /* RequestTokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTokenResponse.swift; sourceTree = "<group>"; };
+		7E320BC22AA790600048750F /* CreateSessionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSessionResponse.swift; sourceTree = "<group>"; };
+		7E320BC62AA790690048750F /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
+		7E320BC72AA790690048750F /* AuthRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
@@ -170,7 +182,6 @@
 		7EC468CD2AA2ADD500B6D28F /* MoviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesAPI.swift; sourceTree = "<group>"; };
 		7EC468D02AA2AE0200B6D28F /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		7EC468D12AA2AE0200B6D28F /* LocalStorageImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageImpl.swift; sourceTree = "<group>"; };
-		7EC468D42AA2AEB800B6D28F /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionResuableView.swift; sourceTree = "<group>"; };
 		7EC468D82AA2C29200B6D28F /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		7EC468DA2AA2C38600B6D28F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -185,16 +196,7 @@
 		7EEAAD872A993CA00087AF46 /* LaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
 		7EEAAD892A993CC80087AF46 /* LaunchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInteractor.swift; sourceTree = "<group>"; };
 		7EEAAD8B2A993CD20087AF46 /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
-		7EEB76AD2AA2D2AB009634FB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7EEB76AF2AA2D436009634FB /* RepositoryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProvider.swift; sourceTree = "<group>"; };
-		7EEB76B12AA2D48F009634FB /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
-		7EEB76B32AA2D49A009634FB /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
-		7EEB76B62AA2D920009634FB /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
-		7EEB76B82AA2D928009634FB /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		7EEB76BA2AA2D931009634FB /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
-		7EEB76BD2AA2E28B009634FB /* CreateSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSession.swift; sourceTree = "<group>"; };
-		7EEB76BF2AA2E376009634FB /* CreateSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionResponse.swift; sourceTree = "<group>"; };
-		7EEB76C22AA2ED57009634FB /* RequestTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTokenResponse.swift; sourceTree = "<group>"; };
 		7EEB76C62AA37819009634FB /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
 		7EEB76C82AA38303009634FB /* MoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepository.swift; sourceTree = "<group>"; };
 		7EEB76CA2AA3830D009634FB /* MoviesRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				7E1B87962AA684D00023A20D /* DetailHeaderView.swift */,
+				7E320BB02AA746790048750F /* DetailDescriptionView.swift */,
 				7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */,
 			);
 			path = Views;
@@ -373,10 +376,46 @@
 			path = "Library Section";
 			sourceTree = "<group>";
 		};
+		7E320BB22AA7901E0048750F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7E320BB32AA7901E0048750F /* Components */,
+				7E320BB72AA7901E0048750F /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		7E320BB32AA7901E0048750F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7E320BB42AA7901E0048750F /* LoginInteractor.swift */,
+				7E320BB52AA7901E0048750F /* LoginPresenter.swift */,
+				7E320BB62AA7901E0048750F /* LoginRouter.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7E320BBE2AA790550048750F /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				7E320BBF2AA790550048750F /* CreateSession.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		7E320BC52AA790690048750F /* Auth Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7E320BC62AA790690048750F /* AuthRepositoryImpl.swift */,
+				7E320BC72AA790690048750F /* AuthRepository.swift */,
+			);
+			path = "Auth Repository";
+			sourceTree = "<group>";
+		};
 		7E70DB3D2A996DE70024FE23 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7EEB76C52AA377CB009634FB /* Request */,
+				7E320BBE2AA790550048750F /* Request */,
 				7EEB76C42AA377C0009634FB /* Response */,
 			);
 			path = Models;
@@ -385,8 +424,8 @@
 		7E70DB3E2A996DEE0024FE23 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				7E320BC52AA790690048750F /* Auth Repository */,
 				7EC468C92AA2AD8F00B6D28F /* Movies Repository */,
-				7EC468C82AA2AD8200B6D28F /* Auth Repository */,
 				7EC468C72AA2AD1100B6D28F /* User Repository */,
 			);
 			path = Repositories;
@@ -397,9 +436,9 @@
 			children = (
 				7EC468CF2AA2AE0200B6D28F /* Local Storage */,
 				7EC468C02AA2AAAD00B6D28F /* HTTP Client */,
+				7E320BBC2AA7903F0048750F /* AuthAPI.swift */,
 				7EC468CB2AA2ADC700B6D28F /* UserAPI.swift */,
 				7EC468CD2AA2ADD500B6D28F /* MoviesAPI.swift */,
-				7EC468D42AA2AEB800B6D28F /* AuthAPI.swift */,
 			);
 			path = Datasources;
 			sourceTree = "<group>";
@@ -452,15 +491,6 @@
 			path = "User Repository";
 			sourceTree = "<group>";
 		};
-		7EC468C82AA2AD8200B6D28F /* Auth Repository */ = {
-			isa = PBXGroup;
-			children = (
-				7EEB76B12AA2D48F009634FB /* AuthRepository.swift */,
-				7EEB76B32AA2D49A009634FB /* AuthRepositoryImpl.swift */,
-			);
-			path = "Auth Repository";
-			sourceTree = "<group>";
-		};
 		7EC468C92AA2AD8F00B6D28F /* Movies Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -504,8 +534,8 @@
 			isa = PBXGroup;
 			children = (
 				7EEAAD802A9937510087AF46 /* Shared */,
+				7E320BB22AA7901E0048750F /* Login */,
 				7EEAAD832A993C390087AF46 /* Launch */,
-				7EEB76AC2AA2D266009634FB /* Login */,
 				7E0807CB2AA3A10A00E6E5C2 /* Main Tab */,
 				7E0807DE2AA40B8600E6E5C2 /* TV Shows */,
 				7EEAAD622A98E1FC0087AF46 /* Movies */,
@@ -583,25 +613,6 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		7EEB76AC2AA2D266009634FB /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				7EEB76B52AA2D913009634FB /* Components */,
-				7EEB76AD2AA2D2AB009634FB /* LoginViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		7EEB76B52AA2D913009634FB /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				7EEB76B82AA2D928009634FB /* LoginRouter.swift */,
-				7EEB76B62AA2D920009634FB /* LoginInteractor.swift */,
-				7EEB76BA2AA2D931009634FB /* LoginPresenter.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		7EEB76BC2AA2D942009634FB /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,20 +623,12 @@
 		7EEB76C42AA377C0009634FB /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				7EEB76BF2AA2E376009634FB /* CreateSessionResponse.swift */,
-				7EEB76C22AA2ED57009634FB /* RequestTokenResponse.swift */,
+				7E320BC22AA790600048750F /* CreateSessionResponse.swift */,
+				7E320BC12AA790600048750F /* RequestTokenResponse.swift */,
 				7EEB76C62AA37819009634FB /* MoviesResponse.swift */,
 				7E1B87662AA42FA70023A20D /* TVShowsResponse.swift */,
 			);
 			path = Response;
-			sourceTree = "<group>";
-		};
-		7EEB76C52AA377CB009634FB /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				7EEB76BD2AA2E28B009634FB /* CreateSession.swift */,
-			);
-			path = Request;
 			sourceTree = "<group>";
 		};
 		7EF4AFB02A82DC970001B902 = {
@@ -745,7 +748,7 @@
 		7E0807D62AA3C1B200E6E5C2 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -757,7 +760,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\ngit diff --cached --name-only | grep \"\\.swift\" | while read filename; do\n    swiftlint lint --path \"$filename\";\ndone\n";
 		};
@@ -791,45 +794,46 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EEAAD822A993A140087AF46 /* AppProtocols.swift in Sources */,
+				7E320BC92AA790690048750F /* AuthRepository.swift in Sources */,
 				7E0807E82AA40F2500E6E5C2 /* TVShowsInteractor.swift in Sources */,
 				7EC468DB2AA2C38600B6D28F /* Environment.swift in Sources */,
 				7E0807F12AA410CD00E6E5C2 /* LibraryInteractor.swift in Sources */,
-				7EEB76C02AA2E376009634FB /* CreateSessionResponse.swift in Sources */,
+				7E320BBD2AA7903F0048750F /* AuthAPI.swift in Sources */,
 				7E0807FD2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift in Sources */,
+				7E320BC02AA790550048750F /* CreateSession.swift in Sources */,
 				7E0807EF2AA410C000E6E5C2 /* LibraryRouter.swift in Sources */,
 				7E0807E02AA40C1200E6E5C2 /* TVShowsViewController.swift in Sources */,
 				7EC468D22AA2AE0200B6D28F /* LocalStorage.swift in Sources */,
 				7EEB76C92AA38303009634FB /* MoviesRepository.swift in Sources */,
-				7EEB76B72AA2D920009634FB /* LoginInteractor.swift in Sources */,
-				7EC468D52AA2AEB800B6D28F /* AuthAPI.swift in Sources */,
 				7E0807D32AA3AD7000E6E5C2 /* DetailViewController.swift in Sources */,
 				7EEAAD8A2A993CC80087AF46 /* LaunchInteractor.swift in Sources */,
 				7EC468C62AA2AAAD00B6D28F /* HTTPConstants.swift in Sources */,
 				7E1B87672AA42FA70023A20D /* TVShowsResponse.swift in Sources */,
 				7E1B87702AA56F960023A20D /* LibraryTabBarView.swift in Sources */,
+				7E320BBA2AA7901E0048750F /* LoginRouter.swift in Sources */,
 				7EC468D32AA2AE0200B6D28F /* LocalStorageImpl.swift in Sources */,
-				7EEB76B92AA2D928009634FB /* LoginRouter.swift in Sources */,
 				7E0807EC2AA40F4000E6E5C2 /* TVShowsPresenter.swift in Sources */,
+				7E320BB92AA7901E0048750F /* LoginPresenter.swift in Sources */,
 				7E0807CD2AA3A13900E6E5C2 /* MainTabBarViewController.swift in Sources */,
-				7EEB76B42AA2D49A009634FB /* AuthRepositoryImpl.swift in Sources */,
 				7EEAAD882A993CA00087AF46 /* LaunchRouter.swift in Sources */,
 				7EC468C52AA2AAAD00B6D28F /* HTTPClient.swift in Sources */,
 				7E1B87992AA6853C0023A20D /* RecommendedBasedOnItemView.swift in Sources */,
 				7EC468C42AA2AAAD00B6D28F /* HTTPClientImpl.swift in Sources */,
 				7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */,
 				7EEB76CB2AA3830D009634FB /* MoviesRepositoryImpl.swift in Sources */,
+				7E320BB82AA7901E0048750F /* LoginInteractor.swift in Sources */,
 				7E0807DD2AA3F9CE00E6E5C2 /* SubSectionItemCollectionViewCell.swift in Sources */,
 				7EEAAD7D2A9934110087AF46 /* MoviesInteractor.swift in Sources */,
 				7EEAAD8C2A993CD20087AF46 /* LaunchPresenter.swift in Sources */,
 				7E1B87722AA57A9E0023A20D /* Colors.swift in Sources */,
-				7EEB76AE2AA2D2AB009634FB /* LoginViewController.swift in Sources */,
 				7E1B87742AA57AA40023A20D /* Fonts.swift in Sources */,
+				7E320BC32AA790600048750F /* RequestTokenResponse.swift in Sources */,
 				7E0807F32AA410D600E6E5C2 /* LibraryPresenter.swift in Sources */,
 				7E0807EA2AA40F3500E6E5C2 /* TVShowsRouter.swift in Sources */,
 				7EEB76B02AA2D436009634FB /* RepositoryProvider.swift in Sources */,
-				7EEB76BB2AA2D931009634FB /* LoginPresenter.swift in Sources */,
+				7E320BBB2AA7901E0048750F /* LoginViewController.swift in Sources */,
 				7E1B87942AA58F680023A20D /* LibrarySectionTableViewCell.swift in Sources */,
-				7EEB76B22AA2D48F009634FB /* AuthRepository.swift in Sources */,
+				7E320BB12AA746790048750F /* DetailDescriptionView.swift in Sources */,
 				7EC468D72AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift in Sources */,
 				7E0807D02AA3A2EF00E6E5C2 /* LibraryViewController.swift in Sources */,
 				7EEB76C72AA37819009634FB /* MoviesResponse.swift in Sources */,
@@ -837,7 +841,9 @@
 				7EEAAD752A9923390087AF46 /* CarouselItemCollectionViewCell.swift in Sources */,
 				7EEAAD722A9920950087AF46 /* MoviesViewController.swift in Sources */,
 				7E0807DB2AA3ED9800E6E5C2 /* UserRepositoryImpl.swift in Sources */,
+				7E320BC42AA790600048750F /* CreateSessionResponse.swift in Sources */,
 				7E0807D92AA3ED8B00E6E5C2 /* UserRepository.swift in Sources */,
+				7E320BC82AA790690048750F /* AuthRepositoryImpl.swift in Sources */,
 				7EEAAD862A993C6D0087AF46 /* LaunchViewController.swift in Sources */,
 				7EC468CE2AA2ADD500B6D28F /* MoviesAPI.swift in Sources */,
 				7EEAAD7F2A9934400087AF46 /* MoviesPresenter.swift in Sources */,
@@ -846,9 +852,7 @@
 				7E0807FA2AA4125100E6E5C2 /* DetailPresenter.swift in Sources */,
 				7EF4AFBD2A82DC970001B902 /* AppDelegate.swift in Sources */,
 				7EF4AFBF2A82DC970001B902 /* SceneDelegate.swift in Sources */,
-				7EEB76C32AA2ED57009634FB /* RequestTokenResponse.swift in Sources */,
 				7E0807F82AA4122F00E6E5C2 /* DetailInteractor.swift in Sources */,
-				7EEB76BE2AA2E28B009634FB /* CreateSession.swift in Sources */,
 				7E1B876C2AA54AEF0023A20D /* LibraryBarButtonItem.swift in Sources */,
 				7E0807F62AA4122600E6E5C2 /* DetailRouter.swift in Sources */,
 				7EEAAD792A99321C0087AF46 /* MoviesRouter.swift in Sources */,
