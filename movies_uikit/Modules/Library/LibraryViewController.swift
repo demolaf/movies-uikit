@@ -13,9 +13,18 @@ protocol LibraryViewDelegate: AnyObject {
     func update(with movies: [Movie])
 }
 
-enum LibrarySectionType: String {
-    case movies = "Movies"
-    case tvShows = "TV Shows"
+enum LibrarySectionType: Int {
+    case movies
+    case tvShows
+
+    var stringValue: String {
+        switch self {
+        case .movies:
+            return "Movies"
+        case .tvShows:
+            return "TV Shows"
+        }
+    }
 }
 
 class LibraryViewController: UIViewController, LibraryViewDelegate {
@@ -32,10 +41,8 @@ class LibraryViewController: UIViewController, LibraryViewDelegate {
 
     private lazy var viewControllers: [UIViewController] = {
         var viewControllers: [UIViewController] = []
-        sections.forEach { section in
+        sections.forEach { _ in
             let vc = LibrarySectionViewController()
-            vc.pageViewController = self
-            vc.title = section.rawValue
             viewControllers.append(UINavigationController(rootViewController: vc))
         }
         return viewControllers
@@ -61,7 +68,7 @@ class LibraryViewController: UIViewController, LibraryViewDelegate {
         return view
     }()
 
-    private let tabBarView: UIView = {
+    private let tabBarView: LibraryTabBarView = {
         let tabBar = LibraryTabBarView()
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
@@ -76,6 +83,7 @@ class LibraryViewController: UIViewController, LibraryViewDelegate {
         initializeViewAppearance()
         initializePageController()
         initializeSubviews()
+        initializeTabBarItemTap()
 
         presenter?.initialize()
     }
@@ -112,6 +120,16 @@ extension LibraryViewController {
         view.gestureRecognizers = libraryPageVC.gestureRecognizers
     }
 
+    private func initializeTabBarItemTap() {
+        tabBarView.movieTabBarPressedCallback = {
+            self.jumpToTab(section: LibrarySectionType.movies)
+        }
+
+        tabBarView.tvTabBarPressedCallback = {
+            self.jumpToTab(section: LibrarySectionType.tvShows)
+        }
+    }
+
     private func applyConstraints() {
         NSLayoutConstraint.activate([
 
@@ -128,7 +146,7 @@ extension LibraryViewController {
             tabBarView.heightAnchor.constraint(equalToConstant: self.view.frame.height * 0.1),
 
             // Library Page VC Constraints
-            libraryPageVC.view.topAnchor.constraint(equalTo: self.tabBarView.bottomAnchor, constant: 36),
+            libraryPageVC.view.topAnchor.constraint(equalTo: self.tabBarView.bottomAnchor, constant: 8),
             libraryPageVC.view.leadingAnchor.constraint(equalTo: self.mainView.leadingAnchor),
             libraryPageVC.view.trailingAnchor.constraint(equalTo: self.mainView.trailingAnchor),
             libraryPageVC.view.bottomAnchor.constraint(equalTo: self.mainView.bottomAnchor)
@@ -137,6 +155,34 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+
+    func jumpToTab(section: LibrarySectionType) {
+
+        self.tabBarView.changeSelectedTab(section: section)
+
+        switch section {
+        case .movies:
+            libraryPageVC.setViewControllers([viewControllers[0]], direction: .reverse, animated: true)
+        case .tvShows:
+            libraryPageVC.setViewControllers([viewControllers[1]], direction: .forward, animated: true)
+        }
+    }
+
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool
+    ) {
+        if completed,
+        let currentViewController = pageViewController.viewControllers?.first,
+        let currentIndex = viewControllers.firstIndex(of: currentViewController) {
+            debugPrint("Current Page Index \(currentIndex)")
+            let currentTab = LibrarySectionType(rawValue: currentIndex) ?? LibrarySectionType.movies
+            self.tabBarView.changeSelectedTab(section: currentTab)
+        }
+    }
+
     func pageViewController(
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController

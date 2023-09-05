@@ -13,7 +13,6 @@ protocol DetailPresenterDelegate: AnyObject {
     var router: DetailRouterDelegate? { get set }
 
     func initialize()
-    func interactorDidFetchMovies(with movies: [Movie])
 }
 
 class DetailPresenter: DetailPresenterDelegate {
@@ -23,11 +22,5 @@ class DetailPresenter: DetailPresenterDelegate {
 
     var view: DetailViewDelegate?
 
-    func initialize() {
-        interactor?.getPopularMovies()
-    }
-
-    func interactorDidFetchMovies(with movies: [Movie]) {
-        view?.update(with: movies)
-    }
+    func initialize() {}
 }

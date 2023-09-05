@@ -29,7 +29,7 @@ class LaunchPresenter: LaunchPresenterDelegate {
     func initialize() {
         // TODO: Handle authentication here, check if signed in or not
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let vc = self.view as? UIViewController
+            let vc = self.view as? LaunchViewController
 
             if let vc = vc {
                 self.router?.push(to: Routes.mainTab, from: vc)

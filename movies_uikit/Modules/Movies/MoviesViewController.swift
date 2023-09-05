@@ -181,7 +181,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case .new(let movies):
             return movies.count
         case .upcoming(let movies):
-            return movies.count > 1 ? 1 : movies.count
+            return movies.count > 3 ? 3 : movies.count
         }
     }
 
@@ -227,6 +227,19 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             let movie = movies[indexPath.row]
             cell.configureViewData(movie: movie)
             return cell
+        }
+
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let section = sections[indexPath.section]
+        switch section {
+        case .popular(movies: let movies):
+            self.presenter?.movieItemTapped(movie: movies[indexPath.row])
+        case .new(movies: let movies):
+            self.presenter?.movieItemTapped(movie: movies[indexPath.row])
+        case .upcoming(movies: let movies):
+            self.presenter?.movieItemTapped(movie: movies[indexPath.row])
         }
 
     }

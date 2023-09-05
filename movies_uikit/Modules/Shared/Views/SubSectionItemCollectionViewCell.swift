@@ -57,7 +57,7 @@ class SubSectionItemCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        self.titleLabelView.text = ""
+        self.titleLabelView.text = nil
         self.imageView.image = nil
     }
 
@@ -105,7 +105,12 @@ class SubSectionItemCollectionViewCell: UICollectionViewCell {
     func configureViewData(movie: Movie?) {
         if let movie = movie {
             self.titleLabelView.text = movie.originalTitle
-            self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(movie.posterPath)")!)
+            self.imageView.sd_setImage(
+                with: HTTPConstants.Endpoints.posterPath(
+                    url: movie.posterPath,
+                    quality: nil
+                ).url
+            )
             return
         }
 
@@ -116,7 +121,12 @@ class SubSectionItemCollectionViewCell: UICollectionViewCell {
     func configureViewData(tv: TVShow?) {
         if let tv = tv {
             self.titleLabelView.text = tv.originalName
-            self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(tv.posterPath)")!)
+            self.imageView.sd_setImage(
+                with: HTTPConstants.Endpoints.posterPath(
+                    url: tv.posterPath,
+                    quality: nil
+                ).url
+            )
             return
         }
 

@@ -28,7 +28,7 @@
 		7E0807F82AA4122F00E6E5C2 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807F72AA4122F00E6E5C2 /* DetailInteractor.swift */; };
 		7E0807FA2AA4125100E6E5C2 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */; };
 		7E0807FD2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */; };
-		7E1B87672AA42FA70023A20D /* PopularTVShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */; };
+		7E1B87672AA42FA70023A20D /* TVShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87662AA42FA70023A20D /* TVShowsResponse.swift */; };
 		7E1B87692AA53DBB0023A20D /* LibrarySectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */; };
 		7E1B876C2AA54AEF0023A20D /* LibraryBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */; };
 		7E1B87702AA56F960023A20D /* LibraryTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */; };
@@ -49,6 +49,8 @@
 		7E1B878F2AA57B6E0023A20D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87822AA57B6E0023A20D /* Montserrat-Regular.ttf */; };
 		7E1B87922AA588950023A20D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87912AA588950023A20D /* Colors.xcassets */; };
 		7E1B87942AA58F680023A20D /* LibrarySectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */; };
+		7E1B87972AA684D00023A20D /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87962AA684D00023A20D /* DetailHeaderView.swift */; };
+		7E1B87992AA6853C0023A20D /* RecommendedBasedOnItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */; };
 		7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70DB192A9960230024FE23 /* AppRouter.swift */; };
 		7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; };
 		7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -87,7 +89,7 @@
 		7EEB76BE2AA2E28B009634FB /* CreateSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76BD2AA2E28B009634FB /* CreateSession.swift */; };
 		7EEB76C02AA2E376009634FB /* CreateSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76BF2AA2E376009634FB /* CreateSessionResponse.swift */; };
 		7EEB76C32AA2ED57009634FB /* RequestTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76C22AA2ED57009634FB /* RequestTokenResponse.swift */; };
-		7EEB76C72AA37819009634FB /* PopularMoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76C62AA37819009634FB /* PopularMoviesResponse.swift */; };
+		7EEB76C72AA37819009634FB /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76C62AA37819009634FB /* MoviesResponse.swift */; };
 		7EEB76C92AA38303009634FB /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76C82AA38303009634FB /* MoviesRepository.swift */; };
 		7EEB76CB2AA3830D009634FB /* MoviesRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB76CA2AA3830D009634FB /* MoviesRepositoryImpl.swift */; };
 		7EF4AFBD2A82DC970001B902 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF4AFBC2A82DC970001B902 /* AppDelegate.swift */; };
@@ -134,7 +136,7 @@
 		7E0807F72AA4122F00E6E5C2 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsBarButtonItem.swift; sourceTree = "<group>"; };
-		7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularTVShowsResponse.swift; sourceTree = "<group>"; };
+		7E1B87662AA42FA70023A20D /* TVShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsResponse.swift; sourceTree = "<group>"; };
 		7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySectionViewController.swift; sourceTree = "<group>"; };
 		7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryBarButtonItem.swift; sourceTree = "<group>"; };
 		7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTabBarView.swift; sourceTree = "<group>"; };
@@ -155,6 +157,8 @@
 		7E1B87822AA57B6E0023A20D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		7E1B87912AA588950023A20D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySectionTableViewCell.swift; sourceTree = "<group>"; };
+		7E1B87962AA684D00023A20D /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
+		7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedBasedOnItemView.swift; sourceTree = "<group>"; };
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
@@ -191,7 +195,7 @@
 		7EEB76BD2AA2E28B009634FB /* CreateSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSession.swift; sourceTree = "<group>"; };
 		7EEB76BF2AA2E376009634FB /* CreateSessionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionResponse.swift; sourceTree = "<group>"; };
 		7EEB76C22AA2ED57009634FB /* RequestTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTokenResponse.swift; sourceTree = "<group>"; };
-		7EEB76C62AA37819009634FB /* PopularMoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesResponse.swift; sourceTree = "<group>"; };
+		7EEB76C62AA37819009634FB /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
 		7EEB76C82AA38303009634FB /* MoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepository.swift; sourceTree = "<group>"; };
 		7EEB76CA2AA3830D009634FB /* MoviesRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepositoryImpl.swift; sourceTree = "<group>"; };
 		7EF4AFB92A82DC970001B902 /* movies_uikit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies_uikit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				7E0807F42AA4121600E6E5C2 /* Components */,
+				7E1B87952AA682230023A20D /* Views */,
 				7E0807D22AA3AD7000E6E5C2 /* DetailViewController.swift */,
 			);
 			path = Detail;
@@ -315,10 +320,9 @@
 		7E1B876A2AA542290023A20D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */,
+				7E1B879A2AA6926A0023A20D /* Library Section */,
 				7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */,
 				7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */,
-				7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,13 +355,31 @@
 			path = Montserrat;
 			sourceTree = "<group>";
 		};
-		7E70DB3D2A996DE70024FE23 /* Model */ = {
+		7E1B87952AA682230023A20D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E1B87962AA684D00023A20D /* DetailHeaderView.swift */,
+				7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7E1B879A2AA6926A0023A20D /* Library Section */ = {
+			isa = PBXGroup;
+			children = (
+				7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */,
+				7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */,
+			);
+			path = "Library Section";
+			sourceTree = "<group>";
+		};
+		7E70DB3D2A996DE70024FE23 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				7EEB76C52AA377CB009634FB /* Request */,
 				7EEB76C42AA377C0009634FB /* Response */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7E70DB3E2A996DEE0024FE23 /* Repositories */ = {
@@ -373,6 +395,8 @@
 		7E70DB412A996E2C0024FE23 /* Datasources */ = {
 			isa = PBXGroup;
 			children = (
+				7EC468CF2AA2AE0200B6D28F /* Local Storage */,
+				7EC468C02AA2AAAD00B6D28F /* HTTP Client */,
 				7EC468CB2AA2ADC700B6D28F /* UserAPI.swift */,
 				7EC468CD2AA2ADD500B6D28F /* MoviesAPI.swift */,
 				7EC468D42AA2AEB800B6D28F /* AuthAPI.swift */,
@@ -494,11 +518,9 @@
 		7EEAAD612A98E1F00087AF46 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				7EC468CF2AA2AE0200B6D28F /* Local Storage */,
-				7EC468C02AA2AAAD00B6D28F /* HTTP Client */,
 				7E70DB412A996E2C0024FE23 /* Datasources */,
 				7E70DB3E2A996DEE0024FE23 /* Repositories */,
-				7E70DB3D2A996DE70024FE23 /* Model */,
+				7E70DB3D2A996DE70024FE23 /* Models */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -592,8 +614,8 @@
 			children = (
 				7EEB76BF2AA2E376009634FB /* CreateSessionResponse.swift */,
 				7EEB76C22AA2ED57009634FB /* RequestTokenResponse.swift */,
-				7EEB76C62AA37819009634FB /* PopularMoviesResponse.swift */,
-				7E1B87662AA42FA70023A20D /* PopularTVShowsResponse.swift */,
+				7EEB76C62AA37819009634FB /* MoviesResponse.swift */,
+				7E1B87662AA42FA70023A20D /* TVShowsResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -723,7 +745,7 @@
 		7E0807D62AA3C1B200E6E5C2 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -735,7 +757,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\ngit diff --cached --name-only | grep \"\\.swift\" | while read filename; do\n    swiftlint lint --path \"$filename\";\ndone\n";
 		};
@@ -783,7 +805,7 @@
 				7E0807D32AA3AD7000E6E5C2 /* DetailViewController.swift in Sources */,
 				7EEAAD8A2A993CC80087AF46 /* LaunchInteractor.swift in Sources */,
 				7EC468C62AA2AAAD00B6D28F /* HTTPConstants.swift in Sources */,
-				7E1B87672AA42FA70023A20D /* PopularTVShowsResponse.swift in Sources */,
+				7E1B87672AA42FA70023A20D /* TVShowsResponse.swift in Sources */,
 				7E1B87702AA56F960023A20D /* LibraryTabBarView.swift in Sources */,
 				7EC468D32AA2AE0200B6D28F /* LocalStorageImpl.swift in Sources */,
 				7EEB76B92AA2D928009634FB /* LoginRouter.swift in Sources */,
@@ -792,6 +814,7 @@
 				7EEB76B42AA2D49A009634FB /* AuthRepositoryImpl.swift in Sources */,
 				7EEAAD882A993CA00087AF46 /* LaunchRouter.swift in Sources */,
 				7EC468C52AA2AAAD00B6D28F /* HTTPClient.swift in Sources */,
+				7E1B87992AA6853C0023A20D /* RecommendedBasedOnItemView.swift in Sources */,
 				7EC468C42AA2AAAD00B6D28F /* HTTPClientImpl.swift in Sources */,
 				7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */,
 				7EEB76CB2AA3830D009634FB /* MoviesRepositoryImpl.swift in Sources */,
@@ -809,7 +832,8 @@
 				7EEB76B22AA2D48F009634FB /* AuthRepository.swift in Sources */,
 				7EC468D72AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift in Sources */,
 				7E0807D02AA3A2EF00E6E5C2 /* LibraryViewController.swift in Sources */,
-				7EEB76C72AA37819009634FB /* PopularMoviesResponse.swift in Sources */,
+				7EEB76C72AA37819009634FB /* MoviesResponse.swift in Sources */,
+				7E1B87972AA684D00023A20D /* DetailHeaderView.swift in Sources */,
 				7EEAAD752A9923390087AF46 /* CarouselItemCollectionViewCell.swift in Sources */,
 				7EEAAD722A9920950087AF46 /* MoviesViewController.swift in Sources */,
 				7E0807DB2AA3ED9800E6E5C2 /* UserRepositoryImpl.swift in Sources */,

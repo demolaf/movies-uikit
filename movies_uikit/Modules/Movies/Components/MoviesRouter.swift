@@ -10,6 +10,9 @@ import UIKit
 
 protocol MoviesRouterDelegate: AnyObject {
     var entry: EntryPoint? { get }
+
+    func push(to route: UIViewController, from vc: UIViewController)
+    func pop(from vc: UIViewController)
 }
 
 class MoviesRouter: MoviesRouterDelegate {
@@ -44,7 +47,9 @@ class MoviesRouter: MoviesRouterDelegate {
         return router
     }
 
-    func push(to route: Routes, from vc: UIViewController) {}
+    func push(to route: UIViewController, from vc: UIViewController) {
+        vc.navigationController?.pushViewController(route, animated: true)
+    }
 
     func pop(from vc: UIViewController) {}
 }

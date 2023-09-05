@@ -16,6 +16,8 @@ protocol MoviesPresenterDelegate: AnyObject {
     func interactorDidFetchPopularMovies(with movies: [Movie])
     func interactorDidFetchNewMovies(with movies: [Movie])
     func interactorDidFetchUpcomingMovies(with movies: [Movie])
+
+    func movieItemTapped(movie: Movie?)
 }
 
 class MoviesPresenter: MoviesPresenterDelegate {
@@ -39,5 +41,19 @@ class MoviesPresenter: MoviesPresenterDelegate {
 
     func interactorDidFetchUpcomingMovies(with movies: [Movie]) {
         view?.update(upcomingMovies: movies)
+    }
+
+    func movieItemTapped(movie: Movie?) {
+        let vc = self.view as? MoviesViewController
+
+        if let vc = vc {
+            let detailVC = Routes.detail.vc as? DetailViewController
+
+            if let detailVC = detailVC {
+                detailVC.movie = movie
+                detailVC.hidesBottomBarWhenPushed = true
+                self.router?.push(to: detailVC, from: vc)
+            }
+        }
     }
 }

@@ -32,7 +32,7 @@ class MoviesAPI {
             ).url,
             headers: headers,
             parameters: nil,
-            response: PopularMoviesResponse.self
+            response: MoviesResponse.self
         ) { result in
             switch result {
             case .success(let response):
@@ -57,7 +57,7 @@ class MoviesAPI {
             ).url,
             headers: headers,
             parameters: nil,
-            response: PopularTVShowsResponse.self
+            response: TVShowsResponse.self
         ) { result in
             switch result {
             case .success(let response):

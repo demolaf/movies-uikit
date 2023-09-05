@@ -17,7 +17,7 @@ class DetailRouter: DetailRouterDelegate {
     var entry: EntryPoint?
 
     static func route() -> DetailRouter {
-        print("initializing tvshows route")
+        print("initializing details route")
         let router = DetailRouter()
 
         // Assign VIP
@@ -42,7 +42,7 @@ class DetailRouter: DetailRouterDelegate {
 
         // setup router entry with specific view controller
         router.entry = view
-        print("finished initializing tvshows route")
+        print("finished initializing details route")
         return router
     }
 

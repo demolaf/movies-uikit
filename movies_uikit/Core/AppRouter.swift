@@ -16,6 +16,7 @@ enum Routes: String {
     case movies = "/movies"
     case tvShows = "/tvShows"
     case library = "/library"
+    case detail = "/detail"
 
     var vc: UIViewController {
         switch self {
@@ -30,7 +31,9 @@ enum Routes: String {
         case .tvShows:
             return TVShowsRouter.route().entry!
         case .library:
-            return LibraryViewController()
+            return LibraryRouter.route().entry!
+        case .detail:
+            return DetailRouter.route().entry!
         }
     }
 }

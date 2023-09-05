@@ -9,14 +9,10 @@ import Foundation
 
 protocol DetailInteractorDelegate: AnyObject {
     var presenter: DetailPresenterDelegate? { get set }
-
-     func getPopularMovies()
 }
 
 class DetailInteractor: DetailInteractorDelegate {
     var presenter: DetailPresenterDelegate?
 
     var moviesRepository: MoviesRepository?
-
-    func getPopularMovies() {}
 }

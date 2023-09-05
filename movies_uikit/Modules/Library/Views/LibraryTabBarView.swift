@@ -9,6 +9,10 @@ import UIKit
 
 class LibraryTabBarView: UIView {
 
+    var movieTabBarPressedCallback: (() -> Void)?
+
+    var tvTabBarPressedCallback: (() -> Void)?
+
     private let tabBarView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -29,7 +33,7 @@ class LibraryTabBarView: UIView {
 
     private let moviesTabIndicator: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .clear
         view.heightAnchor.constraint(equalToConstant: 4).isActive = true
         view.widthAnchor.constraint(equalToConstant: 150).isActive = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +47,7 @@ class LibraryTabBarView: UIView {
 
     private let tvShowTabIndicator: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .clear
         view.heightAnchor.constraint(equalToConstant: 4).isActive = true
         view.widthAnchor.constraint(equalToConstant: 150).isActive = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -74,21 +78,27 @@ class LibraryTabBarView: UIView {
     private let movieSectionLabel: UILabel = {
         let label = UILabel()
         label.text = "Movies"
-        label.textColor = .systemRed
-        label.font = .appFont(ofSize: 14, weight: .medium)
+        label.textColor = .label
+        label.font = .appFont(ofSize: 16, weight: .semibold)
         return label
     }()
 
     private let tvShowSectionLabel: UILabel = {
         let label = UILabel()
         label.text = "TV Shows"
-        label.font = .appFont(ofSize: 14, weight: .medium)
+        label.textColor = .label
+        label.font = .appFont(ofSize: 16, weight: .semibold)
         return label
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeSubviews()
+
+        // Set default tab section to movies
+        changeSelectedTab(section: .movies)
+
+        initializeTabBarTapGestureRecognizers()
     }
 
     required init(coder: NSCoder) {
@@ -128,5 +138,48 @@ class LibraryTabBarView: UIView {
             tabBarSeparatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             tabBarSeparatorView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])
+    }
+
+    func changeSelectedTab(section: LibrarySectionType) {
+        switch section {
+        case .movies:
+            moviesTabIndicator.backgroundColor = .systemRed
+            tvShowTabIndicator.backgroundColor = .clear
+
+            movieSectionLabel.textColor = .systemRed
+            tvShowSectionLabel.textColor = .label
+        case .tvShows:
+            tvShowTabIndicator.backgroundColor = .systemRed
+            moviesTabIndicator.backgroundColor = .clear
+
+            tvShowSectionLabel.textColor = .systemRed
+            movieSectionLabel.textColor = .label
+        }
+    }
+
+    private func initializeTabBarTapGestureRecognizers() {
+        movieSectionStackView.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(movieTabBarPressed)
+            )
+        )
+
+        tvShowSectionStackView.addGestureRecognizer(
+            UITapGestureRecognizer(
+                target: self,
+                action: #selector(tvTabBarPressed)
+            )
+        )
+    }
+
+    @objc
+    private func movieTabBarPressed() {
+        movieTabBarPressedCallback?()
+    }
+
+    @objc
+    private func tvTabBarPressed() {
+        tvTabBarPressedCallback?()
     }
 }

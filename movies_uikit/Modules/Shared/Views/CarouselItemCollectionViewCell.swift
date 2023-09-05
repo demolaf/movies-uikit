@@ -76,8 +76,8 @@ class CarouselItemCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        self.titleLabelView.text = ""
-        self.ratingLabelView.text = ""
+        self.titleLabelView.text = nil
+        self.ratingLabelView.text = nil
         self.imageView.image = nil
     }
 
@@ -138,7 +138,12 @@ class CarouselItemCollectionViewCell: UICollectionViewCell {
         if let movie = movie {
             self.titleLabelView.text = movie.originalTitle
             self.ratingLabelView.text = "\(movie.voteAverage)/10"
-            self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(movie.posterPath)")!)
+            self.imageView.sd_setImage(
+                with: HTTPConstants.Endpoints.posterPath(
+                    url: movie.posterPath,
+                    quality: nil
+                ).url
+            )
             return
         }
 
@@ -151,7 +156,12 @@ class CarouselItemCollectionViewCell: UICollectionViewCell {
         if let tv = tv {
             self.titleLabelView.text = tv.originalName
             self.ratingLabelView.text = "\(tv.voteAverage)/10"
-            self.imageView.sd_setImage(with: URL(string: "https://image.tmdb.org/t/p/w500/\(tv.posterPath)")!)
+            self.imageView.sd_setImage(
+                with: HTTPConstants.Endpoints.posterPath(
+                    url: tv.posterPath,
+                    quality: nil
+                ).url
+            )
             return
         }
 
