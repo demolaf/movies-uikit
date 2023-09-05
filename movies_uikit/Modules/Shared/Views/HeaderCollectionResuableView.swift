@@ -21,10 +21,7 @@ class HeaderCollectionResuableView: UICollectionReusableView {
 
     private let trailingButton: UIButton = {
         let button = UIButton()
-        let attribute = AttributedString()
         button.setTitle("View all", for: .normal)
-        // attribute.font = .appFont(ofSize: 14, weight: .medium)
-        button.configuration?.attributedTitle = attribute
         button.setTitleColor(.systemRed, for: .normal)
         button.sizeToFit()
         button.backgroundColor = .clear
@@ -35,6 +32,8 @@ class HeaderCollectionResuableView: UICollectionReusableView {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 24)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -69,7 +68,7 @@ class HeaderCollectionResuableView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
