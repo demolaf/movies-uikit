@@ -28,6 +28,7 @@ class HTTPConstants {
         case getShows(showType: String, categoryType: String)
         case getNewShows
         case getRecommendedShows
+        case posterPath(url: String, quality: String?)
 
         var stringValue: String {
             switch self {
@@ -45,6 +46,8 @@ class HTTPConstants {
                 return ""
             case .getRecommendedShows:
                 return ""
+            case .posterPath(let url, let quality):
+                return "https://image.tmdb.org/t/p/\(quality ?? "w500")/\(url)"
             }
         }
 
