@@ -211,7 +211,19 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.configureViewData(tv: tvShow)
             return cell
         }
+    }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let section = sections[indexPath.section]
+
+        switch section {
+        case .popular(tvShows: let tvShows):
+            self.presenter?.tvShowItemTapped(tvShow: tvShows[indexPath.row])
+        case .topRated(tvShows: let tvShows):
+            self.presenter?.tvShowItemTapped(tvShow: tvShows[indexPath.row])
+        case .onTheAir(tvShows: let tvShows):
+            self.presenter?.tvShowItemTapped(tvShow: tvShows[indexPath.row])
+        }
     }
 
     func collectionView(

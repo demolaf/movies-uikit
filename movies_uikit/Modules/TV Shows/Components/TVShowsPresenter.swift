@@ -16,6 +16,8 @@ protocol TVShowsPresenterDelegate: AnyObject {
     func interactorDidFetchPopularTVShows(with tvShows: [TVShow])
     func interactorDidFetchTopRatedTVShows(with tvShows: [TVShow])
     func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow])
+
+    func tvShowItemTapped(tvShow: TVShow?)
 }
 
 class TVShowsPresenter: TVShowsPresenterDelegate {
@@ -39,5 +41,19 @@ class TVShowsPresenter: TVShowsPresenterDelegate {
 
     func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow]) {
         view?.update(onTheAirTVShows: tvShows)
+    }
+
+    func tvShowItemTapped(tvShow: TVShow?) {
+        let vc = self.view as? TVShowsViewController
+
+        if let vc = vc {
+            let detailVC = Routes.detail.vc as? DetailViewController
+
+            if let detailVC = detailVC {
+                detailVC.initializeViewData(movie: nil, tvShow: tvShow)
+                detailVC.hidesBottomBarWhenPushed = true
+                self.router?.push(to: detailVC, from: vc)
+            }
+        }
     }
 }

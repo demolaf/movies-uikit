@@ -10,6 +10,9 @@ import UIKit
 
 protocol TVShowsRouterDelegate: AnyObject {
     var entry: EntryPoint? { get }
+
+    func push(to route: UIViewController, from vc: UIViewController)
+    func pop(from vc: UIViewController)
 }
 
 class TVShowsRouter: TVShowsRouterDelegate {
@@ -44,7 +47,9 @@ class TVShowsRouter: TVShowsRouterDelegate {
         return router
     }
 
-    func push(to route: Routes, from vc: UIViewController) {}
+    func push(to route: UIViewController, from vc: UIViewController) {
+        vc.navigationController?.pushViewController(route, animated: true)
+    }
 
     func pop(from vc: UIViewController) {}
 }
