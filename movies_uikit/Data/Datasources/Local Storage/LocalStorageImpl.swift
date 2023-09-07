@@ -15,26 +15,41 @@ class LocalStorageImpl: LocalStorage {
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL ?? "No realm path")
     }
 
-    func create<ObjectType: Object>(
-        object: ObjectType, realmUpdatePolicy: Realm.UpdatePolicy
-    ) {
+    func create(object: AnyObject) {
         do {
-            try realm?.write {
-                realm?.add(object, update: realmUpdatePolicy)
+            if let object = object as? Object {
+                try realm?.write {
+                    realm?.add(object, update: .all)
+                }
             }
         } catch {
             debugPrint(error)
         }
     }
 
-    func read<ObjectType: Object>(
-        object: ObjectType.Type,
-        completion: @escaping (ObjectType?, Error?) -> Void
+    func update(object: AnyObject) {
+        do {
+            if let object = object as? Object {
+                try realm?.write {
+                    realm?.add(object, update: .modified)
+                }
+            }
+        } catch {
+            debugPrint(error)
+        }
+    }
+
+    // swiftlint:disable force_cast
+    func read<ObjectType: AnyObject>(
+        object: ObjectType,
+        completion: @escaping (AnyObject?, Error?) -> Void
     ) {
         do {
             try realm?.write {
-                let object = realm?.object(ofType: ObjectType.self, forPrimaryKey: ObjectType.primaryKey())
-                completion(object, nil)
+                realm?.object(
+                    ofType: (ObjectType.self as! Object.Type).self,
+                    forPrimaryKey: (ObjectType.self as! Object.Type).primaryKey()
+                )
             }
         } catch {
             debugPrint(error)
@@ -42,18 +57,25 @@ class LocalStorageImpl: LocalStorage {
         }
     }
 
-    func readAll<ObjectType: Object>(
-        object: ObjectType.Type,
-        completion: @escaping (Results<ObjectType>?, Error?) -> Void
+    func readAll<ObjectType: AnyObject>(
+        object: ObjectType,
+        completion: @escaping ([ObjectType], Error?) -> Void
     ) {
         do {
             try realm?.write {
-                let results = realm?.objects(ObjectType.self)
-                completion(results, nil)
+                let results = realm?.objects((ObjectType.self as! Object.Type).self)
+
+                var convertToObjects = [ObjectType]()
+
+                results?.sorted(byKeyPath: "").forEach({ object in
+                    convertToObjects.append(object as! ObjectType)
+                })
+                completion(convertToObjects, nil)
             }
         } catch {
             debugPrint(error)
-            completion(nil, error)
+            completion([], error)
         }
     }
+    // swiftlint:enable force_cast
 }
