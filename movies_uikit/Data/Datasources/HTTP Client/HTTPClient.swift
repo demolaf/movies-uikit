@@ -5,18 +5,17 @@
 //
 
 import Foundation
-import Alamofire
 
 protocol HTTPClient {
     /// GET Method
     @discardableResult
     func get<ResponseType: Decodable>(
         url: URL?,
-        headers: HTTPHeaders?,
-        parameters: Parameters?,
+        headers: [String: String]?,
+        parameters: [String: String]?,
         response: ResponseType.Type,
-        completion: @escaping (Result<ResponseType, Error>) -> Void
-    ) -> DataRequest?
+        completion: @escaping (Result<ResponseType, Error>
+    ) -> Void) -> URLSessionTask?
 
     /// POST Method
     @discardableResult
@@ -24,7 +23,6 @@ protocol HTTPClient {
         url: URL?,
         parameters: Encodable,
         response: ResponseType.Type,
-        completion: @escaping (Result<ResponseType, Error>) -> Void
-    ) -> DataRequest?
-
+        completion: @escaping (Result<ResponseType, Error>
+    ) -> Void) -> URLSessionTask?
 }

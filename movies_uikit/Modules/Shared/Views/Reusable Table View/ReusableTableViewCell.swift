@@ -1,5 +1,5 @@
 //
-//  LibrarySectionTableViewCell.swift
+//  ReusableTableViewCell.swift
 //  movies_uikit
 //
 //  Created by Ademola Fadumo on 04/09/2023.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class LibrarySectionTableViewCell: UITableViewCell {
-    static let reuseId = "LibrarySectionTableViewCell"
+class ReusableTableViewCell: UITableViewCell {
+    static let reuseId = "ReusableTableViewCell"
 
     private let rootStackView: UIStackView = {
         let stackView = UIStackView()

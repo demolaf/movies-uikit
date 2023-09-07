@@ -1,5 +1,5 @@
 //
-//  LibrarySectionViewController.swift
+//  ReusableTableViewController.swift
 //  movies_uikit
 //
 //  Created by Ademola Fadumo on 03/09/2023.
@@ -7,14 +7,13 @@
 
 import UIKit
 
-/// Custom dynamically instantiated view controller for library sections
-class LibrarySectionViewController: UIViewController {
+class ReusableTableViewController: UIViewController {
 
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(
-            LibrarySectionTableViewCell.self,
-            forCellReuseIdentifier: LibrarySectionTableViewCell.reuseId
+            ReusableTableViewCell.self,
+            forCellReuseIdentifier: ReusableTableViewCell.reuseId
         )
         tableView.tableHeaderView = UIView()
         tableView.tableFooterView = UIView()
@@ -26,8 +25,6 @@ class LibrarySectionViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.isHidden = true
-
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -41,7 +38,7 @@ class LibrarySectionViewController: UIViewController {
     }
 }
 
-extension LibrarySectionViewController: UITableViewDelegate, UITableViewDataSource {
+extension ReusableTableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
@@ -54,12 +51,12 @@ extension LibrarySectionViewController: UITableViewDelegate, UITableViewDataSour
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: LibrarySectionTableViewCell.reuseId,
+            withIdentifier: ReusableTableViewCell.reuseId,
             for: indexPath
-        ) as? LibrarySectionTableViewCell else {
+        ) as? ReusableTableViewCell else {
             return UITableViewCell()
         }
-
+        cell.selectionStyle = .none
         cell.configureViewData(movie: nil)
         return cell
     }

@@ -11,19 +11,25 @@ class HTTPClientImpl: HTTPClient {
 
     func get<ResponseType: Decodable>(
         url: URL?,
-        headers: HTTPHeaders?,
-        parameters: Parameters?,
+        headers: [String: String]?,
+        parameters: [String: String]?,
         response: ResponseType.Type,
         completion: @escaping (Result<ResponseType, Error>
-        ) -> Void) -> DataRequest? {
+    ) -> Void) -> URLSessionTask? {
         guard let url = url else {
             return nil
+        }
+
+        var httpHeaders = HTTPHeaders()
+
+        if let headers = headers {
+            httpHeaders = HTTPHeaders(headers)
         }
 
         let request = AF.request(
             url, method: HTTPMethod.get,
             parameters: parameters,
-            headers: headers
+            headers: httpHeaders
         ).responseDecodable(of: ResponseType.self) { response in
             switch response.result {
             case .success(let responseObject):
@@ -34,7 +40,7 @@ class HTTPClientImpl: HTTPClient {
         }
 
         request.resume()
-        return request
+        return request.task
     }
 
     func post<ResponseType: Decodable>(
@@ -42,7 +48,7 @@ class HTTPClientImpl: HTTPClient {
         parameters: Encodable,
         response: ResponseType.Type,
         completion: @escaping (Result<ResponseType, Error>
-        ) -> Void) -> DataRequest? {
+    ) -> Void) -> URLSessionTask? {
         guard let url = url else {
             return nil
         }
@@ -62,7 +68,7 @@ class HTTPClientImpl: HTTPClient {
         }
 
         request.resume()
-        return request
+        return request.task
     }
 
 }
