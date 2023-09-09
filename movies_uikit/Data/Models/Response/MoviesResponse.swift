@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - MoviesResponse
 struct MoviesResponse: Decodable {
@@ -21,23 +22,28 @@ struct MoviesResponse: Decodable {
 }
 
 // MARK: - Movie
-struct Movie: Codable {
-    let adult: Bool
-    let backdropPath: String
-    let genreIDS: [Int]
-    let id: Int
-    let originalTitle, overview: String
-    let popularity: Double
-    let posterPath, releaseDate, title: String
-    let video: Bool
-    let voteAverage: Double
-    let voteCount: Int
+class Movie: Object, Codable {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var adult: Bool
+    @Persisted var backdropPath: String
+    @Persisted var genreIDS: List<Int>
+    @Persisted var movieId: Int
+    @Persisted var originalTitle: String
+    @Persisted var overview: String
+    @Persisted var popularity: Double
+    @Persisted var posterPath: String
+    @Persisted var releaseDate: String
+    @Persisted var title: String
+    @Persisted var video: Bool
+    @Persisted var voteAverage: Double
+    @Persisted var voteCount: Int
+    @Persisted var createdAt: Date = Date()
 
     enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"
         case genreIDS = "genre_ids"
-        case id
+        case movieId = "id"
         case originalTitle = "original_title"
         case overview, popularity
         case posterPath = "poster_path"

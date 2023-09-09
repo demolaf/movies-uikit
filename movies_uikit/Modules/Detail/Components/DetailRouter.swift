@@ -8,30 +8,34 @@
 import Foundation
 import UIKit
 
-protocol DetailRouterDelegate: AnyObject {
+protocol DetailRouter: AnyObject, AnyRouter {
     var entry: EntryPoint? { get }
+
+    static func route() -> DetailRouter
 }
 
-class DetailRouter: DetailRouterDelegate {
+class DetailRouterImpl: DetailRouter {
 
     var entry: EntryPoint?
 
     static func route() -> DetailRouter {
-        print("initializing details route")
-        let router = DetailRouter()
+        let router = DetailRouterImpl()
 
         // Assign VIP
         let view = DetailViewController()
-        let presenter = DetailPresenter()
-        let interactor = DetailInteractor()
+        let presenter = DetailPresenterImpl()
+        let interactor = DetailInteractorImpl()
 
         // setup view controller with presenter
         view.presenter = presenter
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.moviesRepository =
+        interactor.userRepository =
         (UIApplication.shared.delegate as? AppDelegate)?
+            .repositoryProvider
+            .userRepository
+        interactor.moviesRepository = (UIApplication.shared.delegate as? AppDelegate)?
             .repositoryProvider
             .moviesRepository
 
@@ -42,11 +46,12 @@ class DetailRouter: DetailRouterDelegate {
 
         // setup router entry with specific view controller
         router.entry = view
-        print("finished initializing details route")
         return router
     }
 
-    func push(to route: Routes, from vc: UIViewController) {}
+    func push(to route: UIViewController, from vc: UIViewController) {
+        vc.navigationController?.pushViewController(route, animated: true)
+    }
 
     func pop(from vc: UIViewController) {}
 }

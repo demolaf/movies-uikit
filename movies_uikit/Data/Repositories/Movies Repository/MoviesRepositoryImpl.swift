@@ -41,4 +41,34 @@ class MoviesRepositoryImpl: MoviesRepository {
             }
         }
     }
+
+    func getRecommendedShowsForMovie(
+        id: String,
+        completion: @escaping ([Movie]) -> Void
+    ) {
+        moviesAPI.getRecommendedShowsByMovie(id: id) { result in
+            switch result {
+            case .success(let movies):
+                completion(movies)
+            case .failure(let error):
+                debugPrint("Failed to fetch recommended movies \(error)")
+                completion([])
+            }
+        }
+    }
+
+    func getRecommendedShowsForTVShow(
+        id: String,
+        completion: @escaping ([TVShow]) -> Void
+    ) {
+        moviesAPI.getRecommendedShowsByTVShow(id: id) { result in
+            switch result {
+            case .success(let tvShows):
+                completion(tvShows)
+            case .failure(let error):
+                debugPrint("Failed to fetch recommended tvshows \(error)")
+                completion([])
+            }
+        }
+    }
 }

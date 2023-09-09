@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-protocol LibraryViewDelegate: AnyObject {
-    var presenter: LibraryPresenterDelegate? { get set }
+protocol LibraryView: AnyObject {
+    var presenter: LibraryPresenter? { get set }
 
-    func update(with movies: [Movie])
+    func update(movies: [Movie])
+    func update(tvShows: [TVShow])
 }
 
 enum LibrarySectionType: Int {
@@ -27,7 +30,7 @@ enum LibrarySectionType: Int {
     }
 }
 
-class LibraryViewController: UIViewController, LibraryViewDelegate {
+class LibraryViewController: UIViewController, LibraryView {
 
     private let sections = [
         LibrarySectionType.movies,
@@ -39,11 +42,11 @@ class LibraryViewController: UIViewController, LibraryViewDelegate {
         return [barButtonItem]
     }()
 
-    private lazy var viewControllers: [UIViewController] = {
-        var viewControllers: [UIViewController] = []
+    private lazy var viewControllers: [ReusableTableViewController] = {
+        var viewControllers: [ReusableTableViewController] = []
         sections.forEach { _ in
-            let vc = LibrarySectionViewController()
-            viewControllers.append(UINavigationController(rootViewController: vc))
+            let vc = ReusableTableViewController()
+            viewControllers.append(vc)
         }
         return viewControllers
     }()
@@ -74,7 +77,7 @@ class LibraryViewController: UIViewController, LibraryViewDelegate {
         return tabBar
     }()
 
-    var presenter: LibraryPresenterDelegate?
+    var presenter: LibraryPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +96,13 @@ class LibraryViewController: UIViewController, LibraryViewDelegate {
         applyConstraints()
     }
 
-    func update(with movies: [Movie]) {}
+    func update(movies: [Movie]) {
+        viewControllers[0].items = movies
+    }
+
+    func update(tvShows: [TVShow]) {
+        viewControllers[1].items = tvShows
+    }
 }
 
 extension LibraryViewController {
@@ -175,8 +184,8 @@ extension LibraryViewController: UIPageViewControllerDelegate, UIPageViewControl
         transitionCompleted completed: Bool
     ) {
         if completed,
-        let currentViewController = pageViewController.viewControllers?.first,
-        let currentIndex = viewControllers.firstIndex(of: currentViewController) {
+           let currentViewController = pageViewController.viewControllers?.first as? ReusableTableViewController,
+           let currentIndex = viewControllers.firstIndex(of: currentViewController ) {
             debugPrint("Current Page Index \(currentIndex)")
             let currentTab = LibrarySectionType(rawValue: currentIndex) ?? LibrarySectionType.movies
             self.tabBarView.changeSelectedTab(section: currentTab)
@@ -187,8 +196,8 @@ extension LibraryViewController: UIPageViewControllerDelegate, UIPageViewControl
         _ pageViewController: UIPageViewController,
         viewControllerBefore viewController: UIViewController
     ) -> UIViewController? {
-        guard let viewControllerIndex = viewControllers
-            .firstIndex(of: viewController) else {
+        guard let viewController = viewController as? ReusableTableViewController,
+                let viewControllerIndex = viewControllers.firstIndex(of: viewController) else {
             return nil
         }
 
@@ -209,8 +218,8 @@ extension LibraryViewController: UIPageViewControllerDelegate, UIPageViewControl
         _ pageViewController: UIPageViewController,
         viewControllerAfter viewController: UIViewController
     ) -> UIViewController? {
-        guard let viewControllerIndex = viewControllers
-            .firstIndex(of: viewController) else {
+        guard let viewController = viewController as? ReusableTableViewController,
+                let viewControllerIndex = viewControllers.firstIndex(of: viewController) else {
             return nil
         }
 

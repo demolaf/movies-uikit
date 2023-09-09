@@ -8,26 +8,24 @@
 import Foundation
 import UIKit
 
-protocol LaunchRouterDelegate: AnyObject {
+protocol LaunchRouter: AnyObject, AnyRouter {
     var entry: EntryPoint? { get }
 
-    func push(to route: Routes, from vc: UIViewController)
-
-    func pop(from vc: UIViewController)
+    static func route() -> LaunchRouter
 }
 
 /// - Handles navigation between view controllers
-class LaunchRouter: LaunchRouterDelegate {
+class LaunchRouterImpl: LaunchRouter {
 
     var entry: EntryPoint?
 
     static func route() -> LaunchRouter {
-        let router = LaunchRouter()
+        let router = LaunchRouterImpl()
 
         // Assign VIP
         let view = LaunchViewController()
-        let presenter = LaunchPresenter()
-        let interactor = LaunchInteractor()
+        let presenter = LaunchPresenterImpl()
+        let interactor = LaunchInteractorImpl()
 
         // setup view controller with presenter
         view.presenter = presenter
@@ -46,8 +44,8 @@ class LaunchRouter: LaunchRouterDelegate {
         return router
     }
 
-    func push(to route: Routes, from vc: UIViewController) {
-        vc.navigationController?.pushViewController(route.vc, animated: true)
+    func push(to route: UIViewController, from vc: UIViewController) {
+        vc.navigationController?.pushViewController(route, animated: true)
     }
 
     func pop(from vc: UIViewController) {

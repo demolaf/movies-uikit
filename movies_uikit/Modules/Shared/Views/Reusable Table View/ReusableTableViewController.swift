@@ -9,6 +9,8 @@ import UIKit
 
 class ReusableTableViewController: UIViewController {
 
+    var items = [AnyObject]()
+
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(
@@ -43,7 +45,7 @@ extension ReusableTableViewController: UITableViewDelegate, UITableViewDataSourc
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
-        return 10
+        return items.count
     }
 
     func tableView(
@@ -56,12 +58,41 @@ extension ReusableTableViewController: UITableViewDelegate, UITableViewDataSourc
         ) as? ReusableTableViewCell else {
             return UITableViewCell()
         }
+
         cell.selectionStyle = .none
-        cell.configureViewData(movie: nil)
+
+        if let item = items[indexPath.row] as? Movie {
+            cell.configureViewData(movie: item)
+        }
+
+        if let item = items[indexPath.row] as? TVShow {
+            cell.configureViewData(tv: item)
+        }
+
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = items[indexPath.row]
+
+        let detailVC = Routes.detail.vc as? DetailViewController
+        if let detailVC = detailVC {
+            if let item = item as? Movie {
+                detailVC.initializeViewData(movie: item, tvShow: nil)
+            }
+            if let item = item as? TVShow {
+                detailVC.initializeViewData(movie: nil, tvShow: item)
+            }
+            detailVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 215
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return self.tableView(tableView, heightForRowAt: indexPath)
     }
 }

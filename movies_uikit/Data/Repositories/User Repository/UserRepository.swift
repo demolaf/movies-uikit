@@ -6,5 +6,11 @@
 //
 
 import Foundation
+import RealmSwift
 
-protocol UserRepository {}
+protocol UserRepository {
+    func bookmarkItem(movie: Movie)
+    func bookmarkItem(tvShow: TVShow)
+    func getBookmarkedMovies(completion: @escaping ([Movie]) -> Void)
+    func getBookmarkedTVShows(completion: @escaping ([TVShow]) -> Void)
+}

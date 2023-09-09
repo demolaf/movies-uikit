@@ -7,25 +7,31 @@
 
 import Foundation
 
-protocol LibraryPresenterDelegate: AnyObject {
-    var view: LibraryViewDelegate? { get set }
-    var interactor: LibraryInteractorDelegate? { get set }
-    var router: LibraryRouterDelegate? { get set }
+protocol LibraryPresenter: AnyObject {
+    var view: LibraryView? { get set }
+    var interactor: LibraryInteractor? { get set }
+    var router: LibraryRouter? { get set }
 
     func initialize()
-    func interactorDidFetchMovies(with movies: [Movie])
+    func interactorDidFetchBookmarkedMovies(with movies: [Movie])
+    func interactorDidFetchBookmarkedTVShows(with tvShows: [TVShow])
 }
 
-class LibraryPresenter: LibraryPresenterDelegate {
-    var router: LibraryRouterDelegate?
-    var interactor: LibraryInteractorDelegate?
-    var view: LibraryViewDelegate?
+class LibraryPresenterImpl: LibraryPresenter {
+    var router: LibraryRouter?
+    var interactor: LibraryInteractor?
+    var view: LibraryView?
 
     func initialize() {
-        interactor?.getPopularMovies()
+        interactor?.getBookmarkedMovies()
+        interactor?.getBookmarkedTVShows()
     }
 
-    func interactorDidFetchMovies(with movies: [Movie]) {
-        view?.update(with: movies)
+    func interactorDidFetchBookmarkedMovies(with movies: [Movie]) {
+        view?.update(movies: movies)
+    }
+
+    func interactorDidFetchBookmarkedTVShows(with tvShows: [TVShow]) {
+        view?.update(tvShows: tvShows)
     }
 }

@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol MoviesPresenterDelegate: AnyObject {
-    var view: MoviesViewDelegate? { get set }
-    var interactor: MoviesInteractorDelegate? { get set }
-    var router: MoviesRouterDelegate? { get set }
+protocol MoviesPresenter: AnyObject {
+    var view: MoviesView? { get set }
+    var interactor: MoviesInteractor? { get set }
+    var router: MoviesRouter? { get set }
 
     func initialize()
     func interactorDidFetchPopularMovies(with movies: [Movie])
@@ -18,12 +18,13 @@ protocol MoviesPresenterDelegate: AnyObject {
     func interactorDidFetchUpcomingMovies(with movies: [Movie])
 
     func movieItemTapped(movie: Movie?)
+    func viewAllButtonTapped(sectionTitle: String, movies: [Movie])
 }
 
-class MoviesPresenter: MoviesPresenterDelegate {
-    var router: MoviesRouterDelegate?
-    var interactor: MoviesInteractorDelegate?
-    var view: MoviesViewDelegate?
+class MoviesPresenterImpl: MoviesPresenter {
+    var router: MoviesRouter?
+    var interactor: MoviesInteractor?
+    var view: MoviesView?
 
     func initialize() {
         interactor?.getPopularMovies()
@@ -54,6 +55,16 @@ class MoviesPresenter: MoviesPresenterDelegate {
                 detailVC.hidesBottomBarWhenPushed = true
                 self.router?.push(to: detailVC, from: vc)
             }
+        }
+    }
+
+    func viewAllButtonTapped(sectionTitle: String, movies: [Movie]) {
+        if let vc = view as? MoviesViewController {
+            let reusableTableVC = ReusableTableViewController()
+            reusableTableVC.title = sectionTitle
+            reusableTableVC.hidesBottomBarWhenPushed = true
+            reusableTableVC.items = movies
+            router?.push(to: reusableTableVC, from: vc)
         }
     }
 }

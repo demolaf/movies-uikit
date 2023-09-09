@@ -7,43 +7,40 @@
 
 import Foundation
 
-protocol MoviesInteractorDelegate: AnyObject {
-     var presenter: MoviesPresenterDelegate? { get set }
+protocol MoviesInteractor: AnyObject {
+     var presenter: MoviesPresenter? { get set }
 
      func getPopularMovies()
      func getNewMovies()
      func getUpcomingMovies()
 }
 
-class MoviesInteractor: MoviesInteractorDelegate {
-    var presenter: MoviesPresenterDelegate?
+class MoviesInteractorImpl: MoviesInteractor {
+    var presenter: MoviesPresenter?
 
     var moviesRepository: MoviesRepository?
 
     func getPopularMovies() {
         moviesRepository?.getMovies(
-            categoryType: "popular",
-            completion: { [weak self] movies in
-            debugPrint("Movies \(movies)")
+            categoryType: "popular"
+        ) { [weak self] movies in
             self?.presenter?.interactorDidFetchPopularMovies(with: movies)
-        })
+        }
     }
 
     func getNewMovies() {
         moviesRepository?.getMovies(
-            categoryType: "now_playing",
-            completion: { [weak self] movies in
-            debugPrint("Movies \(movies)")
+            categoryType: "now_playing"
+        ) { [weak self] movies in
             self?.presenter?.interactorDidFetchNewMovies(with: movies)
-        })
+        }
     }
 
     func getUpcomingMovies() {
         moviesRepository?.getMovies(
-            categoryType: "upcoming",
-            completion: { [weak self] movies in
-            debugPrint("Movies \(movies)")
+            categoryType: "upcoming"
+        ) { [weak self] movies in
             self?.presenter?.interactorDidFetchUpcomingMovies(with: movies)
-        })
+        }
     }
 }

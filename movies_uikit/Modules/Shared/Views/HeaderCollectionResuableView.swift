@@ -11,6 +11,8 @@ import UIKit
 class HeaderCollectionResuableView: UICollectionReusableView {
     static let reuseId = "HeaderCollectionResuableView"
 
+    var viewAllButtonPressedCallback: (() -> Void)?
+
     private let leadingTextLabel: UILabel = {
        let label = UILabel()
         label.textColor = .label
@@ -21,10 +23,21 @@ class HeaderCollectionResuableView: UICollectionReusableView {
 
     private let trailingButton: UIButton = {
         let button = UIButton()
-        button.setTitle("View all", for: .normal)
-        button.setTitleColor(.systemRed, for: .normal)
         button.sizeToFit()
         button.backgroundColor = .clear
+
+        // Set attributed string for button
+        let title = "View all"
+        let titleRange = title.range(of: title)!
+        let attributedString = NSMutableAttributedString(string: title)
+        attributedString.addAttributes(
+            [NSAttributedString.Key.foregroundColor: UIColor.systemRed,
+             NSAttributedString.Key.font: UIFont.appFont(ofSize: 14, weight: .semibold)
+            ],
+            range: NSRange(titleRange, in: title)
+        )
+        button.setAttributedTitle(attributedString, for: .normal)
+
         return button
     }()
 
@@ -41,6 +54,7 @@ class HeaderCollectionResuableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializeSubViews()
+        initializeGestureRecognizers()
     }
 
     required init?(coder: NSCoder) {
@@ -75,5 +89,18 @@ class HeaderCollectionResuableView: UICollectionReusableView {
 
     func configureHeaderLeadingText(leadingText: String) {
         leadingTextLabel.text = leadingText
+    }
+
+    private func initializeGestureRecognizers() {
+        trailingButton.addTarget(
+            self,
+            action: #selector(viewAllButtonPressed),
+            for: .touchUpInside
+        )
+    }
+
+    @objc
+    private func viewAllButtonPressed() {
+        viewAllButtonPressedCallback?()
     }
 }

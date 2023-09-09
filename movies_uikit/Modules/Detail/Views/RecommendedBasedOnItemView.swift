@@ -11,7 +11,8 @@ class RecommendedBasedOnItemView: UIView {
 
     // TODO: Use Generics to fix all the issues with Movie or TVShow type
     // Replace the below with generics
-    var items: [Movie]?
+    var items = [AnyObject]()
+    var itemSelectedCallback: ((AnyObject) -> Void)?
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
@@ -105,7 +106,7 @@ class RecommendedBasedOnItemView: UIView {
         return section
     }
 
-    func configureViewItems(items: [Movie]) {
+    func configureViewItems(items: [AnyObject]) {
         self.items = items
         collectionView.reloadData()
     }
@@ -117,7 +118,7 @@ extension RecommendedBasedOnItemView: UICollectionViewDelegate, UICollectionView
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 10
+        return items.count > 5 ? 5 : items.count
     }
 
     func collectionView(
@@ -130,9 +131,22 @@ extension RecommendedBasedOnItemView: UICollectionViewDelegate, UICollectionView
         ) as? SubSectionItemCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let item = items?[indexPath.row]
-        cell.configureViewData(movie: nil)
+
+        let item = items[indexPath.row]
+
+        if let item = item as? Movie {
+            cell.configureViewData(movie: item)
+        }
+
+        if let item = item as? TVShow {
+            cell.configureViewData(tv: item)
+        }
+
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        itemSelectedCallback?(items[indexPath.row])
     }
 
     func collectionView(

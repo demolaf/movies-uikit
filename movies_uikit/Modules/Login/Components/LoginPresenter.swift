@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-protocol LoginPresenterDelegate: AnyObject {
-    var view: LoginViewDelegate? { get set }
-    var interactor: LoginInteractorDelegate? { get set }
-    var router: LoginRouterDelegate? { get set }
+protocol LoginPresenter: AnyObject {
+    var view: LoginView? { get set }
+    var interactor: LoginInteractor? { get set }
+    var router: LoginRouter? { get set }
 
     func initialize()
     func loginWithWebAuthButtonPressed()
@@ -20,12 +20,12 @@ protocol LoginPresenterDelegate: AnyObject {
 /// - Updates the `View`
 /// - Calls methods in the `Interactor` triggered by the `View`
 /// - Calls methods in the `Router`
-class LoginPresenter: LoginPresenterDelegate {
-    var view: LoginViewDelegate?
+class LoginPresenterImpl: LoginPresenter {
+    var view: LoginView?
 
-    var router: LoginRouterDelegate?
+    var router: LoginRouter?
 
-    var interactor: LoginInteractorDelegate?
+    var interactor: LoginInteractor?
 
     func initialize() {}
 

@@ -1,3 +1,5 @@
 github "Alamofire/Alamofire" ~> 5.7.1
 github "realm/realm-swift"
 github "SDWebImage/SDWebImage"
+github "rive-app/rive-ios"
+github "ReactiveX/RxSwift"

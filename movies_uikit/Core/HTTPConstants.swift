@@ -26,9 +26,8 @@ class HTTPConstants {
         case login
         case webAuth
         case getShows(showType: String, categoryType: String)
-        case getNewShows
-        case getRecommendedShows
         case posterPath(url: String, quality: String?)
+        case getRecommendedShowsByShowId(showType: String, id: String)
 
         var stringValue: String {
             switch self {
@@ -42,12 +41,10 @@ class HTTPConstants {
                 return "https://www.themoviedb.org/authenticate/\(Auth.requestToken)?redirect_to=movies-uikit:authenticate"
             case .getShows(let showType, let categoryType):
                 return Endpoints.baseUrlPrefix + "/\(showType)/\(categoryType)"
-            case .getNewShows:
-                return ""
-            case .getRecommendedShows:
-                return ""
             case .posterPath(let url, let quality):
                 return "https://image.tmdb.org/t/p/\(quality ?? "w500")/\(url)"
+            case .getRecommendedShowsByShowId(let showType, let id):
+                return Endpoints.baseUrlPrefix + "/\(showType)/\(id)/recommendations"
             }
         }
 

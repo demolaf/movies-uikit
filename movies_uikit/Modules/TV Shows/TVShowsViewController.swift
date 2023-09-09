@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol TVShowsViewDelegate: AnyObject {
-    var presenter: TVShowsPresenterDelegate? { get set }
+protocol TVShowsView: AnyObject {
+    var presenter: TVShowsPresenter? { get set }
 
     func update(popularTVShows: [TVShow])
     func update(topRatedTVShows: [TVShow])
@@ -21,7 +21,7 @@ enum TVSectionType {
     case onTheAir(tvShows: [TVShow])
 }
 
-class TVShowsViewController: UIViewController, TVShowsViewDelegate {
+class TVShowsViewController: UIViewController, TVShowsView {
 
     // MARK: Views
 
@@ -59,7 +59,7 @@ class TVShowsViewController: UIViewController, TVShowsViewDelegate {
 
     // MARK: Properties
 
-    var presenter: TVShowsPresenterDelegate?
+    var presenter: TVShowsPresenter?
 
     private var sections = [TVSectionType]()
 
@@ -162,9 +162,9 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
         case .popular(let tvShows):
             return tvShows.count
         case .topRated(let tvShows):
-            return tvShows.count
+            return tvShows.count > 5 ? 5 : tvShows.count
         case .onTheAir(let tvShows):
-            return tvShows.count
+            return tvShows.count > 5 ? 5 : tvShows.count
         }
     }
 
@@ -243,10 +243,22 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
 
         switch section {
         case .popular: break
-        case .topRated:
+        case .topRated(let tvShows):
             headerView.configureHeaderLeadingText(leadingText: "Top Rated")
-        case .onTheAir:
+            headerView.viewAllButtonPressedCallback = {
+                self.presenter?.viewAllButtonTapped(
+                    sectionTitle: "Top Rated",
+                    tvShows: tvShows
+                )
+            }
+        case .onTheAir(let tvShows):
             headerView.configureHeaderLeadingText(leadingText: "On The Air")
+            headerView.viewAllButtonPressedCallback = {
+                self.presenter?.viewAllButtonTapped(
+                    sectionTitle: "On The Air",
+                    tvShows: tvShows
+                )
+            }
         }
 
         return headerView

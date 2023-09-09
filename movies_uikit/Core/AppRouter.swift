@@ -21,19 +21,19 @@ enum Routes: String {
     var vc: UIViewController {
         switch self {
         case .launch:
-            return LaunchRouter.route().entry!
+            return LaunchRouterImpl.route().entry!
         case .login:
-            return LoginRouter.route().entry!
+            return LoginRouterImpl.route().entry!
         case .mainTab:
             return MainTabBarViewController()
         case .movies:
-            return MoviesRouter.route().entry!
+            return MoviesRouterImpl.route().entry!
         case .tvShows:
-            return TVShowsRouter.route().entry!
+            return TVShowsRouterImpl.route().entry!
         case .library:
-            return LibraryRouter.route().entry!
+            return LibraryRouterImpl.route().entry!
         case .detail:
-            return DetailRouter.route().entry!
+            return DetailRouterImpl.route().entry!
         }
     }
 }

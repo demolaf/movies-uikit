@@ -8,22 +8,24 @@
 import Foundation
 import UIKit
 
-protocol LoginRouterDelegate: AnyObject {
+protocol LoginRouter: AnyObject, AnyRouter {
     var entry: EntryPoint? { get }
+
+    static func route() -> LoginRouter
 }
 
 /// - Handles navigation between view controllers
-class LoginRouter: LoginRouterDelegate {
+class LoginRouterImpl: LoginRouter {
 
     var entry: EntryPoint?
 
     static func route() -> LoginRouter {
-        let router = LoginRouter()
+        let router = LoginRouterImpl()
 
         // Assign VIP
         let view = LoginViewController()
-        let presenter = LoginPresenter()
-        let interactor = LoginInteractor()
+        let presenter = LoginPresenterImpl()
+        let interactor = LoginInteractorImpl()
 
         // setup view controller with presenter
         view.presenter = presenter
@@ -44,8 +46,8 @@ class LoginRouter: LoginRouterDelegate {
         return router
     }
 
-    func push(to route: Routes, from vc: UIViewController) {
-        vc.navigationController?.pushViewController(route.vc, animated: true)
+    func push(to route: UIViewController, from vc: UIViewController) {
+        vc.navigationController?.pushViewController(route, animated: true)
     }
 
     func pop(from vc: UIViewController) {

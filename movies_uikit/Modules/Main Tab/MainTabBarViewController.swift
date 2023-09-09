@@ -35,7 +35,6 @@ class MainTabBarViewController: UITabBarController {
 
         self.tabBar.tintColor = .label
 
-        //
         setViewControllers([nav1, nav2, nav3], animated: false)
     }
 }

@@ -16,6 +16,17 @@ class UserAPI {
     }
 
     // store for library (movies/tv shows) in realm
+    func bookmarkItem<T: AnyObject>(object: T) {
+        localStorage.update(object: object)
+    }
 
     // get for library (movies/tv shows) from realm
+    func getBookmarkedItems<T: AnyObject>(
+        object: T.Type,
+        completion: @escaping ([T]) -> Void
+    ) {
+        localStorage.readAll(object: T.self, sortBy: "createdAt") { items, _ in
+            completion(items)
+        }
+    }
 }

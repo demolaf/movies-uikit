@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 /// For Movies
 class MoviesAPI {
@@ -22,8 +21,7 @@ class MoviesAPI {
         categoryType: String,
         completion: @escaping (Result<[Movie], Error>) -> Void
     ) {
-        var headers = HTTPHeaders()
-        headers.add(name: "Authorization", value: "Bearer \(HTTPConstants.Auth.tmdbAuthToken)")
+        let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
         httpClient.get(
             url: HTTPConstants.Endpoints.getShows(
@@ -47,13 +45,59 @@ class MoviesAPI {
         categoryType: String,
         completion: @escaping (Result<[TVShow], Error>) -> Void
     ) {
-        var headers = HTTPHeaders()
-        headers.add(name: "Authorization", value: "Bearer \(HTTPConstants.Auth.tmdbAuthToken)")
+        let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
         httpClient.get(
             url: HTTPConstants.Endpoints.getShows(
                 showType: "tv",
                 categoryType: categoryType
+            ).url,
+            headers: headers,
+            parameters: nil,
+            response: TVShowsResponse.self
+        ) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.results))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getRecommendedShowsByMovie(
+        id: String,
+        completion: @escaping (Result<[Movie], Error>) -> Void
+    ) {
+        let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
+        httpClient.get(
+            url: HTTPConstants.Endpoints.getRecommendedShowsByShowId(
+                showType: "movie",
+                id: id
+            ).url,
+            headers: headers,
+            parameters: nil,
+            response: MoviesResponse.self
+        ) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.results))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getRecommendedShowsByTVShow(
+        id: String,
+        completion: @escaping (Result<[TVShow], Error>) -> Void
+    ) {
+        let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
+
+        httpClient.get(
+            url: HTTPConstants.Endpoints.getRecommendedShowsByShowId(
+                showType: "tv",
+                id: id
             ).url,
             headers: headers,
             parameters: nil,

@@ -14,15 +14,15 @@ enum MoviesSectionType {
     case upcoming(movies: [Movie])
 }
 
-protocol MoviesViewDelegate: AnyObject {
-    var presenter: MoviesPresenterDelegate? { get set }
+protocol MoviesView: AnyObject {
+    var presenter: MoviesPresenter? { get set }
 
     func update(popularMovies: [Movie])
     func update(newMovies: [Movie])
     func update(upcomingMovies: [Movie])
 }
 
-class MoviesViewController: UIViewController, MoviesViewDelegate {
+class MoviesViewController: UIViewController, MoviesView {
 
     // MARK: Views
 
@@ -73,7 +73,7 @@ class MoviesViewController: UIViewController, MoviesViewDelegate {
 
     // MARK: Properties
 
-    var presenter: MoviesPresenterDelegate?
+    var presenter: MoviesPresenter?
 
     private var sections = [MoviesSectionType]()
 
@@ -179,9 +179,9 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case .popular(let movies):
             return movies.count
         case .new(let movies):
-            return movies.count
+            return movies.count > 5 ? 5 : movies.count
         case .upcoming(let movies):
-            return movies.count > 3 ? 3 : movies.count
+            return movies.count > 5 ? 5 : movies.count
         }
     }
 
@@ -261,10 +261,16 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
         switch section {
         case .popular: break
-        case .new:
+        case .new(let movies):
             headerView.configureHeaderLeadingText(leadingText: "New")
-        case .upcoming:
+            headerView.viewAllButtonPressedCallback = {
+                self.presenter?.viewAllButtonTapped(sectionTitle: "New", movies: movies)
+            }
+        case .upcoming(let movies):
             headerView.configureHeaderLeadingText(leadingText: "Upcoming")
+            headerView.viewAllButtonPressedCallback = {
+                self.presenter?.viewAllButtonTapped(sectionTitle: "Upcoming", movies: movies)
+            }
         }
 
         return headerView

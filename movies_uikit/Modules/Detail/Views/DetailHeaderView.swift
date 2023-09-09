@@ -9,6 +9,20 @@ import UIKit
 
 class DetailHeaderView: UIView {
 
+    var saveForLaterPressedCallback: (() -> Void)?
+
+    private let rootView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 24
+        view.backgroundColor = .systemBackground
+        view.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMaxXMinYCorner
+        ]
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private let rootStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -24,8 +38,9 @@ class DetailHeaderView: UIView {
     private let topStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .leading
+        stackView.alignment = .fill
         stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
@@ -107,6 +122,21 @@ class DetailHeaderView: UIView {
         return button
     }()
 
+    private let saveForLaterButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .plain()
+        button.setImage(
+            UIImage(systemName: "plus")?.withTintColor(
+                .systemRed,
+                renderingMode: .alwaysOriginal
+            ),
+            for: .normal
+        )
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalTo: button.widthAnchor, multiplier: 1/1).isActive = true
+        return button
+    }()
+
     private let separator: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.grayscale300
@@ -119,6 +149,7 @@ class DetailHeaderView: UIView {
         super.init(frame: frame)
 
         initializeSubviews()
+        initializeTapGestureRecognizers()
     }
 
     override func layoutSubviews() {
@@ -135,7 +166,10 @@ class DetailHeaderView: UIView {
         self.clipsToBounds = true
 
         self.addSubview(posterImageView)
-        self.addSubview(rootStackView)
+        self.addSubview(rootView)
+
+        //
+        rootView.addSubview(rootStackView)
 
         //
         rootStackView.addArrangedSubview(topStackView)
@@ -144,6 +178,7 @@ class DetailHeaderView: UIView {
 
         //
         topStackView.addArrangedSubview(titleLabel)
+        topStackView.addArrangedSubview(saveForLaterButton)
 
         //
         bottomStackView.addArrangedSubview(subTitleStackView)
@@ -163,11 +198,32 @@ class DetailHeaderView: UIView {
             posterImageView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.7),
 
             //
-            rootStackView.topAnchor.constraint(equalTo: self.posterImageView.bottomAnchor),
-            rootStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            rootStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            rootStackView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.3)
+            rootView.topAnchor.constraint(equalTo: self.posterImageView.bottomAnchor, constant: -24),
+            rootView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            rootView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+
+            //
+            rootStackView.topAnchor.constraint(equalTo: self.rootView.topAnchor),
+            rootStackView.leadingAnchor.constraint(equalTo: self.rootView.leadingAnchor),
+            rootStackView.trailingAnchor.constraint(equalTo: self.rootView.trailingAnchor),
+            rootStackView.bottomAnchor.constraint(equalTo: self.rootView.bottomAnchor),
+
+            //
+            topStackView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.1)
         ])
+    }
+
+    private func initializeTapGestureRecognizers() {
+        saveForLaterButton.addTarget(
+            self,
+            action: #selector(saveForLaterButtonPressed),
+            for: .touchUpInside
+        )
+    }
+
+    @objc
+    private func saveForLaterButtonPressed() {
+        saveForLaterPressedCallback?()
     }
 
     func configureViewData(movie: Movie?) {
@@ -189,7 +245,7 @@ class DetailHeaderView: UIView {
             self.releaseDateLabel.text = tvShow.firstAirDate
             self.posterImageView.sd_setImage(
                 with: HTTPConstants.Endpoints.posterPath(
-                    url: tvShow.backdropPath,
+                    url: tvShow.backdropPath ?? "",
                     quality: "original"
                 ).url
             )

@@ -7,43 +7,40 @@
 
 import Foundation
 
-protocol TVShowsInteractorDelegate: AnyObject {
-     var presenter: TVShowsPresenterDelegate? { get set }
+protocol TVShowsInteractor: AnyObject {
+     var presenter: TVShowsPresenter? { get set }
 
      func getPopularTVShows()
      func getTopRatedTVShows()
      func getOnTheAirTVShows()
 }
 
-class TVShowsInteractor: TVShowsInteractorDelegate {
-    var presenter: TVShowsPresenterDelegate?
+class TVShowsInteractorImpl: TVShowsInteractor {
+    var presenter: TVShowsPresenter?
 
     var moviesRepository: MoviesRepository?
 
     func getPopularTVShows() {
         moviesRepository?.getTVShows(
-            categoryType: "popular",
-            completion: { [weak self] tvShows in
-            debugPrint("TVShows \(tvShows)")
+            categoryType: "popular"
+        ) { [weak self] tvShows in
             self?.presenter?.interactorDidFetchPopularTVShows(with: tvShows)
-        })
+        }
     }
 
     func getTopRatedTVShows() {
         moviesRepository?.getTVShows(
-            categoryType: "top_rated",
-            completion: { [weak self] tvShows in
-            debugPrint("TVShows \(tvShows)")
+            categoryType: "top_rated"
+        ) { [weak self] tvShows in
             self?.presenter?.interactorDidFetchTopRatedTVShows(with: tvShows)
-        })
+        }
     }
 
     func getOnTheAirTVShows() {
         moviesRepository?.getTVShows(
-            categoryType: "on_the_air",
-            completion: { [weak self] tvShows in
-            debugPrint("TVShows \(tvShows)")
+            categoryType: "on_the_air"
+        ) { [weak self] tvShows in
             self?.presenter?.interactorDidFetchOnTheAirTVShows(with: tvShows)
-        })
+        }
     }
 }

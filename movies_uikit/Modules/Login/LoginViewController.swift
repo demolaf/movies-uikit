@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol LoginViewDelegate: AnyObject {
-    var presenter: LoginPresenterDelegate? { get set }
+protocol LoginView: AnyObject {
+    var presenter: LoginPresenter? { get set }
 }
 
-class LoginViewController: UIViewController, LoginViewDelegate {
+class LoginViewController: UIViewController, LoginView {
 
-    var presenter: LoginPresenterDelegate?
+    var presenter: LoginPresenter?
 
     private let loginButton: UIButton = {
         let button = UIButton()
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, LoginViewDelegate {
         view.backgroundColor = .systemBackground
         view.addSubview(loginButton)
 
-        loginButton.addTarget(self, action: #selector(something), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(loginWithWebAuthPressed), for: .touchUpInside)
 
         presenter?.initialize()
     }
@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, LoginViewDelegate {
     }
 
     @objc
-    private func something() {
-        (presenter as? LoginPresenter)?.loginWithWebAuthButtonPressed()
+    private func loginWithWebAuthPressed() {
+        presenter?.loginWithWebAuthButtonPressed()
     }
 }

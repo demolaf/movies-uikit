@@ -18,12 +18,13 @@ class MockLocalStorage: LocalStorage {
     func update(object: AnyObject) {}
 
     func read<ObjectType>(
-        object: ObjectType,
+        object: ObjectType.Type,
         completion: @escaping (AnyObject?, Error?) -> Void
     ) where ObjectType: AnyObject {}
 
     func readAll<ObjectType>(
-        object: ObjectType,
+        object: ObjectType.Type,
+        sortBy: String,
         completion: @escaping ([ObjectType], Error?) -> Void
     ) where ObjectType: AnyObject {}
 }

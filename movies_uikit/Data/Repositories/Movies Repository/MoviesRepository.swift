@@ -8,6 +8,20 @@
 import Foundation
 
 protocol MoviesRepository {
-    func getMovies(categoryType: String, completion: @escaping ([Movie]) -> Void)
-    func getTVShows(categoryType: String, completion: @escaping ([TVShow]) -> Void)
+    func getMovies(
+        categoryType: String,
+        completion: @escaping ([Movie]) -> Void
+    )
+    func getTVShows(
+        categoryType: String,
+        completion: @escaping ([TVShow]) -> Void
+    )
+    func getRecommendedShowsForMovie(
+        id: String,
+        completion: @escaping ([Movie]) -> Void
+    )
+    func getRecommendedShowsForTVShow(
+        id: String,
+        completion: @escaping ([TVShow]) -> Void
+    )
 }

@@ -7,12 +7,14 @@
 
 import UIKit
 
-protocol DetailViewDelegate: AnyObject {
-    var presenter: DetailPresenterDelegate? { get set }
-    func initializeViewData(movie: Movie?, tvShow: TVShow?)
+protocol DetailView: AnyObject {
+    var presenter: DetailPresenter? { get set }
+
+    func update(recommendedMovies: [Movie])
+    func update(recommendedTVShows: [TVShow])
 }
 
-class DetailViewController: UIViewController, DetailViewDelegate {
+class DetailViewController: UIViewController, DetailView {
 
     private let rootScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -24,9 +26,9 @@ class DetailViewController: UIViewController, DetailViewDelegate {
     private let rootScrollStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 24
         stackView.alignment = .fill
         stackView.distribution = .fill
+        stackView.spacing = 24
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -48,6 +50,7 @@ class DetailViewController: UIViewController, DetailViewDelegate {
 
     private let recommendationsBasedOnItemView: RecommendedBasedOnItemView = {
         let view = RecommendedBasedOnItemView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.heightAnchor.constraint(
             equalTo: view.widthAnchor,
             multiplier: 1
@@ -55,7 +58,7 @@ class DetailViewController: UIViewController, DetailViewDelegate {
         return view
     }()
 
-    var presenter: DetailPresenterDelegate?
+    var presenter: DetailPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +67,6 @@ class DetailViewController: UIViewController, DetailViewDelegate {
         view.backgroundColor = .systemBackground
 
         initializeSubviews()
-
-        presenter?.initialize()
     }
 
     override func viewDidLayoutSubviews() {
@@ -84,17 +85,38 @@ class DetailViewController: UIViewController, DetailViewDelegate {
     }
 
     func initializeViewData(movie: Movie?, tvShow: TVShow?) {
+        // TODO: Check if movie or tvShow is in db for "saveForLater" button
         if let movie = movie {
             // self.title = movie.originalTitle
-            self.detailHeaderView.configureViewData(movie: movie)
-            self.detailDescriptionView.configureViewData(movie: movie)
+            detailHeaderView.configureViewData(movie: movie)
+            detailDescriptionView.configureViewData(movie: movie)
+            presenter?.getRecommendedMovies(id: String(movie.movieId))
+            detailHeaderView.saveForLaterPressedCallback = {
+                self.presenter?.bookmarkButtonPressed(movie: movie)
+            }
         }
 
         if let tvShow = tvShow {
             // self.title = tvShow.originalName
-            self.detailHeaderView.configureViewData(tvShow: tvShow)
-            self.detailDescriptionView.configureViewData(tvShow: tvShow)
+            detailHeaderView.configureViewData(tvShow: tvShow)
+            detailDescriptionView.configureViewData(tvShow: tvShow)
+            presenter?.getRecommendedTVShows(id: String(tvShow.tvShowId))
+            detailHeaderView.saveForLaterPressedCallback = {
+                self.presenter?.bookmarkButtonPressed(tvShow: tvShow)
+            }
         }
+
+        recommendationsBasedOnItemView.itemSelectedCallback = { item in
+            self.presenter?.recommendedItemTapped(item: item)
+        }
+    }
+
+    func update(recommendedMovies: [Movie]) {
+        recommendationsBasedOnItemView.configureViewItems(items: recommendedMovies)
+    }
+
+    func update(recommendedTVShows: [TVShow]) {
+        recommendationsBasedOnItemView.configureViewItems(items: recommendedTVShows)
     }
 
     private func applyConstraints() {

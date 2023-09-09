@@ -8,13 +8,17 @@ import Foundation
 
 protocol LocalStorage {
     func create(object: AnyObject)
+
     func update(object: AnyObject)
+
     func read<ObjectType: AnyObject>(
-        object: ObjectType,
+        object: ObjectType.Type,
         completion: @escaping (AnyObject?, Error?) -> Void
     )
+
     func readAll<ObjectType: AnyObject>(
-        object: ObjectType,
+        object: ObjectType.Type,
+        sortBy: String,
         completion: @escaping ([ObjectType], Error?) -> Void
     )
 }

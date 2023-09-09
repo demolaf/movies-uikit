@@ -8,26 +8,26 @@
 import Foundation
 import UIKit
 
-protocol LoginInteractorDelegate: AnyObject {
-    var presenter: LoginPresenterDelegate? { get set }
+protocol LoginInteractor: AnyObject {
+    var presenter: LoginPresenter? { get set }
 
     func loginWithWebAuth()
 }
 
 /// - Calls methods in `Repositories`
-class LoginInteractor: LoginInteractorDelegate {
-    var presenter: LoginPresenterDelegate?
+class LoginInteractorImpl: LoginInteractor {
+    var presenter: LoginPresenter?
 
     var authRepository: AuthRepository?
 
     func loginWithWebAuth() {
-        authRepository?.getRequestToken(completion: { success in
+        authRepository?.getRequestToken { success in
             if success {
                 guard let url = HTTPConstants.Endpoints.webAuth.url else {
                     return
                 }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
-        })
+        }
     }
 }

@@ -29,7 +29,7 @@
 		7E0807FA2AA4125100E6E5C2 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */; };
 		7E0807FD2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */; };
 		7E1B87672AA42FA70023A20D /* TVShowsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87662AA42FA70023A20D /* TVShowsResponse.swift */; };
-		7E1B87692AA53DBB0023A20D /* LibrarySectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */; };
+		7E1B87692AA53DBB0023A20D /* ReusableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87682AA53DBB0023A20D /* ReusableTableViewController.swift */; };
 		7E1B876C2AA54AEF0023A20D /* LibraryBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */; };
 		7E1B87702AA56F960023A20D /* LibraryTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */; };
 		7E1B87722AA57A9E0023A20D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87712AA57A9E0023A20D /* Colors.swift */; };
@@ -48,7 +48,7 @@
 		7E1B878E2AA57B6E0023A20D /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87812AA57B6E0023A20D /* Montserrat-Black.ttf */; };
 		7E1B878F2AA57B6E0023A20D /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87822AA57B6E0023A20D /* Montserrat-Regular.ttf */; };
 		7E1B87922AA588950023A20D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1B87912AA588950023A20D /* Colors.xcassets */; };
-		7E1B87942AA58F680023A20D /* LibrarySectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */; };
+		7E1B87942AA58F680023A20D /* ReusableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87932AA58F680023A20D /* ReusableTableViewCell.swift */; };
 		7E1B87972AA684D00023A20D /* DetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87962AA684D00023A20D /* DetailHeaderView.swift */; };
 		7E1B87992AA6853C0023A20D /* RecommendedBasedOnItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */; };
 		7E320BB12AA746790048750F /* DetailDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BB02AA746790048750F /* DetailDescriptionView.swift */; };
@@ -62,6 +62,10 @@
 		7E320BC42AA790600048750F /* CreateSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC22AA790600048750F /* CreateSessionResponse.swift */; };
 		7E320BC82AA790690048750F /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC62AA790690048750F /* AuthRepositoryImpl.swift */; };
 		7E320BC92AA790690048750F /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC72AA790690048750F /* AuthRepository.swift */; };
+		7E320BD82AA7FF110048750F /* MoviesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BD72AA7FF110048750F /* MoviesRepositoryTests.swift */; };
+		7E6428E22AA9651C00CF1752 /* RiveRuntime.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6428E12AA9651C00CF1752 /* RiveRuntime.xcframework */; };
+		7E6428E32AA9651C00CF1752 /* RiveRuntime.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6428E12AA9651C00CF1752 /* RiveRuntime.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7E6428E82AA9685800CF1752 /* sith-de-mayo.riv in Resources */ = {isa = PBXBuildFile; fileRef = 7E6428E72AA9685800CF1752 /* sith-de-mayo.riv */; };
 		7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70DB192A9960230024FE23 /* AppRouter.swift */; };
 		7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; };
 		7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -79,6 +83,14 @@
 		7EC468D72AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */; };
 		7EC468DB2AA2C38600B6D28F /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468DA2AA2C38600B6D28F /* Environment.swift */; };
 		7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */; };
+		7EE72F172AAAA05E00C9055F /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */; };
+		7EE72F182AAAA05E00C9055F /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7EE72F192AAAA05E00C9055F /* RxCocoa.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F162AAAA05E00C9055F /* RxCocoa.xcframework */; };
+		7EE72F1A2AAAA05E00C9055F /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F162AAAA05E00C9055F /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7EE72F1E2AAAA22500C9055F /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1B2AAAA22500C9055F /* RxRelay.xcframework */; };
+		7EE72F1F2AAAA22500C9055F /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1B2AAAA22500C9055F /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7EE72F222AAAA22600C9055F /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1D2AAAA22500C9055F /* RxBlocking.xcframework */; };
+		7EE72F232AAAA22600C9055F /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1D2AAAA22500C9055F /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EEAAD722A9920950087AF46 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD712A9920950087AF46 /* MoviesViewController.swift */; };
 		7EEAAD752A9923390087AF46 /* CarouselItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD742A9923390087AF46 /* CarouselItemCollectionViewCell.swift */; };
 		7EEAAD792A99321C0087AF46 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD782A99321C0087AF46 /* MoviesRouter.swift */; };
@@ -99,6 +111,16 @@
 		7EF4AFC92A82DC980001B902 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EF4AFC72A82DC980001B902 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7E320BD22AA7E5B30048750F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7EF4AFB12A82DC970001B902 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EF4AFB82A82DC970001B902;
+			remoteInfo = movies_uikit;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		7EC468B92AA2AA1C00B6D28F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -107,9 +129,14 @@
 			dstSubfolderSpec = 10;
 			files = (
 				7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */,
+				7EE72F232AAAA22600C9055F /* RxBlocking.xcframework in Embed Frameworks */,
+				7EE72F1A2AAAA05E00C9055F /* RxCocoa.xcframework in Embed Frameworks */,
 				7E0807C72AA3997E00E6E5C2 /* SDWebImage.xcframework in Embed Frameworks */,
+				7EE72F1F2AAAA22500C9055F /* RxRelay.xcframework in Embed Frameworks */,
 				7E0807CA2AA399C000E6E5C2 /* SDWebImageMapKit.xcframework in Embed Frameworks */,
 				7EC468BF2AA2AA2300B6D28F /* RealmSwift.xcframework in Embed Frameworks */,
+				7EE72F182AAAA05E00C9055F /* RxSwift.xcframework in Embed Frameworks */,
+				7E6428E32AA9651C00CF1752 /* RiveRuntime.xcframework in Embed Frameworks */,
 				7EC468BC2AA2AA2000B6D28F /* Realm.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -138,7 +165,7 @@
 		7E0807F92AA4125100E6E5C2 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		7E0807FC2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsBarButtonItem.swift; sourceTree = "<group>"; };
 		7E1B87662AA42FA70023A20D /* TVShowsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsResponse.swift; sourceTree = "<group>"; };
-		7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySectionViewController.swift; sourceTree = "<group>"; };
+		7E1B87682AA53DBB0023A20D /* ReusableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableTableViewController.swift; sourceTree = "<group>"; };
 		7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryBarButtonItem.swift; sourceTree = "<group>"; };
 		7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTabBarView.swift; sourceTree = "<group>"; };
 		7E1B87712AA57A9E0023A20D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -157,7 +184,7 @@
 		7E1B87812AA57B6E0023A20D /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.ttf"; sourceTree = "<group>"; };
 		7E1B87822AA57B6E0023A20D /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		7E1B87912AA588950023A20D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySectionTableViewCell.swift; sourceTree = "<group>"; };
+		7E1B87932AA58F680023A20D /* ReusableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableTableViewCell.swift; sourceTree = "<group>"; };
 		7E1B87962AA684D00023A20D /* DetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeaderView.swift; sourceTree = "<group>"; };
 		7E1B87982AA6853C0023A20D /* RecommendedBasedOnItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedBasedOnItemView.swift; sourceTree = "<group>"; };
 		7E320BB02AA746790048750F /* DetailDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDescriptionView.swift; sourceTree = "<group>"; };
@@ -171,6 +198,10 @@
 		7E320BC22AA790600048750F /* CreateSessionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSessionResponse.swift; sourceTree = "<group>"; };
 		7E320BC62AA790690048750F /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
 		7E320BC72AA790690048750F /* AuthRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		7E320BCE2AA7E5B30048750F /* movies_uikitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movies_uikitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E320BD72AA7FF110048750F /* MoviesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepositoryTests.swift; sourceTree = "<group>"; };
+		7E6428E12AA9651C00CF1752 /* RiveRuntime.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RiveRuntime.xcframework; path = Carthage/Build/RiveRuntime.xcframework; sourceTree = "<group>"; };
+		7E6428E72AA9685800CF1752 /* sith-de-mayo.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sith-de-mayo.riv"; sourceTree = "<group>"; };
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
@@ -186,6 +217,11 @@
 		7EC468D82AA2C29200B6D28F /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		7EC468DA2AA2C38600B6D28F /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		7ECCCACB2A999A1B005F1138 /* MoviesBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesBarButtonItem.swift; sourceTree = "<group>"; };
+		7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		7EE72F162AAAA05E00C9055F /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
+		7EE72F1B2AAAA22500C9055F /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
+		7EE72F1C2AAAA22500C9055F /* RxTest.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxTest.xcframework; path = Carthage/Build/RxTest.xcframework; sourceTree = "<group>"; };
+		7EE72F1D2AAAA22500C9055F /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
 		7EEAAD712A9920950087AF46 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		7EEAAD742A9923390087AF46 /* CarouselItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EEAAD782A99321C0087AF46 /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
@@ -209,14 +245,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7E320BCB2AA7E5B30048750F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EF4AFB62A82DC970001B902 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */,
+				7EE72F222AAAA22600C9055F /* RxBlocking.xcframework in Frameworks */,
+				7EE72F192AAAA05E00C9055F /* RxCocoa.xcframework in Frameworks */,
 				7E0807C62AA3997E00E6E5C2 /* SDWebImage.xcframework in Frameworks */,
+				7EE72F1E2AAAA22500C9055F /* RxRelay.xcframework in Frameworks */,
 				7E0807C92AA399C000E6E5C2 /* SDWebImageMapKit.xcframework in Frameworks */,
 				7EC468BE2AA2AA2300B6D28F /* RealmSwift.xcframework in Frameworks */,
+				7EE72F172AAAA05E00C9055F /* RxSwift.xcframework in Frameworks */,
+				7E6428E22AA9651C00CF1752 /* RiveRuntime.xcframework in Frameworks */,
 				7EC468BB2AA2AA2000B6D28F /* Realm.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +306,7 @@
 				7EEB76AF2AA2D436009634FB /* RepositoryProvider.swift */,
 				7E70DB192A9960230024FE23 /* AppRouter.swift */,
 				7EC468DA2AA2C38600B6D28F /* Environment.swift */,
+				7EC468C32AA2AAAD00B6D28F /* HTTPConstants.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -322,7 +371,6 @@
 		7E1B876A2AA542290023A20D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7E1B879A2AA6926A0023A20D /* Library Section */,
 				7E1B876B2AA54AEF0023A20D /* LibraryBarButtonItem.swift */,
 				7E1B876F2AA56F960023A20D /* LibraryTabBarView.swift */,
 			);
@@ -367,13 +415,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7E1B879A2AA6926A0023A20D /* Library Section */ = {
+		7E1B879A2AA6926A0023A20D /* Reusable Table View */ = {
 			isa = PBXGroup;
 			children = (
-				7E1B87682AA53DBB0023A20D /* LibrarySectionViewController.swift */,
-				7E1B87932AA58F680023A20D /* LibrarySectionTableViewCell.swift */,
+				7E1B87682AA53DBB0023A20D /* ReusableTableViewController.swift */,
+				7E1B87932AA58F680023A20D /* ReusableTableViewCell.swift */,
 			);
-			path = "Library Section";
+			path = "Reusable Table View";
 			sourceTree = "<group>";
 		};
 		7E320BB22AA7901E0048750F /* Login */ = {
@@ -412,6 +460,23 @@
 			path = "Auth Repository";
 			sourceTree = "<group>";
 		};
+		7E320BCF2AA7E5B30048750F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7ED7B8122AAC9D9B008C84CD /* Data */,
+				7ED7B8142AAC9DBE008C84CD /* Modules */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		7E6428E42AA9681100CF1752 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				7E6428E72AA9685800CF1752 /* sith-de-mayo.riv */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		7E70DB3D2A996DE70024FE23 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +511,7 @@
 		7E70DB452A996ED50024FE23 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7E1B879A2AA6926A0023A20D /* Reusable Table View */,
 				7EC468D62AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift */,
 				7E0807DC2AA3F9CE00E6E5C2 /* SubSectionItemCollectionViewCell.swift */,
 				7EEAAD742A9923390087AF46 /* CarouselItemCollectionViewCell.swift */,
@@ -453,16 +519,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7EC468962A9EDB2800B6D28F /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		7EC468B52AA2AA1C00B6D28F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7EE72F1D2AAAA22500C9055F /* RxBlocking.xcframework */,
+				7EE72F1B2AAAA22500C9055F /* RxRelay.xcframework */,
+				7EE72F1C2AAAA22500C9055F /* RxTest.xcframework */,
+				7EE72F162AAAA05E00C9055F /* RxCocoa.xcframework */,
+				7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */,
+				7E6428E12AA9651C00CF1752 /* RiveRuntime.xcframework */,
 				7E0807C82AA399C000E6E5C2 /* SDWebImageMapKit.xcframework */,
 				7E0807C52AA3997E00E6E5C2 /* SDWebImage.xcframework */,
 				7EC468BD2AA2AA2200B6D28F /* RealmSwift.xcframework */,
@@ -477,7 +542,6 @@
 			children = (
 				7EC468C12AA2AAAD00B6D28F /* HTTPClientImpl.swift */,
 				7EC468C22AA2AAAD00B6D28F /* HTTPClient.swift */,
-				7EC468C32AA2AAAD00B6D28F /* HTTPConstants.swift */,
 			);
 			path = "HTTP Client";
 			sourceTree = "<group>";
@@ -509,6 +573,69 @@
 			path = "Local Storage";
 			sourceTree = "<group>";
 		};
+		7ED7B8112AAC9D8E008C84CD /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				7E320BD72AA7FF110048750F /* MoviesRepositoryTests.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		7ED7B8122AAC9D9B008C84CD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7ED7B8132AAC9DA8008C84CD /* Datasources */,
+				7ED7B8112AAC9D8E008C84CD /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7ED7B8132AAC9DA8008C84CD /* Datasources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Datasources;
+			sourceTree = "<group>";
+		};
+		7ED7B8142AAC9DBE008C84CD /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7ED7B8182AAC9DE8008C84CD /* Detail */,
+				7ED7B8172AAC9DE3008C84CD /* Library */,
+				7ED7B8162AAC9DD5008C84CD /* TV Shows */,
+				7ED7B8152AAC9DC9008C84CD /* Movies */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		7ED7B8152AAC9DC9008C84CD /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		7ED7B8162AAC9DD5008C84CD /* TV Shows */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "TV Shows";
+			sourceTree = "<group>";
+		};
+		7ED7B8172AAC9DE3008C84CD /* Library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		7ED7B8182AAC9DE8008C84CD /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		7EEAAD5D2A98E1710087AF46 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +649,7 @@
 		7EEAAD5E2A98E1770087AF46 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7E6428E42AA9681100CF1752 /* Animations */,
 				7E1B87752AA57B1E0023A20D /* Fonts */,
 				7E0807D52AA3AEE600E6E5C2 /* Assets */,
 				7E1B87712AA57A9E0023A20D /* Colors.swift */,
@@ -558,7 +686,6 @@
 		7EEAAD622A98E1FC0087AF46 /* Movies */ = {
 			isa = PBXGroup;
 			children = (
-				7EC468962A9EDB2800B6D28F /* Extensions */,
 				7EEAAD762A9930A50087AF46 /* Components */,
 				7EEAAD732A9922FF0087AF46 /* Views */,
 				7EEAAD712A9920950087AF46 /* MoviesViewController.swift */,
@@ -635,6 +762,7 @@
 			isa = PBXGroup;
 			children = (
 				7EF4AFBB2A82DC970001B902 /* movies_uikit */,
+				7E320BCF2AA7E5B30048750F /* Tests */,
 				7EF4AFBA2A82DC970001B902 /* Products */,
 				7EC468B52AA2AA1C00B6D28F /* Frameworks */,
 			);
@@ -644,6 +772,7 @@
 			isa = PBXGroup;
 			children = (
 				7EF4AFB92A82DC970001B902 /* movies_uikit.app */,
+				7E320BCE2AA7E5B30048750F /* movies_uikitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -665,6 +794,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7E320BCD2AA7E5B30048750F /* movies_uikitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E320BD42AA7E5B30048750F /* Build configuration list for PBXNativeTarget "movies_uikitTests" */;
+			buildPhases = (
+				7E320BCA2AA7E5B30048750F /* Sources */,
+				7E320BCB2AA7E5B30048750F /* Frameworks */,
+				7E320BCC2AA7E5B30048750F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E320BD32AA7E5B30048750F /* PBXTargetDependency */,
+			);
+			name = movies_uikitTests;
+			productName = movies_uikitTests;
+			productReference = 7E320BCE2AA7E5B30048750F /* movies_uikitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7EF4AFB82A82DC970001B902 /* movies_uikit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EF4AFCD2A82DC980001B902 /* Build configuration list for PBXNativeTarget "movies_uikit" */;
@@ -695,6 +842,11 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					7E320BCD2AA7E5B30048750F = {
+						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
+						TestTargetID = 7EF4AFB82A82DC970001B902;
+					};
 					7EF4AFB82A82DC970001B902 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -714,11 +866,19 @@
 			projectRoot = "";
 			targets = (
 				7EF4AFB82A82DC970001B902 /* movies_uikit */,
+				7E320BCD2AA7E5B30048750F /* movies_uikitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7E320BCC2AA7E5B30048750F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EF4AFB72A82DC970001B902 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -733,6 +893,7 @@
 				7E1B87832AA57B6E0023A20D /* Montserrat-SemiBold.ttf in Resources */,
 				7E1B878C2AA57B6E0023A20D /* Montserrat-SemiBoldItalic.ttf in Resources */,
 				7E1B878A2AA57B6E0023A20D /* Montserrat-Medium.ttf in Resources */,
+				7E6428E82AA9685800CF1752 /* sith-de-mayo.riv in Resources */,
 				7E1B878D2AA57B6E0023A20D /* Montserrat-ExtraLight.ttf in Resources */,
 				7EF4AFC92A82DC980001B902 /* LaunchScreen.storyboard in Resources */,
 				7EF4AFC62A82DC980001B902 /* Assets.xcassets in Resources */,
@@ -777,6 +938,11 @@
 				"$(SRCROOT)/Carthage/Build/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/RealmSwift.framework",
 				"$(SRCROOT)/Carthage/Build/SDWebImage.framework",
+				"$(SRCROOT)/Carthage/Build/RiveRuntime.framework",
+				"$(SRCROOT)/Carthage/Build/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/RxBlocking.framework",
+				"$(SRCROOT)/Carthage/Build/RxRelay.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -789,6 +955,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7E320BCA2AA7E5B30048750F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E320BD82AA7FF110048750F /* MoviesRepositoryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7EF4AFB52A82DC970001B902 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -832,7 +1006,7 @@
 				7E0807EA2AA40F3500E6E5C2 /* TVShowsRouter.swift in Sources */,
 				7EEB76B02AA2D436009634FB /* RepositoryProvider.swift in Sources */,
 				7E320BBB2AA7901E0048750F /* LoginViewController.swift in Sources */,
-				7E1B87942AA58F680023A20D /* LibrarySectionTableViewCell.swift in Sources */,
+				7E1B87942AA58F680023A20D /* ReusableTableViewCell.swift in Sources */,
 				7E320BB12AA746790048750F /* DetailDescriptionView.swift in Sources */,
 				7EC468D72AA2B4DE00B6D28F /* HeaderCollectionResuableView.swift in Sources */,
 				7E0807D02AA3A2EF00E6E5C2 /* LibraryViewController.swift in Sources */,
@@ -848,7 +1022,7 @@
 				7EC468CE2AA2ADD500B6D28F /* MoviesAPI.swift in Sources */,
 				7EEAAD7F2A9934400087AF46 /* MoviesPresenter.swift in Sources */,
 				7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */,
-				7E1B87692AA53DBB0023A20D /* LibrarySectionViewController.swift in Sources */,
+				7E1B87692AA53DBB0023A20D /* ReusableTableViewController.swift in Sources */,
 				7E0807FA2AA4125100E6E5C2 /* DetailPresenter.swift in Sources */,
 				7EF4AFBD2A82DC970001B902 /* AppDelegate.swift in Sources */,
 				7EF4AFBF2A82DC970001B902 /* SceneDelegate.swift in Sources */,
@@ -862,6 +1036,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7E320BD32AA7E5B30048750F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7EF4AFB82A82DC970001B902 /* movies_uikit */;
+			targetProxy = 7E320BD22AA7E5B30048750F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		7EF4AFC72A82DC980001B902 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -874,6 +1056,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7E320BD52AA7E5B30048750F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3G33A99C47;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aob.movies-uikitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movies_uikit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/movies_uikit";
+			};
+			name = Debug;
+		};
+		7E320BD62AA7E5B30048750F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3G33A99C47;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aob.movies-uikitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movies_uikit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/movies_uikit";
+			};
+			name = Release;
+		};
 		7EF4AFCB2A82DC980001B902 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7EC468D82AA2C29200B6D28F /* Development.xcconfig */;
@@ -1045,6 +1266,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7E320BD42AA7E5B30048750F /* Build configuration list for PBXNativeTarget "movies_uikitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7E320BD52AA7E5B30048750F /* Debug */,
+				7E320BD62AA7E5B30048750F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7EF4AFB42A82DC970001B902 /* Build configuration list for PBXProject "movies_uikit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

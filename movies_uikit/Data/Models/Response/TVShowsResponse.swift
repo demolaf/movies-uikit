@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - TVShowsResponse
 struct TVShowsResponse: Codable {
@@ -21,23 +22,29 @@ struct TVShowsResponse: Codable {
 }
 
 // MARK: - TVShow
-struct TVShow: Codable {
-    let backdropPath, firstAirDate: String
-    let genreIDS: [Int]
-    let id: Int
-    let name: String
-    let originCountry: [String]
-    let originalLanguage, originalName, overview: String
-    let popularity: Double
-    let posterPath: String
-    let voteAverage: Double
-    let voteCount: Int
+class TVShow: Object, Codable {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var backdropPath: String?
+    @Persisted var firstAirDate: String?
+    @Persisted var genreIDS: List<Int>
+    @Persisted var tvShowId: Int
+    @Persisted var name: String
+    @Persisted var originCountry: List<String>
+    @Persisted var originalLanguage: String
+    @Persisted var originalName: String
+    @Persisted var overview: String
+    @Persisted var popularity: Double
+    @Persisted var posterPath: String
+    @Persisted var voteAverage: Double
+    @Persisted var voteCount: Int
+    @Persisted var createdAt: Date = Date()
 
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case firstAirDate = "first_air_date"
         case genreIDS = "genre_ids"
-        case id, name
+        case tvShowId = "id"
+        case name
         case originCountry = "origin_country"
         case originalLanguage = "original_language"
         case originalName = "original_name"

@@ -115,6 +115,7 @@ class ReusableTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+
     }
 
     private func initializeSubViews() {
@@ -151,7 +152,7 @@ class ReusableTableViewCell: UITableViewCell {
                 ).url
             )
             itemTitle.text = movie.originalTitle
-            itemSubtitle.text = "\(movie.releaseDate)"
+            itemSubtitle.text = movie.releaseDate
             return
         }
 
@@ -169,7 +170,7 @@ class ReusableTableViewCell: UITableViewCell {
                 ).url
             )
             itemTitle.text = tv.originalName
-            itemSubtitle.text = "\(tv.firstAirDate)"
+            itemSubtitle.text = tv.firstAirDate
             return
         }
 

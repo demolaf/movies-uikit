@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol TVShowsPresenterDelegate: AnyObject {
-    var view: TVShowsViewDelegate? { get set }
-    var interactor: TVShowsInteractorDelegate? { get set }
-    var router: TVShowsRouterDelegate? { get set }
+protocol TVShowsPresenter: AnyObject {
+    var view: TVShowsView? { get set }
+    var interactor: TVShowsInteractor? { get set }
+    var router: TVShowsRouter? { get set }
 
     func initialize()
     func interactorDidFetchPopularTVShows(with tvShows: [TVShow])
@@ -18,12 +18,13 @@ protocol TVShowsPresenterDelegate: AnyObject {
     func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow])
 
     func tvShowItemTapped(tvShow: TVShow?)
+    func viewAllButtonTapped(sectionTitle: String, tvShows: [TVShow])
 }
 
-class TVShowsPresenter: TVShowsPresenterDelegate {
-    var router: TVShowsRouterDelegate?
-    var interactor: TVShowsInteractorDelegate?
-    var view: TVShowsViewDelegate?
+class TVShowsPresenterImpl: TVShowsPresenter {
+    var router: TVShowsRouter?
+    var interactor: TVShowsInteractor?
+    var view: TVShowsView?
 
     func initialize() {
         interactor?.getPopularTVShows()
@@ -54,6 +55,16 @@ class TVShowsPresenter: TVShowsPresenterDelegate {
                 detailVC.hidesBottomBarWhenPushed = true
                 self.router?.push(to: detailVC, from: vc)
             }
+        }
+    }
+
+    func viewAllButtonTapped(sectionTitle: String, tvShows: [TVShow]) {
+        if let vc = view as? TVShowsViewController {
+            let reusableTableVC = ReusableTableViewController()
+            reusableTableVC.title = sectionTitle
+            reusableTableVC.hidesBottomBarWhenPushed = true
+            reusableTableVC.items = tvShows
+            router?.push(to: reusableTableVC, from: vc)
         }
     }
 }

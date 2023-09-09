@@ -13,10 +13,19 @@ class LibraryTabBarView: UIView {
 
     var tvTabBarPressedCallback: (() -> Void)?
 
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+
     private let tabBarView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 24
+        stackView.spacing = 12
         stackView.alignment = .bottom
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -114,7 +123,8 @@ class LibraryTabBarView: UIView {
     private func initializeSubviews() {
 
         self.addSubview(tabBarSeparatorView)
-        self.addSubview(tabBarView)
+        self.addSubview(stackView)
+        self.stackView.addArrangedSubview(tabBarView)
 
         self.tabBarView.addArrangedSubview(movieSectionStackView)
         self.tabBarView.addArrangedSubview(tvShowSectionStackView)
@@ -128,13 +138,13 @@ class LibraryTabBarView: UIView {
 
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            tabBarView.topAnchor.constraint(equalTo: self.topAnchor),
-            tabBarView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            tabBarView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            tabBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: self.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
 
             // Tab Bar Separator View Constraints
-            tabBarSeparatorView.topAnchor.constraint(equalTo: self.tabBarView.bottomAnchor),
+            tabBarSeparatorView.topAnchor.constraint(equalTo: self.stackView.bottomAnchor),
             tabBarSeparatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             tabBarSeparatorView.trailingAnchor.constraint(equalTo: self.trailingAnchor)
         ])

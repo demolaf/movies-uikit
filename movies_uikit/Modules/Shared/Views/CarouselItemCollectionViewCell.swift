@@ -38,7 +38,6 @@ class CarouselItemCollectionViewCell: UICollectionViewCell {
         label.font = .appFont(ofSize: 16, weight: .regular)
         label.sizeToFit()
         label.numberOfLines = 2
-        // label.backgroundColor = .blue
         return label
     }()
 
@@ -48,7 +47,6 @@ class CarouselItemCollectionViewCell: UICollectionViewCell {
         label.textColor = .label
         label.textAlignment = .right
         label.sizeToFit()
-        // label.backgroundColor = .red
         return label
     }()
 

@@ -41,7 +41,7 @@ class LocalStorageImpl: LocalStorage {
 
     // swiftlint:disable force_cast
     func read<ObjectType: AnyObject>(
-        object: ObjectType,
+        object: ObjectType.Type,
         completion: @escaping (AnyObject?, Error?) -> Void
     ) {
         do {
@@ -58,19 +58,45 @@ class LocalStorageImpl: LocalStorage {
     }
 
     func readAll<ObjectType: AnyObject>(
-        object: ObjectType,
+        object: ObjectType.Type,
+        sortBy: String,
         completion: @escaping ([ObjectType], Error?) -> Void
     ) {
         do {
             try realm?.write {
                 let results = realm?.objects((ObjectType.self as! Object.Type).self)
-
                 var convertToObjects = [ObjectType]()
 
-                results?.sorted(byKeyPath: "").forEach({ object in
+                results?.sorted(byKeyPath: sortBy).forEach({ object in
                     convertToObjects.append(object as! ObjectType)
                 })
                 completion(convertToObjects, nil)
+            }
+        } catch {
+            debugPrint(error)
+            completion([], error)
+        }
+    }
+
+    func readAllWithChanges<ObjectType: AnyObject>(
+        object: ObjectType.Type,
+        sortBy: String,
+        completion: @escaping ([ObjectType], Error?) -> Void
+    ) {
+        do {
+            try realm?.write {
+                let results = realm?.objects((ObjectType.self as! Object.Type).self)
+//                results?.observe(on: .main, { change in
+//                    switch change {
+//                    case .initial(let value):
+//                        <#code#>
+//                    case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+//                        <#code#>
+//                    case .error(_):
+//                        <#code#>
+//                    }
+//                })
+//                completion(convertToObjects, nil)
             }
         } catch {
             debugPrint(error)

@@ -7,12 +7,13 @@
 
 import Foundation
 import UIKit
+import RiveRuntime
 
-protocol LaunchViewDelegate: AnyObject {
-    var presenter: LaunchPresenterDelegate? { get set }
+protocol LaunchView: AnyObject {
+    var presenter: LaunchPresenter? { get set }
 }
 
-class LaunchViewController: UIViewController, LaunchViewDelegate {
+class LaunchViewController: UIViewController, LaunchView {
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -24,7 +25,17 @@ class LaunchViewController: UIViewController, LaunchViewDelegate {
         return label
     }()
 
-    var presenter: LaunchPresenterDelegate?
+    private let loadingAnimationView: RiveView = {
+        let riveVM = RiveViewModel(
+            fileName: "sith-de-mayo",
+            stateMachineName: "State Machine 1",
+            artboardName: "New Artboard"
+        )
+
+        return riveVM.createRiveView()
+    }()
+
+    var presenter: LaunchPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +43,28 @@ class LaunchViewController: UIViewController, LaunchViewDelegate {
         navigationController?.navigationItem.setHidesBackButton(true, animated: false)
         navigationController?.setNavigationBarHidden(true, animated: false)
 
-        view.backgroundColor = .gray
-        view.addSubview(titleLabel)
+        view.backgroundColor = .systemBackground
 
+        initializeSubviews()
+
+        presenter?.initialize()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        applyConstraints()
+    }
+
+    private func initializeSubviews() {
+        view.addSubview(titleLabel)
+        // view.addSubview(loadingAnimationView)
+    }
+
+    private func applyConstraints() {
         titleLabel.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 150)
         titleLabel.center = view.center
 
-        presenter?.initialize()
+        // loadingAnimationView.frame = view.bounds
     }
 }

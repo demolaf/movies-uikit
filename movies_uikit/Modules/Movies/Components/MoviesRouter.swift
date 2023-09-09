@@ -8,24 +8,23 @@
 import Foundation
 import UIKit
 
-protocol MoviesRouterDelegate: AnyObject {
+protocol MoviesRouter: AnyObject, AnyRouter {
     var entry: EntryPoint? { get }
 
-    func push(to route: UIViewController, from vc: UIViewController)
-    func pop(from vc: UIViewController)
+    static func route() -> MoviesRouter
 }
 
-class MoviesRouter: MoviesRouterDelegate {
+class MoviesRouterImpl: MoviesRouter {
 
     var entry: EntryPoint?
 
     static func route() -> MoviesRouter {
-        let router = MoviesRouter()
+        let router = MoviesRouterImpl()
 
         // Assign VIP
         let view = MoviesViewController()
-        let presenter = MoviesPresenter()
-        let interactor = MoviesInteractor()
+        let presenter = MoviesPresenterImpl()
+        let interactor = MoviesInteractorImpl()
 
         // setup view controller with presenter
         view.presenter = presenter
