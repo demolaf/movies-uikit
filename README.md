@@ -9,7 +9,9 @@
 
 ## Description
 
+
 ## Preview
+![ezgif com-video-to-gif](https://github.com/demolaf/movies-uikit/assets/48495111/9c5cfa32-ddcd-429c-849f-4f1e0ffc73db)
 
 ## Running the App
 
