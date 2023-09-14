@@ -186,7 +186,6 @@ extension LibraryViewController: UIPageViewControllerDelegate, UIPageViewControl
         if completed,
            let currentViewController = pageViewController.viewControllers?.first as? ReusableTableViewController,
            let currentIndex = viewControllers.firstIndex(of: currentViewController ) {
-            debugPrint("Current Page Index \(currentIndex)")
             let currentTab = LibrarySectionType(rawValue: currentIndex) ?? LibrarySectionType.movies
             self.tabBarView.changeSelectedTab(section: currentTab)
         }

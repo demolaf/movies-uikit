@@ -94,6 +94,9 @@ class DetailViewController: UIViewController, DetailView {
             detailHeaderView.saveForLaterPressedCallback = {
                 self.presenter?.bookmarkButtonPressed(movie: movie)
             }
+            recommendationsBasedOnItemView.viewAllItemsCallback = { items in
+                self.presenter?.viewAllButtonTapped(sectionTitle: "Related to \(movie.originalTitle)", movies: items)
+            }
         }
 
         if let tvShow = tvShow {
@@ -103,6 +106,9 @@ class DetailViewController: UIViewController, DetailView {
             presenter?.getRecommendedTVShows(id: String(tvShow.tvShowId))
             detailHeaderView.saveForLaterPressedCallback = {
                 self.presenter?.bookmarkButtonPressed(tvShow: tvShow)
+            }
+            recommendationsBasedOnItemView.viewAllItemsCallback = { items in
+                self.presenter?.viewAllButtonTapped(sectionTitle: "Related to \(tvShow.originalName)", movies: items)
             }
         }
 

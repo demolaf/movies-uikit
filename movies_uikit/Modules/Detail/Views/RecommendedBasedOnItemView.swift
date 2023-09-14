@@ -13,6 +13,7 @@ class RecommendedBasedOnItemView: UIView {
     // Replace the below with generics
     var items = [AnyObject]()
     var itemSelectedCallback: ((AnyObject) -> Void)?
+    var viewAllItemsCallback: (([AnyObject]) -> Void)?
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(
@@ -163,6 +164,9 @@ extension RecommendedBasedOnItemView: UICollectionViewDelegate, UICollectionView
         }
 
         headerView.configureHeaderLeadingText(leadingText: "Related to this movie")
+        headerView.viewAllButtonPressedCallback = {
+            self.viewAllItemsCallback?(self.items)
+        }
         return headerView
     }
 }

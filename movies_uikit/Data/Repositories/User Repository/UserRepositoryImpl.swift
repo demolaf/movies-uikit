@@ -16,10 +16,16 @@ class UserRepositoryImpl: UserRepository {
 
     func bookmarkItem(movie: Movie) {
         userAPI.bookmarkItem(object: movie)
+        userAPI.bookmarkItem {
+            movie.bookmarked = !movie.bookmarked
+        }
     }
 
     func bookmarkItem(tvShow: TVShow) {
         userAPI.bookmarkItem(object: tvShow)
+        userAPI.bookmarkItem {
+            tvShow.bookmarked = !tvShow.bookmarked
+        }
     }
 
     func getBookmarkedMovies(completion: @escaping ([Movie]) -> Void) {

@@ -38,6 +38,7 @@ class Movie: Object, Codable {
     @Persisted var voteAverage: Double
     @Persisted var voteCount: Int
     @Persisted var createdAt: Date = Date()
+    @Persisted var bookmarked: Bool
 
     enum CodingKeys: String, CodingKey {
         case adult

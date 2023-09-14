@@ -153,17 +153,21 @@ class LibraryTabBarView: UIView {
     func changeSelectedTab(section: LibrarySectionType) {
         switch section {
         case .movies:
-            moviesTabIndicator.backgroundColor = .systemRed
-            tvShowTabIndicator.backgroundColor = .clear
+            UIView.animate(withDuration: 0.2) {
+                self.moviesTabIndicator.backgroundColor = .systemRed
+                self.tvShowTabIndicator.backgroundColor = .clear
 
-            movieSectionLabel.textColor = .systemRed
-            tvShowSectionLabel.textColor = .label
+                self.movieSectionLabel.textColor = .systemRed
+                self.tvShowSectionLabel.textColor = .label
+            }
         case .tvShows:
-            tvShowTabIndicator.backgroundColor = .systemRed
-            moviesTabIndicator.backgroundColor = .clear
+            UIView.animate(withDuration: 0.2) {
+                self.tvShowTabIndicator.backgroundColor = .systemRed
+                self.moviesTabIndicator.backgroundColor = .clear
 
-            tvShowSectionLabel.textColor = .systemRed
-            movieSectionLabel.textColor = .label
+                self.tvShowSectionLabel.textColor = .systemRed
+                self.movieSectionLabel.textColor = .label
+            }
         }
     }
 

@@ -25,8 +25,13 @@ class MockLocalStorage: LocalStorage {
     func readAll<ObjectType>(
         object: ObjectType.Type,
         sortBy: String,
+        predicate: NSPredicate?,
         completion: @escaping ([ObjectType], Error?) -> Void
-    ) where ObjectType: AnyObject {}
+    ) where ObjectType : AnyObject {}
+
+    func updateProperty(
+        callback: @escaping () -> Void
+    ) {}
 }
 
 class MockHTTPClient: HTTPClient {

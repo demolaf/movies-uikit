@@ -23,11 +23,6 @@ class DetailDescriptionView: UIView {
 
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-
-        // swiftlint:disable line_length
-        label.text = "In the heart of a bustling city, where the neon lights flicker like stars against the night sky, a secret garden blooms. Its ivy-covered walls hold whispers of forgotten tales, while the cobblestone path meanders through vibrant beds of flowers in every hue imaginable. The air is filled with the melodic symphony of chirping crickets and distant laughter from a hidden café. Wanderers often stumble upon this oasis, as if drawn by an invisible thread of serenity. Time stands still here, allowing weary souls to find solace amidst the chaos, and for dreams to weave their tapestries under the watchful gaze of the silver moon."
-        // swiftlint:enable line_length
-
         label.textColor = .label
         label.font = .appFont(ofSize: 16, weight: .regular)
         label.numberOfLines = 0

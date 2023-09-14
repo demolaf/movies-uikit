@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import RxSwift
+import RealmSwift
 
 class DetailHeaderView: UIView {
 
+    private var notificationToken: NotificationToken?
     var saveForLaterPressedCallback: (() -> Void)?
 
     private let rootView: UIView = {
@@ -236,6 +239,35 @@ class DetailHeaderView: UIView {
                     quality: "original"
                 ).url
             )
+            debugPrint("Bookmarked \(movie.bookmarked)")
+            updateBookmarkedState(bookmarked: movie.bookmarked)
+            // addObserverOnMovie(movie: movie)
+        }
+    }
+
+    private func addObserverOnMovie(movie: Movie) {
+        notificationToken = movie.observe(keyPaths: ["bookmarked"]) { [weak self] change in
+            switch change {
+            case .error(let error):
+                debugPrint("Object error \(error)")
+            case .change(_, let properties):
+                properties.forEach { change in
+                    debugPrint("change \(change)")
+                }
+                self?.updateBookmarkedState(bookmarked: movie.bookmarked)
+            case .deleted:
+                debugPrint("Object deleted")
+            }
+        }
+    }
+
+    private func updateBookmarkedState(bookmarked: Bool) {
+        if bookmarked {
+            saveForLaterButton.imageView?.image = UIImage(systemName: "checkmark")?.withTintColor(
+                .systemRed, renderingMode: .alwaysOriginal)
+        } else {
+            saveForLaterButton.imageView?.image = UIImage(systemName: "plus")?.withTintColor(
+                .systemRed, renderingMode: .alwaysOriginal)
         }
     }
 

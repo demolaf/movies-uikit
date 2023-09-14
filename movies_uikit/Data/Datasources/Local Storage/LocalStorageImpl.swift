@@ -6,6 +6,7 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
 
 class LocalStorageImpl: LocalStorage {
     let realm: Realm?
@@ -39,6 +40,16 @@ class LocalStorageImpl: LocalStorage {
         }
     }
 
+    func updateProperty(callback: @escaping () -> Void) {
+        do {
+            realm?.beginWrite()
+            callback()
+            try realm?.commitWrite()
+        } catch {
+            debugPrint(error)
+        }
+    }
+
     // swiftlint:disable force_cast
     func read<ObjectType: AnyObject>(
         object: ObjectType.Type,
@@ -60,11 +71,17 @@ class LocalStorageImpl: LocalStorage {
     func readAll<ObjectType: AnyObject>(
         object: ObjectType.Type,
         sortBy: String,
+        predicate: NSPredicate?,
         completion: @escaping ([ObjectType], Error?) -> Void
     ) {
         do {
             try realm?.write {
-                let results = realm?.objects((ObjectType.self as! Object.Type).self)
+                var results = realm?.objects((ObjectType.self as! Object.Type).self)
+
+                if let predicate = predicate {
+                    results = results?.filter(predicate)
+                }
+
                 var convertToObjects = [ObjectType]()
 
                 results?.sorted(byKeyPath: sortBy).forEach({ object in

@@ -17,6 +17,7 @@ protocol DetailPresenter: AnyObject {
     func bookmarkButtonPressed(movie: Movie)
     func bookmarkButtonPressed(tvShow: TVShow)
     func recommendedItemTapped(item: AnyObject)
+    func viewAllButtonTapped(sectionTitle: String, movies: [AnyObject])
 
     func interactorDidFetchRecommendedShows(movies: [Movie])
     func interactorDidFetchRecommendedShows(tvShows: [TVShow])
@@ -66,6 +67,16 @@ class DetailPresenterImpl: DetailPresenter {
                 detailVC.hidesBottomBarWhenPushed = true
                 router?.push(to: detailVC, from: vc)
             }
+        }
+    }
+
+    func viewAllButtonTapped(sectionTitle: String, movies: [AnyObject]) {
+        if let vc = view as? DetailViewController {
+            let reusableTableVC = ReusableTableViewController()
+            reusableTableVC.title = sectionTitle
+            reusableTableVC.hidesBottomBarWhenPushed = true
+            reusableTableVC.items = movies
+            router?.push(to: reusableTableVC, from: vc)
         }
     }
 

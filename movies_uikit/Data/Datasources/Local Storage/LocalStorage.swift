@@ -11,6 +11,8 @@ protocol LocalStorage {
 
     func update(object: AnyObject)
 
+    func updateProperty(callback: @escaping () -> Void)
+
     func read<ObjectType: AnyObject>(
         object: ObjectType.Type,
         completion: @escaping (AnyObject?, Error?) -> Void
@@ -19,6 +21,7 @@ protocol LocalStorage {
     func readAll<ObjectType: AnyObject>(
         object: ObjectType.Type,
         sortBy: String,
+        predicate: NSPredicate?,
         completion: @escaping ([ObjectType], Error?) -> Void
     )
 }
