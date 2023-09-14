@@ -11,7 +11,7 @@
 
 
 ## Preview
-![ezgif com-video-to-gif](https://github.com/demolaf/movies-uikit/assets/48495111/9c5cfa32-ddcd-429c-849f-4f1e0ffc73db)
+https://github.com/demolaf/movies-uikit/assets/48495111/eee18e7c-8e47-405b-a42a-f2e943f07310
 
 ## Running the App
 
