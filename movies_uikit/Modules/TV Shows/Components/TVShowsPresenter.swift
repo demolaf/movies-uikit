@@ -63,7 +63,7 @@ class TVShowsPresenterImpl: TVShowsPresenter {
             let reusableTableVC = ReusableTableViewController()
             reusableTableVC.title = sectionTitle
             reusableTableVC.hidesBottomBarWhenPushed = true
-            reusableTableVC.items = tvShows
+            reusableTableVC.items.accept(tvShows)
             router?.push(to: reusableTableVC, from: vc)
         }
     }

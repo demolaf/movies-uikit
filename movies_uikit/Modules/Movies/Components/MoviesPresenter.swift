@@ -63,7 +63,7 @@ class MoviesPresenterImpl: MoviesPresenter {
             let reusableTableVC = ReusableTableViewController()
             reusableTableVC.title = sectionTitle
             reusableTableVC.hidesBottomBarWhenPushed = true
-            reusableTableVC.items = movies
+            reusableTableVC.items.accept(movies)
             router?.push(to: reusableTableVC, from: vc)
         }
     }

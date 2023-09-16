@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ReusableTableViewController: UIViewController {
 
-    var items = [AnyObject]()
+    var items = BehaviorRelay<[AnyObject]>(value: [])
+
+    private var bag = DisposeBag()
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -27,10 +31,10 @@ class ReusableTableViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
-        tableView.delegate = self
-        tableView.dataSource = self
 
         self.view.addSubview(tableView)
+
+        bindTableData()
     }
 
     override func viewDidLayoutSubviews() {
@@ -38,56 +42,48 @@ class ReusableTableViewController: UIViewController {
 
         tableView.frame = self.view.bounds
     }
+
+    private func bindTableData() {
+        // Bind items to table
+        items.bind(
+            to: tableView.rx.items(
+                cellIdentifier: ReusableTableViewCell.reuseId,
+                cellType: ReusableTableViewCell.self)
+        ) { _, model, cell in
+            cell.selectionStyle = .none
+            if let item = model as? Movie {
+                cell.configureViewData(movie: item)
+            }
+
+            if let item = model as? TVShow {
+                cell.configureViewData(tv: item)
+            }
+        }.disposed(by: bag)
+
+        // Bind a model selected handler
+        tableView.rx.modelSelected(AnyObject.self).bind { model in
+            let item = model
+
+            let detailVC = Routes.detail.vc as? DetailViewController
+            if let detailVC = detailVC {
+                if let item = item as? Movie {
+                    detailVC.initializeViewData(movie: item, tvShow: nil)
+                }
+                if let item = item as? TVShow {
+                    detailVC.initializeViewData(movie: nil, tvShow: item)
+                }
+                detailVC.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(detailVC, animated: true)
+            }
+        }.disposed(by: bag)
+
+        tableView
+            .rx.setDelegate(self)
+            .disposed(by: bag)
+    }
 }
 
-extension ReusableTableViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        return items.count
-    }
-
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ReusableTableViewCell.reuseId,
-            for: indexPath
-        ) as? ReusableTableViewCell else {
-            return UITableViewCell()
-        }
-
-        cell.selectionStyle = .none
-
-        if let item = items[indexPath.row] as? Movie {
-            cell.configureViewData(movie: item)
-        }
-
-        if let item = items[indexPath.row] as? TVShow {
-            cell.configureViewData(tv: item)
-        }
-
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = items[indexPath.row]
-
-        let detailVC = Routes.detail.vc as? DetailViewController
-        if let detailVC = detailVC {
-            if let item = item as? Movie {
-                detailVC.initializeViewData(movie: item, tvShow: nil)
-            }
-            if let item = item as? TVShow {
-                detailVC.initializeViewData(movie: nil, tvShow: item)
-            }
-            detailVC.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(detailVC, animated: true)
-        }
-    }
-
+extension ReusableTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 215
     }

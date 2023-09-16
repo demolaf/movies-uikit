@@ -97,11 +97,11 @@ class LibraryViewController: UIViewController, LibraryView {
     }
 
     func update(movies: [Movie]) {
-        viewControllers[0].items = movies
+        viewControllers[0].items.accept(movies)
     }
 
     func update(tvShows: [TVShow]) {
-        viewControllers[1].items = tvShows
+        viewControllers[1].items.accept(tvShows)
     }
 }
 
