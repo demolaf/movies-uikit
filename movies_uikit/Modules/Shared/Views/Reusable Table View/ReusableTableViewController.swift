@@ -49,21 +49,19 @@ class ReusableTableViewController: UIViewController {
             to: tableView.rx.items(
                 cellIdentifier: ReusableTableViewCell.reuseId,
                 cellType: ReusableTableViewCell.self)
-        ) { _, model, cell in
+        ) { _, item, cell in
             cell.selectionStyle = .none
-            if let item = model as? Movie {
+            if let item = item as? Movie {
                 cell.configureViewData(movie: item)
             }
 
-            if let item = model as? TVShow {
+            if let item = item as? TVShow {
                 cell.configureViewData(tv: item)
             }
         }.disposed(by: bag)
 
         // Bind a model selected handler
-        tableView.rx.modelSelected(AnyObject.self).bind { model in
-            let item = model
-
+        tableView.rx.modelSelected(AnyObject.self).bind { item in
             let detailVC = Routes.detail.vc as? DetailViewController
             if let detailVC = detailVC {
                 if let item = item as? Movie {
