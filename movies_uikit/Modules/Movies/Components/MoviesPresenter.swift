@@ -7,10 +7,14 @@
 
 import Foundation
 
+// Presenter usually uses two protocols:
+// 1. for actions from the view
+// 2. for actions from the interactor
 protocol MoviesPresenter: AnyObject {
     var view: MoviesView? { get set }
     var interactor: MoviesInteractor? { get set }
     var router: MoviesRouter? { get set }
+    var group: DispatchGroup? { get set }
 
     func initialize()
     func interactorDidFetchPopularMovies(with movies: [Movie])
@@ -26,31 +30,46 @@ class MoviesPresenterImpl: MoviesPresenter {
     var interactor: MoviesInteractor?
     var view: MoviesView?
 
+    var group: DispatchGroup?
+
+    var popular: [Movie] = []
+    var new: [Movie] = []
+    var upcoming: [Movie] = []
+
     func initialize() {
+        group = DispatchGroup()
+        group?.enter()
+        group?.enter()
+        group?.enter()
+
         interactor?.getPopularMovies()
         interactor?.getNewMovies()
         interactor?.getUpcomingMovies()
     }
 
     func interactorDidFetchPopularMovies(with movies: [Movie]) {
-        view?.update(popularMovies: movies)
+        popular = movies
     }
 
     func interactorDidFetchNewMovies(with movies: [Movie]) {
-        view?.update(newMovies: movies)
+        new = movies
     }
 
     func interactorDidFetchUpcomingMovies(with movies: [Movie]) {
-        view?.update(upcomingMovies: movies)
+        upcoming = movies
+
+        group?.notify(queue: .main) { [self] in
+            view?.update(
+                popularMovies: popular,
+                newMovies: new,
+                upcomingMovies: upcoming
+            )
+        }
     }
 
     func movieItemTapped(movie: Movie?) {
-        let vc = self.view as? MoviesViewController
-
-        if let vc = vc {
-            let detailVC = Routes.detail.vc as? DetailViewController
-
-            if let detailVC = detailVC {
+        if let vc = self.view as? MoviesViewController {
+            if let detailVC = Routes.detail.vc as? DetailViewController {
                 detailVC.initializeViewData(movie: movie, tvShow: nil)
                 detailVC.hidesBottomBarWhenPushed = true
                 self.router?.push(to: detailVC, from: vc)
@@ -58,8 +77,11 @@ class MoviesPresenterImpl: MoviesPresenter {
         }
     }
 
-    func viewAllButtonTapped(sectionTitle: String, movies: [Movie]) {
-        if let vc = view as? MoviesViewController {
+    func viewAllButtonTapped(
+        sectionTitle: String,
+        movies: [Movie]
+    ) {
+        if let vc = self.view as? MoviesViewController {
             let reusableTableVC = ReusableTableViewController()
             reusableTableVC.title = sectionTitle
             reusableTableVC.hidesBottomBarWhenPushed = true

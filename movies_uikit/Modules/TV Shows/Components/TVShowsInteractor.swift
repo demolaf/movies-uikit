@@ -24,6 +24,9 @@ class TVShowsInteractorImpl: TVShowsInteractor {
         moviesRepository?.getTVShows(
             categoryType: "popular"
         ) { [weak self] tvShows in
+            defer {
+                self?.presenter?.group?.leave()
+            }
             self?.presenter?.interactorDidFetchPopularTVShows(with: tvShows)
         }
     }
@@ -32,6 +35,9 @@ class TVShowsInteractorImpl: TVShowsInteractor {
         moviesRepository?.getTVShows(
             categoryType: "top_rated"
         ) { [weak self] tvShows in
+            defer {
+                self?.presenter?.group?.leave()
+            }
             self?.presenter?.interactorDidFetchTopRatedTVShows(with: tvShows)
         }
     }
@@ -40,6 +46,9 @@ class TVShowsInteractorImpl: TVShowsInteractor {
         moviesRepository?.getTVShows(
             categoryType: "on_the_air"
         ) { [weak self] tvShows in
+            defer {
+                self?.presenter?.group?.leave()
+            }
             self?.presenter?.interactorDidFetchOnTheAirTVShows(with: tvShows)
         }
     }

@@ -71,8 +71,9 @@ class LibraryViewController: UIViewController, LibraryView {
         return view
     }()
 
-    private let tabBarView: LibraryTabBarView = {
+    private lazy var tabBarView: LibraryTabBarView = {
         let tabBar = LibraryTabBarView()
+        tabBar.delegate = self
         tabBar.translatesAutoresizingMaskIntoConstraints = false
         return tabBar
     }()
@@ -86,7 +87,6 @@ class LibraryViewController: UIViewController, LibraryView {
         initializeViewAppearance()
         initializePageController()
         initializeSubviews()
-        initializeTabBarItemTap()
 
         presenter?.initialize()
     }
@@ -127,16 +127,6 @@ extension LibraryViewController {
 
         libraryPageVC.didMove(toParent: self)
         view.gestureRecognizers = libraryPageVC.gestureRecognizers
-    }
-
-    private func initializeTabBarItemTap() {
-        tabBarView.movieTabBarPressedCallback = {
-            self.jumpToTab(section: LibrarySectionType.movies)
-        }
-
-        tabBarView.tvTabBarPressedCallback = {
-            self.jumpToTab(section: LibrarySectionType.tvShows)
-        }
     }
 
     private func applyConstraints() {
@@ -234,5 +224,15 @@ extension LibraryViewController: UIPageViewControllerDelegate, UIPageViewControl
         }
 
         return viewControllers[nextIndex]
+    }
+}
+
+extension LibraryViewController: LibraryTabBarViewDelegate {
+    func didTapMovieTabBar() {
+        self.jumpToTab(section: LibrarySectionType.movies)
+    }
+
+    func didTapTVTabBar() {
+        self.jumpToTab(section: LibrarySectionType.tvShows)
     }
 }

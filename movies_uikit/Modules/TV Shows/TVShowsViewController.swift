@@ -10,9 +10,7 @@ import UIKit
 protocol TVShowsView: AnyObject {
     var presenter: TVShowsPresenter? { get set }
 
-    func update(popularTVShows: [TVShow])
-    func update(topRatedTVShows: [TVShow])
-    func update(onTheAirTVShows: [TVShow])
+    func update(popularTVShows: [TVShow], topRatedTVShows: [TVShow], onTheAirTVShows: [TVShow])
 }
 
 enum TVSectionType {
@@ -93,17 +91,9 @@ class TVShowsViewController: UIViewController, TVShowsView {
         collectionView.dataSource = self
     }
 
-    func update(popularTVShows: [TVShow]) {
+    func update(popularTVShows: [TVShow], topRatedTVShows: [TVShow], onTheAirTVShows: [TVShow]) {
         sections.append(.popular(tvShows: popularTVShows))
-        collectionView.reloadData()
-    }
-
-    func update(topRatedTVShows: [TVShow]) {
         sections.append(.topRated(tvShows: topRatedTVShows))
-        collectionView.reloadData()
-    }
-
-    func update(onTheAirTVShows: [TVShow]) {
         sections.append(.onTheAir(tvShows: onTheAirTVShows))
         collectionView.reloadData()
     }

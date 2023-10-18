@@ -7,11 +7,14 @@
 
 import UIKit
 
+protocol LibraryTabBarViewDelegate: AnyObject {
+    func didTapMovieTabBar()
+    func didTapTVTabBar()
+}
+
 class LibraryTabBarView: UIView {
 
-    var movieTabBarPressedCallback: (() -> Void)?
-
-    var tvTabBarPressedCallback: (() -> Void)?
+    weak var delegate: LibraryTabBarViewDelegate?
 
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -189,11 +192,11 @@ class LibraryTabBarView: UIView {
 
     @objc
     private func movieTabBarPressed() {
-        movieTabBarPressedCallback?()
+        delegate?.didTapMovieTabBar()
     }
 
     @objc
     private func tvTabBarPressed() {
-        tvTabBarPressedCallback?()
+        delegate?.didTapTVTabBar()
     }
 }

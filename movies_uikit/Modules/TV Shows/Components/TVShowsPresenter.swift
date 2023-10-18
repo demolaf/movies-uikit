@@ -11,6 +11,7 @@ protocol TVShowsPresenter: AnyObject {
     var view: TVShowsView? { get set }
     var interactor: TVShowsInteractor? { get set }
     var router: TVShowsRouter? { get set }
+    var group: DispatchGroup? { get set }
 
     func initialize()
     func interactorDidFetchPopularTVShows(with tvShows: [TVShow])
@@ -25,23 +26,41 @@ class TVShowsPresenterImpl: TVShowsPresenter {
     var router: TVShowsRouter?
     var interactor: TVShowsInteractor?
     var view: TVShowsView?
+    var group: DispatchGroup?
+
+    var popular: [TVShow] = []
+    var topRated: [TVShow] = []
+    var onTheAir: [TVShow] = []
 
     func initialize() {
+        group = DispatchGroup()
+        group?.enter()
+        group?.enter()
+        group?.enter()
+
         interactor?.getPopularTVShows()
         interactor?.getTopRatedTVShows()
         interactor?.getOnTheAirTVShows()
     }
 
     func interactorDidFetchPopularTVShows(with tvShows: [TVShow]) {
-        view?.update(popularTVShows: tvShows)
+        popular = tvShows
     }
 
     func interactorDidFetchTopRatedTVShows(with tvShows: [TVShow]) {
-        view?.update(topRatedTVShows: tvShows)
+        topRated = tvShows
     }
 
     func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow]) {
-        view?.update(onTheAirTVShows: tvShows)
+        onTheAir = tvShows
+
+        group?.notify(queue: .main) { [self] in
+            view?.update(
+                popularTVShows: popular,
+                topRatedTVShows: topRated,
+                onTheAirTVShows: onTheAir
+            )
+        }
     }
 
     func tvShowItemTapped(tvShow: TVShow?) {

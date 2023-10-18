@@ -24,6 +24,9 @@ class MoviesInteractorImpl: MoviesInteractor {
         moviesRepository?.getMovies(
             categoryType: "popular"
         ) { [weak self] movies in
+            defer {
+                self?.presenter?.group?.leave()
+            }
             self?.presenter?.interactorDidFetchPopularMovies(with: movies)
         }
     }
@@ -32,6 +35,9 @@ class MoviesInteractorImpl: MoviesInteractor {
         moviesRepository?.getMovies(
             categoryType: "now_playing"
         ) { [weak self] movies in
+            defer {
+                self?.presenter?.group?.leave()
+            }
             self?.presenter?.interactorDidFetchNewMovies(with: movies)
         }
     }
@@ -40,6 +46,9 @@ class MoviesInteractorImpl: MoviesInteractor {
         moviesRepository?.getMovies(
             categoryType: "upcoming"
         ) { [weak self] movies in
+            defer {
+                self?.presenter?.group?.leave()
+            }
             self?.presenter?.interactorDidFetchUpcomingMovies(with: movies)
         }
     }

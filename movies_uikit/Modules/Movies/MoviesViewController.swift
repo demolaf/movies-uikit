@@ -17,9 +17,7 @@ enum MoviesSectionType {
 protocol MoviesView: AnyObject {
     var presenter: MoviesPresenter? { get set }
 
-    func update(popularMovies: [Movie])
-    func update(newMovies: [Movie])
-    func update(upcomingMovies: [Movie])
+    func update(popularMovies: [Movie], newMovies: [Movie], upcomingMovies: [Movie])
 }
 
 class MoviesViewController: UIViewController, MoviesView {
@@ -107,17 +105,9 @@ class MoviesViewController: UIViewController, MoviesView {
         collectionView.dataSource = self
     }
 
-    func update(popularMovies: [Movie]) {
+    func update(popularMovies: [Movie], newMovies: [Movie], upcomingMovies: [Movie]) {
         sections.append(.popular(movies: popularMovies))
-        collectionView.reloadData()
-    }
-
-    func update(newMovies: [Movie]) {
         sections.append(.new(movies: newMovies))
-        collectionView.reloadData()
-    }
-
-    func update(upcomingMovies: [Movie]) {
         sections.append(.upcoming(movies: upcomingMovies))
         collectionView.reloadData()
     }
@@ -231,7 +221,10 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         let section = sections[indexPath.section]
 
         switch section {
