@@ -34,9 +34,6 @@ class TVShowsPresenterImpl: TVShowsPresenter {
 
     func initialize() {
         group = DispatchGroup()
-        group?.enter()
-        group?.enter()
-        group?.enter()
 
         interactor?.getPopularTVShows()
         interactor?.getTopRatedTVShows()

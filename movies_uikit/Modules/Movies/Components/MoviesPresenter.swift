@@ -38,9 +38,6 @@ class MoviesPresenterImpl: MoviesPresenter {
 
     func initialize() {
         group = DispatchGroup()
-        group?.enter()
-        group?.enter()
-        group?.enter()
 
         interactor?.getPopularMovies()
         interactor?.getNewMovies()

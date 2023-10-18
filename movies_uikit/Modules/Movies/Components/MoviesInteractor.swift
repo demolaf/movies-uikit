@@ -21,6 +21,7 @@ class MoviesInteractorImpl: MoviesInteractor {
     var moviesRepository: MoviesRepository?
 
     func getPopularMovies() {
+        presenter?.group?.enter()
         moviesRepository?.getMovies(
             categoryType: "popular"
         ) { [weak self] movies in
@@ -32,6 +33,7 @@ class MoviesInteractorImpl: MoviesInteractor {
     }
 
     func getNewMovies() {
+        presenter?.group?.enter()
         moviesRepository?.getMovies(
             categoryType: "now_playing"
         ) { [weak self] movies in
@@ -43,6 +45,7 @@ class MoviesInteractorImpl: MoviesInteractor {
     }
 
     func getUpcomingMovies() {
+        presenter?.group?.enter()
         moviesRepository?.getMovies(
             categoryType: "upcoming"
         ) { [weak self] movies in

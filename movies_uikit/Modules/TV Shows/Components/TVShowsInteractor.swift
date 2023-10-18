@@ -21,6 +21,7 @@ class TVShowsInteractorImpl: TVShowsInteractor {
     var moviesRepository: MoviesRepository?
 
     func getPopularTVShows() {
+        presenter?.group?.enter()
         moviesRepository?.getTVShows(
             categoryType: "popular"
         ) { [weak self] tvShows in
@@ -32,6 +33,7 @@ class TVShowsInteractorImpl: TVShowsInteractor {
     }
 
     func getTopRatedTVShows() {
+        presenter?.group?.enter()
         moviesRepository?.getTVShows(
             categoryType: "top_rated"
         ) { [weak self] tvShows in
@@ -43,6 +45,7 @@ class TVShowsInteractorImpl: TVShowsInteractor {
     }
 
     func getOnTheAirTVShows() {
+        presenter?.group?.enter()
         moviesRepository?.getTVShows(
             categoryType: "on_the_air"
         ) { [weak self] tvShows in
