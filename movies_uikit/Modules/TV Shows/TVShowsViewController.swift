@@ -55,6 +55,13 @@ class TVShowsViewController: UIViewController, TVShowsView {
         return collectionView
     }()
 
+    private let loadingIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+
     // MARK: Properties
 
     var presenter: TVShowsPresenter?
@@ -84,18 +91,23 @@ class TVShowsViewController: UIViewController, TVShowsView {
         // NOTE: Must be the first view added to parent
         // subviews to enable title to scroll on collection view scrolled
         view.addSubview(collectionView)
+        view.addSubview(loadingIndicator)
     }
 
     private func setupCollectionViews() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isHidden = true
     }
 
     func update(popularTVShows: [TVShow], topRatedTVShows: [TVShow], onTheAirTVShows: [TVShow]) {
         sections.append(.popular(tvShows: popularTVShows))
         sections.append(.topRated(tvShows: topRatedTVShows))
         sections.append(.onTheAir(tvShows: onTheAirTVShows))
+
+        loadingIndicator.stopAnimating()
         collectionView.reloadData()
+        collectionView.isHidden = false
     }
 
     @objc
@@ -114,6 +126,8 @@ extension TVShowsViewController {
     }
 
     private func applyConstraints() {
+        loadingIndicator.center = view.center
+
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.topAnchor,

@@ -44,8 +44,9 @@ class LibraryViewController: UIViewController, LibraryView {
 
     private lazy var viewControllers: [ReusableTableViewController] = {
         var viewControllers: [ReusableTableViewController] = []
-        sections.forEach { _ in
+        sections.forEach { section in
             let vc = ReusableTableViewController()
+            vc.title = section.stringValue
             viewControllers.append(vc)
         }
         return viewControllers
@@ -154,19 +155,6 @@ extension LibraryViewController {
 }
 
 extension LibraryViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-
-    func jumpToTab(section: LibrarySectionType) {
-
-        self.tabBarView.changeSelectedTab(section: section)
-
-        switch section {
-        case .movies:
-            libraryPageVC.setViewControllers([viewControllers[0]], direction: .reverse, animated: true)
-        case .tvShows:
-            libraryPageVC.setViewControllers([viewControllers[1]], direction: .forward, animated: true)
-        }
-    }
-
     func pageViewController(
         _ pageViewController: UIPageViewController,
         didFinishAnimating finished: Bool,
@@ -234,5 +222,17 @@ extension LibraryViewController: LibraryTabBarViewDelegate {
 
     func didTapTVTabBar() {
         self.jumpToTab(section: LibrarySectionType.tvShows)
+    }
+
+    func jumpToTab(section: LibrarySectionType) {
+
+        self.tabBarView.changeSelectedTab(section: section)
+
+        switch section {
+        case .movies:
+            libraryPageVC.setViewControllers([viewControllers[0]], direction: .reverse, animated: true)
+        case .tvShows:
+            libraryPageVC.setViewControllers([viewControllers[1]], direction: .forward, animated: true)
+        }
     }
 }

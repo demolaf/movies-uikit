@@ -44,6 +44,15 @@ class ReusableTableViewController: UIViewController {
     }
 
     private func bindTableData() {
+        if items.value.isEmpty {
+            tableView.setEmptyView(
+                title: "No bookmarked \(title?.lowercased() ?? "shows") yet",
+                message: "Bookmark your favorite \(title?.lowercased() ?? "shows") and they'll show up here"
+            )
+        } else {
+            tableView.restore()
+        }
+
         // Bind items to table
         items.bind(
             to: tableView.rx.items(
