@@ -7,10 +7,12 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 protocol UserRepository {
-    func bookmarkItem(movie: Movie)
-    func bookmarkItem(tvShow: TVShow)
-    func getBookmarkedMovies(completion: @escaping ([Movie]) -> Void)
-    func getBookmarkedTVShows(completion: @escaping ([TVShow]) -> Void)
+    func bookmarkItem(movie: MovieDTO)
+    func bookmarkItem(tvShow: TVShowDTO)
+    func getBookmarkedMovies() -> BehaviorRelay<[MovieDTO]>
+    func getBookmarkedTVShows() -> BehaviorRelay<[TVShowDTO]>
 }

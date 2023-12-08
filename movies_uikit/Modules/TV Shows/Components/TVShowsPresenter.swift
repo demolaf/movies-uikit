@@ -14,12 +14,15 @@ protocol TVShowsPresenter: AnyObject {
     var group: DispatchGroup? { get set }
 
     func initialize()
-    func interactorDidFetchPopularTVShows(with tvShows: [TVShow])
-    func interactorDidFetchTopRatedTVShows(with tvShows: [TVShow])
-    func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow])
+    func interactorDidFetchPopularTVShows(with tvShows: [Show])
+    func interactorDidFetchTopRatedTVShows(with tvShows: [Show])
+    func interactorDidFetchOnTheAirTVShows(with tvShows: [Show])
+    func interactorDidFetchSearchResults(with tvShows: [Show])
 
-    func tvShowItemTapped(tvShow: TVShow?)
-    func viewAllButtonTapped(sectionTitle: String, tvShows: [TVShow])
+    func tvShowItemTapped(item: Show)
+    func viewAllButtonTapped(sectionTitle: String, items: [Show])
+
+    func searchForTVShow(with query: String)
 }
 
 class TVShowsPresenterImpl: TVShowsPresenter {
@@ -28,9 +31,9 @@ class TVShowsPresenterImpl: TVShowsPresenter {
     var view: TVShowsView?
     var group: DispatchGroup?
 
-    var popular: [TVShow] = []
-    var topRated: [TVShow] = []
-    var onTheAir: [TVShow] = []
+    var popular: [Show] = []
+    var topRated: [Show] = []
+    var onTheAir: [Show] = []
 
     func initialize() {
         group = DispatchGroup()
@@ -40,15 +43,15 @@ class TVShowsPresenterImpl: TVShowsPresenter {
         interactor?.getOnTheAirTVShows()
     }
 
-    func interactorDidFetchPopularTVShows(with tvShows: [TVShow]) {
+    func interactorDidFetchPopularTVShows(with tvShows: [Show]) {
         popular = tvShows
     }
 
-    func interactorDidFetchTopRatedTVShows(with tvShows: [TVShow]) {
+    func interactorDidFetchTopRatedTVShows(with tvShows: [Show]) {
         topRated = tvShows
     }
 
-    func interactorDidFetchOnTheAirTVShows(with tvShows: [TVShow]) {
+    func interactorDidFetchOnTheAirTVShows(with tvShows: [Show]) {
         onTheAir = tvShows
 
         group?.notify(queue: .main) { [self] in
@@ -60,27 +63,22 @@ class TVShowsPresenterImpl: TVShowsPresenter {
         }
     }
 
-    func tvShowItemTapped(tvShow: TVShow?) {
-        let vc = self.view as? TVShowsViewController
-
-        if let vc = vc {
-            let detailVC = Routes.detail.vc as? DetailViewController
-
-            if let detailVC = detailVC {
-                detailVC.initializeViewData(movie: nil, tvShow: tvShow)
-                detailVC.hidesBottomBarWhenPushed = true
-                self.router?.push(to: detailVC, from: vc)
-            }
-        }
+    func tvShowItemTapped(item: Show) {
+        router?.navigateToDetailVC(item: item)
     }
 
-    func viewAllButtonTapped(sectionTitle: String, tvShows: [TVShow]) {
-        if let vc = view as? TVShowsViewController {
-            let reusableTableVC = ReusableTableViewController()
-            reusableTableVC.title = sectionTitle
-            reusableTableVC.hidesBottomBarWhenPushed = true
-            reusableTableVC.items.accept(tvShows)
-            router?.push(to: reusableTableVC, from: vc)
-        }
+    func viewAllButtonTapped(
+        sectionTitle: String,
+        items: [Show]
+    ) {
+        router?.navigateToReusableTableVC(sectionTitle: sectionTitle, items: items)
+    }
+
+    func searchForTVShow(with query: String) {
+        interactor?.searchForTVShow(with: query)
+    }
+
+    func interactorDidFetchSearchResults(with tvShows: [Show]) {
+        view?.searchResults.onNext(tvShows)
     }
 }

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol LibraryPresenter: AnyObject {
     var view: LibraryView? { get set }
@@ -13,8 +15,8 @@ protocol LibraryPresenter: AnyObject {
     var router: LibraryRouter? { get set }
 
     func initialize()
-    func interactorDidFetchBookmarkedMovies(with movies: [Movie])
-    func interactorDidFetchBookmarkedTVShows(with tvShows: [TVShow])
+    func interactorDidFetchBookmarkedMovies(with movies: BehaviorRelay<[Show]>)
+    func interactorDidFetchBookmarkedTVShows(with tvShows: BehaviorRelay<[Show]>)
 }
 
 class LibraryPresenterImpl: LibraryPresenter {
@@ -27,11 +29,11 @@ class LibraryPresenterImpl: LibraryPresenter {
         interactor?.getBookmarkedTVShows()
     }
 
-    func interactorDidFetchBookmarkedMovies(with movies: [Movie]) {
+    func interactorDidFetchBookmarkedMovies(with movies: BehaviorRelay<[Show]>) {
         view?.update(movies: movies)
     }
 
-    func interactorDidFetchBookmarkedTVShows(with tvShows: [TVShow]) {
+    func interactorDidFetchBookmarkedTVShows(with tvShows: BehaviorRelay<[Show]>) {
         view?.update(tvShows: tvShows)
     }
 }

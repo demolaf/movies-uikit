@@ -6,17 +6,21 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 protocol TVShowsView: AnyObject {
     var presenter: TVShowsPresenter? { get set }
+    // this is a computed property?
+    var searchResults: BehaviorSubject<[Show]> { get }
 
-    func update(popularTVShows: [TVShow], topRatedTVShows: [TVShow], onTheAirTVShows: [TVShow])
+    func update(popularTVShows: [Show], topRatedTVShows: [Show], onTheAirTVShows: [Show])
 }
 
 enum TVSectionType {
-    case popular(tvShows: [TVShow])
-    case topRated(tvShows: [TVShow])
-    case onTheAir(tvShows: [TVShow])
+    case popular(tvShows: [Show])
+    case topRated(tvShows: [Show])
+    case onTheAir(tvShows: [Show])
 }
 
 class TVShowsViewController: UIViewController, TVShowsView {
@@ -26,6 +30,17 @@ class TVShowsViewController: UIViewController, TVShowsView {
     private let leadingBarButtonItems: [UIBarButtonItem] = {
         let barButtonItem = TVShowsBarButtonItem()
         return [barButtonItem]
+    }()
+
+    private lazy var searchBar: UISearchController = {
+        let resuableTableVC = ReusableTableViewController()
+        resuableTableVC.delegate = self
+        let searchBar = UISearchController(
+            searchResultsController: resuableTableVC
+        )
+        searchBar.searchBar.placeholder = "Search for a tv show by title"
+        searchBar.searchBar.searchBarStyle = .minimal
+        return searchBar
     }()
 
     lazy var collectionView: UICollectionView = {
@@ -66,7 +81,11 @@ class TVShowsViewController: UIViewController, TVShowsView {
 
     var presenter: TVShowsPresenter?
 
-    private var sections = [TVSectionType]()
+    var sections: [TVSectionType] = []
+
+    let searchResults = BehaviorSubject<[Show]>(value: [])
+
+    let disposeBag = DisposeBag()
 
     // MARK: Initialization
 
@@ -92,6 +111,7 @@ class TVShowsViewController: UIViewController, TVShowsView {
         // subviews to enable title to scroll on collection view scrolled
         view.addSubview(collectionView)
         view.addSubview(loadingIndicator)
+        searchBar.searchResultsUpdater = self
     }
 
     private func setupCollectionViews() {
@@ -100,7 +120,11 @@ class TVShowsViewController: UIViewController, TVShowsView {
         collectionView.isHidden = true
     }
 
-    func update(popularTVShows: [TVShow], topRatedTVShows: [TVShow], onTheAirTVShows: [TVShow]) {
+    func update(
+        popularTVShows: [Show],
+        topRatedTVShows: [Show],
+        onTheAirTVShows: [Show]
+    ) {
         sections.append(.popular(tvShows: popularTVShows))
         sections.append(.topRated(tvShows: topRatedTVShows))
         sections.append(.onTheAir(tvShows: onTheAirTVShows))
@@ -123,6 +147,12 @@ extension TVShowsViewController {
         //
         view.backgroundColor = .systemBackground
         navigationItem.setLeftBarButtonItems(leadingBarButtonItems, animated: true)
+        navigationItem.searchController = searchBar
+        if #available(iOS 16.0, *) {
+            navigationItem.preferredSearchBarPlacement = .inline
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
     private func applyConstraints() {
@@ -147,189 +177,23 @@ extension TVShowsViewController {
     }
 }
 
-// MARK: - UICollectionView Delegate & DataSource
+extension TVShowsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
 
-extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+        presenter?.searchForTVShow(with: text)
 
-    func numberOfSections(
-        in collectionView: UICollectionView
-    ) -> Int {
-        return sections.count
+        let vc = searchController.searchResultsController as? ReusableTableViewController
+        searchResults.subscribe(onNext: { tvShows in
+            vc?.items.accept(tvShows)
+        }).disposed(by: disposeBag)
     }
+}
 
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        let section = sections[section]
-        switch section {
-        case .popular(let tvShows):
-            return tvShows.count
-        case .topRated(let tvShows):
-            return tvShows.count > 5 ? 5 : tvShows.count
-        case .onTheAir(let tvShows):
-            return tvShows.count > 5 ? 5 : tvShows.count
-        }
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt
-        indexPath: IndexPath
-    ) -> UICollectionViewCell {
-
-        let type = self.sections[indexPath.section]
-
-        switch type {
-        case .popular(let tvShows):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: CarouselItemCollectionViewCell.reuseId,
-                for: indexPath
-            ) as? CarouselItemCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-
-            let tvShow = tvShows[indexPath.row]
-            cell.configureViewData(tv: tvShow)
-            return cell
-        case .topRated(let tvShows):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: SubSectionItemCollectionViewCell.reuseId,
-                for: indexPath
-            ) as? SubSectionItemCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-
-            let tvShow = tvShows[indexPath.row]
-            cell.configureViewData(tv: tvShow)
-            return cell
-        case .onTheAir(let tvShows):
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: SubSectionItemCollectionViewCell.reuseId,
-                for: indexPath
-            ) as? SubSectionItemCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-
-            let tvShow = tvShows[indexPath.row]
-            cell.configureViewData(tv: tvShow)
-            return cell
-        }
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let section = sections[indexPath.section]
-
-        switch section {
-        case .popular(tvShows: let tvShows):
-            self.presenter?.tvShowItemTapped(tvShow: tvShows[indexPath.row])
-        case .topRated(tvShows: let tvShows):
-            self.presenter?.tvShowItemTapped(tvShow: tvShows[indexPath.row])
-        case .onTheAir(tvShows: let tvShows):
-            self.presenter?.tvShowItemTapped(tvShow: tvShows[indexPath.row])
-        }
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        at indexPath: IndexPath
-    ) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: HeaderCollectionResuableView.reuseId,
-            for: indexPath
-        ) as? HeaderCollectionResuableView else {
-            return UICollectionReusableView()
-        }
-
-        let section = sections[indexPath.section]
-
-        switch section {
-        case .popular: break
-        case .topRated(let tvShows):
-            headerView.configureHeaderLeadingText(leadingText: "Top Rated")
-            headerView.viewAllButtonPressedCallback = {
-                self.presenter?.viewAllButtonTapped(
-                    sectionTitle: "Top Rated",
-                    tvShows: tvShows
-                )
-            }
-        case .onTheAir(let tvShows):
-            headerView.configureHeaderLeadingText(leadingText: "On The Air")
-            headerView.viewAllButtonPressedCallback = {
-                self.presenter?.viewAllButtonTapped(
-                    sectionTitle: "On The Air",
-                    tvShows: tvShows
-                )
-            }
-        }
-
-        return headerView
-    }
-
-    func createSectionLayout(
-        section: Int
-    ) -> NSCollectionLayoutSection {
-
-        let type = sections[section]
-
-        switch type {
-        case .popular:
-            // Item
-            let item = NSCollectionLayoutItem(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .absolute(320),
-                    heightDimension: .absolute(250)
-                )
-            )
-
-            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 24)
-
-            let group = NSCollectionLayoutGroup.horizontal(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .absolute(320),
-                    heightDimension: .absolute(275)
-                ),
-                subitems: [item]
-            )
-
-            // Section
-            let section = NSCollectionLayoutSection(group: group)
-            section.orthogonalScrollingBehavior = .continuous
-            return section
-        case .topRated, .onTheAir:
-            // Item
-            let item = NSCollectionLayoutItem(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .absolute(150),
-                    heightDimension: .absolute(225)
-                )
-            )
-
-            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 24)
-            let group = NSCollectionLayoutGroup.horizontal(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .absolute(150),
-                    heightDimension: .absolute(275)
-                ),
-                subitems: [item]
-            )
-
-            // Section
-            let section = NSCollectionLayoutSection(group: group)
-
-            let footerHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                          heightDimension: .absolute(50.0))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: footerHeaderSize,
-                elementKind: UICollectionView.elementKindSectionHeader,
-                alignment: .top)
-
-            section.boundarySupplementaryItems = [header]
-
-            section.orthogonalScrollingBehavior = .continuous
-            return section
-        }
+extension TVShowsViewController: ReusableTableViewControllerDelegate {
+    func didTapItem(item: Show) {
+        presenter?.tvShowItemTapped(item: item)
     }
 }

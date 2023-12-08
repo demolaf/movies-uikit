@@ -66,10 +66,6 @@ class HeaderCollectionResuableView: UICollectionReusableView {
         applyConstraints()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-
     // MARK: Private Methods
 
     private func initializeSubViews() {

@@ -5,6 +5,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol LocalStorage {
     func create(object: AnyObject)
@@ -24,4 +26,10 @@ protocol LocalStorage {
         predicate: NSPredicate?,
         completion: @escaping ([ObjectType], Error?) -> Void
     )
+
+    func readAllWithChanges<ObjectType: AnyObject>(
+        object: ObjectType.Type,
+        sortBy: String,
+        predicate: NSPredicate?
+    ) -> BehaviorRelay<[ObjectType]>
 }

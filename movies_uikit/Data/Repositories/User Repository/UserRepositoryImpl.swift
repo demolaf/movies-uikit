@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class UserRepositoryImpl: UserRepository {
     let userAPI: UserAPI
@@ -14,29 +16,25 @@ class UserRepositoryImpl: UserRepository {
         self.userAPI = userAPI
     }
 
-    func bookmarkItem(movie: Movie) {
+    func bookmarkItem(movie: MovieDTO) {
         userAPI.bookmarkItem(object: movie)
         userAPI.bookmarkItem {
             movie.bookmarked = !movie.bookmarked
         }
     }
 
-    func bookmarkItem(tvShow: TVShow) {
+    func bookmarkItem(tvShow: TVShowDTO) {
         userAPI.bookmarkItem(object: tvShow)
         userAPI.bookmarkItem {
             tvShow.bookmarked = !tvShow.bookmarked
         }
     }
 
-    func getBookmarkedMovies(completion: @escaping ([Movie]) -> Void) {
-        userAPI.getBookmarkedItems(object: Movie.self) { items in
-            completion(items)
-        }
+    func getBookmarkedMovies() -> BehaviorRelay<[MovieDTO]> {
+        return userAPI.getBookmarkedItems(object: MovieDTO.self)
     }
 
-    func getBookmarkedTVShows(completion: @escaping ([TVShow]) -> Void) {
-        userAPI.getBookmarkedItems(object: TVShow.self) { items in
-            completion(items)
-        }
+    func getBookmarkedTVShows() -> BehaviorRelay<[TVShowDTO]> {
+        return userAPI.getBookmarkedItems(object: TVShowDTO.self)
     }
 }

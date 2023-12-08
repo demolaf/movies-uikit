@@ -47,7 +47,7 @@ class MoviesInteractorImpl: MoviesInteractor {
     func getUpcomingMovies() {
         presenter?.group?.enter()
         moviesRepository?.getMovies(
-            categoryType: "upcoming"
+            categoryType: "popular"
         ) { [weak self] movies in
             defer {
                 self?.presenter?.group?.leave()

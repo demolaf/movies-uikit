@@ -32,7 +32,6 @@ class MainTabBarViewController: UITabBarController {
         nav1.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(systemName: "house"), tag: 1)
         nav2.tabBarItem = UITabBarItem(title: "TV Shows", image: UIImage(systemName: "display"), tag: 2)
         nav3.tabBarItem = UITabBarItem(title: "Library", image: UIImage(systemName: "building.columns"), tag: 3)
-
         self.tabBar.tintColor = .label
 
         setViewControllers([nav1, nav2, nav3], animated: false)

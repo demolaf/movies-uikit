@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 /// For User saved data such as favorite movies and tv shows
 class UserAPI {
@@ -24,15 +26,12 @@ class UserAPI {
     }
 
     func getBookmarkedItems<T: AnyObject>(
-        object: T.Type,
-        completion: @escaping ([T]) -> Void
-    ) {
-        localStorage.readAll(
+        object: T.Type
+    ) -> BehaviorRelay<[T]> {
+        return localStorage.readAllWithChanges(
             object: T.self,
             sortBy: "createdAt",
             predicate: NSPredicate(format: "bookmarked == %d", true)
-        ) { items, _ in
-            completion(items)
-        }
+        )
     }
 }

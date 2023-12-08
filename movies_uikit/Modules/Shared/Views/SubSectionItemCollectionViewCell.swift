@@ -102,28 +102,12 @@ class SubSectionItemCollectionViewCell: UICollectionViewCell {
 
     // MARK: Public Methods
 
-    func configureViewData(movie: Movie?) {
-        if let movie = movie {
-            self.titleLabelView.text = movie.originalTitle
+    func configureViewData(show: Show?) {
+        if let show = show {
+            self.titleLabelView.text = show.title
             self.imageView.sd_setImage(
                 with: HTTPConstants.Endpoints.posterPath(
-                    url: movie.posterPath,
-                    quality: nil
-                ).url
-            )
-            return
-        }
-
-        self.titleLabelView.text = "N/A"
-        self.imageView.image = UIImage(systemName: "photo")
-    }
-
-    func configureViewData(tv: TVShow?) {
-        if let tv = tv {
-            self.titleLabelView.text = tv.originalName
-            self.imageView.sd_setImage(
-                with: HTTPConstants.Endpoints.posterPath(
-                    url: tv.posterPath,
+                    url: show.posterPath,
                     quality: nil
                 ).url
             )

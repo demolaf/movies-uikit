@@ -14,13 +14,17 @@ class MoviesRepositoryImpl: MoviesRepository {
         self.moviesAPI = moviesAPI
     }
 
-    func getMovies(categoryType: String, completion: @escaping ([Movie]) -> Void) {
+    func getMovies(
+        categoryType: String,
+        completion: @escaping ([Show]) -> Void
+    ) {
         moviesAPI.getMovies(
             categoryType: categoryType
         ) { result in
             switch result {
             case .success(let movies):
-                completion(movies)
+                let result = movies.map { $0.toShow() }
+                completion(result)
             case .failure(let error):
                 debugPrint("Failed to fetch movies \(error)")
                 completion([])
@@ -28,13 +32,17 @@ class MoviesRepositoryImpl: MoviesRepository {
         }
     }
 
-    func getTVShows(categoryType: String, completion: @escaping ([TVShow]) -> Void) {
+    func getTVShows(
+        categoryType: String,
+        completion: @escaping ([Show]) -> Void
+    ) {
         moviesAPI.getTVShows(
             categoryType: categoryType
         ) { result in
             switch result {
             case .success(let tvShows):
-                completion(tvShows)
+                let result = tvShows.map { $0.toShow() }
+                completion(result)
             case .failure(let error):
                 debugPrint("Failed to fetch tvShows \(error)")
                 completion([])
@@ -44,12 +52,13 @@ class MoviesRepositoryImpl: MoviesRepository {
 
     func getRecommendedShowsForMovie(
         id: String,
-        completion: @escaping ([Movie]) -> Void
+        completion: @escaping ([Show]) -> Void
     ) {
         moviesAPI.getRecommendedShowsByMovie(id: id) { result in
             switch result {
             case .success(let movies):
-                completion(movies)
+                let result = movies.map { $0.toShow() }
+                completion(result)
             case .failure(let error):
                 debugPrint("Failed to fetch recommended movies \(error)")
                 completion([])
@@ -59,14 +68,47 @@ class MoviesRepositoryImpl: MoviesRepository {
 
     func getRecommendedShowsForTVShow(
         id: String,
-        completion: @escaping ([TVShow]) -> Void
+        completion: @escaping ([Show]) -> Void
     ) {
         moviesAPI.getRecommendedShowsByTVShow(id: id) { result in
             switch result {
             case .success(let tvShows):
-                completion(tvShows)
+                let result = tvShows.map { $0.toShow() }
+                completion(result)
             case .failure(let error):
                 debugPrint("Failed to fetch recommended tvshows \(error)")
+                completion([])
+            }
+        }
+    }
+
+    func getMovieSearchResults(
+        from query: String,
+        completion: @escaping ([Show]) -> Void
+    ) {
+        moviesAPI.getMovieSearchResults(from: query) { result in
+            switch result {
+            case .success(let movies):
+                let result = movies.map { $0.toShow() }
+                completion(result)
+            case .failure(let error):
+                debugPrint("Failed to fetch movie search results \(error)")
+                completion([])
+            }
+        }
+    }
+
+    func getTVShowsSearchResults(
+        from query: String,
+        completion: @escaping ([Show]) -> Void
+    ) {
+        moviesAPI.getTVShowsSearchResults(from: query) { result in
+            switch result {
+            case .success(let tvShows):
+                let result = tvShows.map { $0.toShow() }
+                completion(result)
+            case .failure(let error):
+                debugPrint("Failed to fetch tv show search results \(error)")
                 completion([])
             }
         }

@@ -22,15 +22,14 @@ class LibraryInteractorImpl: LibraryInteractor {
     func getPopularMovies() {}
 
     func getBookmarkedMovies() {
-        userRepository?.getBookmarkedMovies { [weak self] movies in
-            debugPrint("items: \(movies)")
-            self?.presenter?.interactorDidFetchBookmarkedMovies(with: movies)
-        }
+//        if let relay = userRepository?.getBookmarkedMovies() {
+//            self.presenter?.interactorDidFetchBookmarkedMovies(with: relay)
+//        }
     }
 
     func getBookmarkedTVShows() {
-        userRepository?.getBookmarkedTVShows { [weak self] tvShows in
-            self?.presenter?.interactorDidFetchBookmarkedTVShows(with: tvShows)
-        }
+//        if let relay = userRepository?.getBookmarkedTVShows() {
+//            self.presenter?.interactorDidFetchBookmarkedTVShows(with: relay)
+//        }
     }
 }

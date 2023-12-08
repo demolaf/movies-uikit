@@ -7,13 +7,13 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
+import RxRelay
 
 protocol LibraryView: AnyObject {
     var presenter: LibraryPresenter? { get set }
 
-    func update(movies: [Movie])
-    func update(tvShows: [TVShow])
+    func update(movies: BehaviorRelay<[Show]>)
+    func update(tvShows: BehaviorRelay<[Show]>)
 }
 
 enum LibrarySectionType: Int {
@@ -97,12 +97,12 @@ class LibraryViewController: UIViewController, LibraryView {
         applyConstraints()
     }
 
-    func update(movies: [Movie]) {
-        viewControllers[0].items.accept(movies)
+    func update(movies: BehaviorRelay<[Show]>) {
+        viewControllers[0].items.accept(movies.value)
     }
 
-    func update(tvShows: [TVShow]) {
-        viewControllers[1].items.accept(tvShows)
+    func update(tvShows: BehaviorRelay<[Show]>) {
+        viewControllers[1].items.accept(tvShows.value)
     }
 }
 
@@ -120,6 +120,7 @@ extension LibraryViewController {
         self.mainView.addSubview(libraryPageVC.view)
     }
 
+    // TODO: This can be changed to use ScrollView and .paging scrollBehaviour
     private func initializePageController() {
         libraryPageVC.delegate = self
         libraryPageVC.dataSource = self

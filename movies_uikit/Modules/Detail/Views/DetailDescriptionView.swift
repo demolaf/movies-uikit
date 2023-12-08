@@ -78,15 +78,9 @@ class DetailDescriptionView: UIView {
         ])
     }
 
-    func configureViewData(movie: Movie?) {
-        if let movie = movie {
-            self.descriptionLabel.text = movie.overview
-        }
-    }
-
-    func configureViewData(tvShow: TVShow?) {
-        if let tvShow = tvShow {
-            self.descriptionLabel.text = tvShow.overview
+    func configureViewData(show: Show?) {
+        if let show = show {
+            self.descriptionLabel.text = show.overview
         }
     }
 }

@@ -13,6 +13,8 @@ protocol TVShowsInteractor: AnyObject {
      func getPopularTVShows()
      func getTopRatedTVShows()
      func getOnTheAirTVShows()
+
+    func searchForTVShow(with query: String)
 }
 
 class TVShowsInteractorImpl: TVShowsInteractor {
@@ -53,6 +55,14 @@ class TVShowsInteractorImpl: TVShowsInteractor {
                 self?.presenter?.group?.leave()
             }
             self?.presenter?.interactorDidFetchOnTheAirTVShows(with: tvShows)
+        }
+    }
+
+    func searchForTVShow(with query: String) {
+        moviesRepository?.getTVShowsSearchResults(
+            from: query
+        ) { [weak self] tvShows in
+            self?.presenter?.interactorDidFetchSearchResults(with: tvShows)
         }
     }
 }

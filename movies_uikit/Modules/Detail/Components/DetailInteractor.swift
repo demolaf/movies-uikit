@@ -10,8 +10,8 @@ import Foundation
 protocol DetailInteractor: AnyObject {
     var presenter: DetailPresenter? { get set }
 
-    func bookmarkItem(movie: Movie)
-    func bookmarkItem(tvShow: TVShow)
+    func bookmarkItem(movie: Show)
+    func bookmarkItem(tvShow: Show)
     func getRecommendedShows(movie id: String)
     func getRecommendedShows(tvShow id: String)
 }
@@ -23,12 +23,12 @@ class DetailInteractorImpl: DetailInteractor {
 
     var moviesRepository: MoviesRepository?
 
-    func bookmarkItem(movie: Movie) {
-        userRepository?.bookmarkItem(movie: movie)
+    func bookmarkItem(movie: Show) {
+        // userRepository?.bookmarkItem(movie: movie)
     }
 
-    func bookmarkItem(tvShow: TVShow) {
-        userRepository?.bookmarkItem(tvShow: tvShow)
+    func bookmarkItem(tvShow: Show) {
+        // userRepository?.bookmarkItem(tvShow: tvShow)
     }
 
     func getRecommendedShows(movie id: String) {

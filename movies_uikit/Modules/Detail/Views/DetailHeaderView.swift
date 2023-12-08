@@ -229,36 +229,38 @@ class DetailHeaderView: UIView {
         saveForLaterPressedCallback?()
     }
 
-    func configureViewData(movie: Movie?) {
-        if let movie = movie {
-            self.titleLabel.text = movie.originalTitle
-            self.releaseDateLabel.text = movie.releaseDate
-            self.posterImageView.sd_setImage(
-                with: HTTPConstants.Endpoints.posterPath(
-                    url: movie.backdropPath,
-                    quality: "original"
-                ).url
-            )
-            debugPrint("Bookmarked \(movie.bookmarked)")
-            updateBookmarkedState(bookmarked: movie.bookmarked)
+    func configureViewData(show: Show?) {
+        if let show = show {
+            self.titleLabel.text = show.title
+            self.releaseDateLabel.text = show.releaseDate
+            if let backdropPath = show.backdropPath {
+                self.posterImageView.sd_setImage(
+                    with: HTTPConstants.Endpoints.posterPath(
+                        url: backdropPath,
+                        quality: "original"
+                    ).url
+                )
+            }
+            debugPrint("Bookmarked \(show.bookmarked)")
+            updateBookmarkedState(bookmarked: show.bookmarked)
             // addObserverOnMovie(movie: movie)
         }
     }
 
-    private func addObserverOnMovie(movie: Movie) {
-        notificationToken = movie.observe(keyPaths: ["bookmarked"]) { [weak self] change in
-            switch change {
-            case .error(let error):
-                debugPrint("Object error \(error)")
-            case .change(_, let properties):
-                properties.forEach { change in
-                    debugPrint("change \(change)")
-                }
-                self?.updateBookmarkedState(bookmarked: movie.bookmarked)
-            case .deleted:
-                debugPrint("Object deleted")
-            }
-        }
+    private func addObserverOnMovie(movie: Show) {
+//        notificationToken = movie.observe(keyPaths: ["bookmarked"]) { [weak self] change in
+//            switch change {
+//            case .error(let error):
+//                debugPrint("Object error \(error)")
+//            case .change(_, let properties):
+//                properties.forEach { change in
+//                    debugPrint("change \(change)")
+//                }
+//                self?.updateBookmarkedState(bookmarked: movie.bookmarked)
+//            case .deleted:
+//                debugPrint("Object deleted")
+//            }
+//        }
     }
 
     private func updateBookmarkedState(bookmarked: Bool) {
@@ -268,19 +270,6 @@ class DetailHeaderView: UIView {
         } else {
             saveForLaterButton.imageView?.image = UIImage(systemName: "plus")?.withTintColor(
                 .systemRed, renderingMode: .alwaysOriginal)
-        }
-    }
-
-    func configureViewData(tvShow: TVShow?) {
-        if let tvShow = tvShow {
-            self.titleLabel.text = tvShow.originalName
-            self.releaseDateLabel.text = tvShow.firstAirDate
-            self.posterImageView.sd_setImage(
-                with: HTTPConstants.Endpoints.posterPath(
-                    url: tvShow.backdropPath ?? "",
-                    quality: "original"
-                ).url
-            )
         }
     }
 }

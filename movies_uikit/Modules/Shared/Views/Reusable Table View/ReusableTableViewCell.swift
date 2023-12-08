@@ -111,13 +111,6 @@ class ReusableTableViewCell: UITableViewCell {
         applyConstraints()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-
-    }
-
     private func initializeSubViews() {
         self.contentView.addSubview(rootStackView)
         rootStackView.addArrangedSubview(itemImageView)
@@ -130,7 +123,7 @@ class ReusableTableViewCell: UITableViewCell {
     private func applyConstraints() {
         self.contentView.clipsToBounds = true
 
-      NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate([
             rootStackView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 24),
             rootStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
             rootStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -20),
@@ -143,38 +136,20 @@ class ReusableTableViewCell: UITableViewCell {
 
     private func initializeCellAppearance() {}
 
-    func configureViewData(movie: Movie?) {
-        if let movie = movie {
+    func configureViewData(show: Show?) {
+        if let show = show {
             itemImageView.sd_setImage(
                 with: HTTPConstants.Endpoints.posterPath(
-                url: movie.posterPath,
-                quality: nil
+                    url: show.posterPath,
+                    quality: nil
                 ).url
             )
-            itemTitle.text = movie.originalTitle
-            itemSubtitle.text = movie.releaseDate
+            itemTitle.text = show.title
+            itemSubtitle.text = show.releaseDate
             return
         }
 
         itemImageView.image = UIImage(named: "hero-image")!
-        itemTitle.text = "N/A"
-        itemSubtitle.text = "N/A"
-    }
-
-    func configureViewData(tv: TVShow?) {
-        if let tv = tv {
-            itemImageView.sd_setImage(
-                with: HTTPConstants.Endpoints.posterPath(
-                url: tv.posterPath,
-                quality: nil
-                ).url
-            )
-            itemTitle.text = tv.originalName
-            itemSubtitle.text = tv.firstAirDate
-            return
-        }
-
-        itemImageView.image = UIImage(systemName: "photo")!
         itemTitle.text = "N/A"
         itemSubtitle.text = "N/A"
     }

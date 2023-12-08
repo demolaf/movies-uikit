@@ -9,15 +9,15 @@ import Foundation
 import UIKit
 
 enum MoviesSectionType {
-    case popular(movies: [Movie])
-    case new(movies: [Movie])
-    case upcoming(movies: [Movie])
+    case popular(movies: [Show])
+    case new(movies: [Show])
+    case upcoming(movies: [Show])
 }
 
 protocol MoviesView: AnyObject {
     var presenter: MoviesPresenter? { get set }
 
-    func update(popularMovies: [Movie], newMovies: [Movie], upcomingMovies: [Movie])
+    func update(popularMovies: [Show], newMovies: [Show], upcomingMovies: [Show])
 }
 
 class MoviesViewController: UIViewController, MoviesView {
@@ -27,19 +27,6 @@ class MoviesViewController: UIViewController, MoviesView {
     private let leadingBarButtonItems: [UIBarButtonItem] = {
         let barButtonItem = MoviesBarButtonItem()
         return [barButtonItem]
-    }()
-
-    private let trailingBarButtonItems: [UIBarButtonItem] = {
-        let searchBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "magnifyingglass"),
-            style: .plain,
-            target: MoviesViewController.self,
-            action: #selector(searchBarButtonItemPressed)
-        )
-
-        searchBarButtonItem.tintColor = .label
-
-        return [searchBarButtonItem]
     }()
 
     private lazy var collectionView: UICollectionView = {
@@ -67,6 +54,16 @@ class MoviesViewController: UIViewController, MoviesView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         return collectionView
+    }()
+
+    private lazy var searchController: UISearchController = {
+        let resuableTableVC = ReusableTableViewController()
+        resuableTableVC.delegate = self
+        let searchController = UISearchController(
+            searchResultsController: resuableTableVC
+        )
+        searchController.searchBar.placeholder = "Search for a movie by title"
+        return searchController
     }()
 
     private let loadingIndicator: UIActivityIndicatorView = {
@@ -106,6 +103,7 @@ class MoviesViewController: UIViewController, MoviesView {
         // subviews to enable title to scroll on collection view scrolled
         view.addSubview(collectionView)
         view.addSubview(loadingIndicator)
+        searchController.searchResultsUpdater = self
     }
 
     private func setupCollectionViews() {
@@ -114,7 +112,7 @@ class MoviesViewController: UIViewController, MoviesView {
         collectionView.isHidden = true
     }
 
-    func update(popularMovies: [Movie], newMovies: [Movie], upcomingMovies: [Movie]) {
+    func update(popularMovies: [Show], newMovies: [Show], upcomingMovies: [Show]) {
         sections.append(.popular(movies: popularMovies))
         sections.append(.new(movies: newMovies))
         sections.append(.upcoming(movies: upcomingMovies))
@@ -123,9 +121,6 @@ class MoviesViewController: UIViewController, MoviesView {
         collectionView.reloadData()
         collectionView.isHidden = false
     }
-
-    @objc
-    private func searchBarButtonItemPressed() {}
 }
 
 // MARK: Appearance
@@ -138,8 +133,13 @@ extension MoviesViewController {
 
         //
         navigationItem.setLeftBarButtonItems(leadingBarButtonItems, animated: true)
-        navigationItem.setRightBarButtonItems(trailingBarButtonItems, animated: true)
         navigationItem.hidesBackButton = true
+        navigationItem.searchController = searchController
+        if #available(iOS 16.0, *) {
+            navigationItem.preferredSearchBarPlacement = .inline
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
     private func applyConstraints() {
@@ -207,7 +207,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
 
             let movie = movies[indexPath.row]
-            cell.configureViewData(movie: movie)
+            cell.configureViewData(show: movie)
             return cell
         case .new(let movies):
             guard let cell = collectionView.dequeueReusableCell(
@@ -218,7 +218,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
 
             let movie = movies[indexPath.row]
-            cell.configureViewData(movie: movie)
+            cell.configureViewData(show: movie)
             return cell
         case .upcoming(let movies):
             guard let cell = collectionView.dequeueReusableCell(
@@ -229,7 +229,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             }
 
             let movie = movies[indexPath.row]
-            cell.configureViewData(movie: movie)
+            cell.configureViewData(show: movie)
             return cell
         }
 
@@ -243,11 +243,11 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
         switch section {
         case .popular(movies: let movies):
-            self.presenter?.movieItemTapped(movie: movies[indexPath.row])
+            self.presenter?.movieItemTapped(item: movies[indexPath.row])
         case .new(movies: let movies):
-            self.presenter?.movieItemTapped(movie: movies[indexPath.row])
+            self.presenter?.movieItemTapped(item: movies[indexPath.row])
         case .upcoming(movies: let movies):
-            self.presenter?.movieItemTapped(movie: movies[indexPath.row])
+            self.presenter?.movieItemTapped(item: movies[indexPath.row])
         }
     }
 
@@ -271,12 +271,18 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case .new(let movies):
             headerView.configureHeaderLeadingText(leadingText: "New")
             headerView.viewAllButtonPressedCallback = {
-                self.presenter?.viewAllButtonTapped(sectionTitle: "New", movies: movies)
+                self.presenter?.viewAllButtonTapped(
+                    sectionTitle: "New",
+                    items: movies
+                )
             }
         case .upcoming(let movies):
             headerView.configureHeaderLeadingText(leadingText: "Upcoming")
             headerView.viewAllButtonPressedCallback = {
-                self.presenter?.viewAllButtonTapped(sectionTitle: "Upcoming", movies: movies)
+                self.presenter?.viewAllButtonTapped(
+                    sectionTitle: "Upcoming",
+                    items: movies
+                )
             }
         }
 
@@ -348,5 +354,26 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             section.orthogonalScrollingBehavior = .continuous
             return section
         }
+    }
+}
+
+extension MoviesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+
+        //presenter?.searchForTVShow(with: text)
+
+//        let vc = searchController.searchResultsController as? ReusableTableViewController
+//        searchResults.subscribe(onNext: { tvShows in
+//            vc?.items.accept(tvShows)
+//        }).disposed(by: disposeBag)
+    }
+}
+
+extension MoviesViewController: ReusableTableViewControllerDelegate {
+    func didTapItem(item: Show) {
+        presenter?.movieItemTapped(item: item)
     }
 }

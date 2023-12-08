@@ -132,31 +132,13 @@ class CarouselItemCollectionViewCell: UICollectionViewCell {
 
     // MARK: Public Methods
 
-    func configureViewData(movie: Movie?) {
-        if let movie = movie {
-            self.titleLabelView.text = movie.originalTitle
-            self.ratingLabelView.text = "\(movie.voteAverage)/10"
+    func configureViewData(show: Show?) {
+        if let show = show {
+            self.titleLabelView.text = show.title
+            self.ratingLabelView.text = "\(String(format: "%.1f", show.rating))/10"
             self.imageView.sd_setImage(
                 with: HTTPConstants.Endpoints.posterPath(
-                    url: movie.posterPath,
-                    quality: nil
-                ).url
-            )
-            return
-        }
-
-        self.titleLabelView.text = "N/A"
-        self.ratingLabelView.text = "0/10"
-        self.imageView.image = UIImage(systemName: "photo")
-    }
-
-    func configureViewData(tv: TVShow?) {
-        if let tv = tv {
-            self.titleLabelView.text = tv.originalName
-            self.ratingLabelView.text = "\(tv.voteAverage)/10"
-            self.imageView.sd_setImage(
-                with: HTTPConstants.Endpoints.posterPath(
-                    url: tv.posterPath,
+                    url: show.posterPath,
                     quality: nil
                 ).url
             )

@@ -13,14 +13,12 @@ protocol DetailPresenter: AnyObject {
     var router: DetailRouter? { get set }
 
     func getRecommendedMovies(id: String)
-    func getRecommendedTVShows(id: String)
-    func bookmarkButtonPressed(movie: Movie)
-    func bookmarkButtonPressed(tvShow: TVShow)
-    func recommendedItemTapped(item: AnyObject)
-    func viewAllButtonTapped(sectionTitle: String, movies: [AnyObject])
+    func bookmarkButtonPressed(show: Show)
+    func recommendedItemTapped(item: Show)
+    func viewAllButtonTapped(sectionTitle: String, items: [Show])
 
-    func interactorDidFetchRecommendedShows(movies: [Movie])
-    func interactorDidFetchRecommendedShows(tvShows: [TVShow])
+    func interactorDidFetchRecommendedShows(movies: [Show])
+    func interactorDidFetchRecommendedShows(tvShows: [Show])
 }
 
 class DetailPresenterImpl: DetailPresenter {
@@ -41,52 +39,29 @@ class DetailPresenterImpl: DetailPresenter {
         interactor?.getRecommendedShows(tvShow: id)
     }
 
-    func bookmarkButtonPressed(movie: Movie) {
-        interactor?.bookmarkItem(movie: movie)
-    }
-
-    func bookmarkButtonPressed(tvShow: TVShow) {
-        interactor?.bookmarkItem(tvShow: tvShow)
+    func bookmarkButtonPressed(show: Show) {
+        // interactor?.bookmarkItem(show: show)
     }
 
     func fetchRecommendedShowsByShow(id: String) {
         interactor?.getRecommendedShows(movie: id)
     }
 
-    func recommendedItemTapped(item: AnyObject) {
-        let detailVC = Routes.detail.vc as? DetailViewController
-
-        if let vc = view as? DetailViewController {
-            if let detailVC = detailVC {
-                if let item = item as? Movie {
-                    detailVC.initializeViewData(movie: item, tvShow: nil)
-                }
-                if let item = item as? TVShow {
-                    detailVC.initializeViewData(movie: nil, tvShow: item)
-                }
-                detailVC.hidesBottomBarWhenPushed = true
-                router?.push(to: detailVC, from: vc)
-            }
-        }
+    func recommendedItemTapped(item: Show) {
+        router?.navigateToDetailVC(item: item)
     }
 
-    func viewAllButtonTapped(sectionTitle: String, movies: [AnyObject]) {
-        if let vc = view as? DetailViewController {
-            let reusableTableVC = ReusableTableViewController()
-            reusableTableVC.title = sectionTitle
-            reusableTableVC.hidesBottomBarWhenPushed = true
-            reusableTableVC.items.accept(movies)
-            router?.push(to: reusableTableVC, from: vc)
-        }
+    func viewAllButtonTapped(sectionTitle: String, items: [Show]) {
+        router?.navigateToReusableTableVC(sectionTitle: sectionTitle, items: items)
     }
 
     // MARK: Presenter Outputs
 
-    func interactorDidFetchRecommendedShows(movies: [Movie]) {
+    func interactorDidFetchRecommendedShows(movies: [Show]) {
         view?.update(recommendedMovies: movies)
     }
 
-    func interactorDidFetchRecommendedShows(tvShows: [TVShow]) {
+    func interactorDidFetchRecommendedShows(tvShows: [Show]) {
         view?.update(recommendedTVShows: tvShows)
     }
 }

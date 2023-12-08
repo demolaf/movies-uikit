@@ -11,7 +11,6 @@ import UIKit
 /// Register routes in app
 enum Routes: String {
     case launch = "/launch"
-    case login = "/login"
     case mainTab = "/mainTab"
     case movies = "/movies"
     case tvShows = "/tvShows"
@@ -22,8 +21,6 @@ enum Routes: String {
         switch self {
         case .launch:
             return LaunchRouterImpl.route().entry!
-        case .login:
-            return LoginRouterImpl.route().entry!
         case .mainTab:
             return MainTabBarViewController()
         case .movies:

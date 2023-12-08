@@ -10,8 +10,8 @@ import UIKit
 protocol DetailView: AnyObject {
     var presenter: DetailPresenter? { get set }
 
-    func update(recommendedMovies: [Movie])
-    func update(recommendedTVShows: [TVShow])
+    func update(recommendedMovies: [Show])
+    func update(recommendedTVShows: [Show])
 }
 
 class DetailViewController: UIViewController, DetailView {
@@ -84,44 +84,32 @@ class DetailViewController: UIViewController, DetailView {
         rootScrollStackView.addArrangedSubview(recommendationsBasedOnItemView)
     }
 
-    func initializeViewData(movie: Movie?, tvShow: TVShow?) {
+    func initializeViewData(show: Show) {
         // TODO: Check if movie or tvShow is in db for "saveForLater" button
-        if let movie = movie {
             // self.title = movie.originalTitle
-            detailHeaderView.configureViewData(movie: movie)
-            detailDescriptionView.configureViewData(movie: movie)
-            presenter?.getRecommendedMovies(id: String(movie.movieId))
+            detailHeaderView.configureViewData(show: show)
+            detailDescriptionView.configureViewData(show: show)
+            presenter?.getRecommendedMovies(id: String(show.id))
             detailHeaderView.saveForLaterPressedCallback = {
-                self.presenter?.bookmarkButtonPressed(movie: movie)
+                // self.presenter?.bookmarkButtonPressed(movie: )
             }
             recommendationsBasedOnItemView.viewAllItemsCallback = { items in
-                self.presenter?.viewAllButtonTapped(sectionTitle: "Related to \(movie.originalTitle)", movies: items)
+                self.presenter?.viewAllButtonTapped(
+                    sectionTitle: "Related to \(show.title)",
+                    items: items
+                )
             }
-        }
-
-        if let tvShow = tvShow {
-            // self.title = tvShow.originalName
-            detailHeaderView.configureViewData(tvShow: tvShow)
-            detailDescriptionView.configureViewData(tvShow: tvShow)
-            presenter?.getRecommendedTVShows(id: String(tvShow.tvShowId))
-            detailHeaderView.saveForLaterPressedCallback = {
-                self.presenter?.bookmarkButtonPressed(tvShow: tvShow)
-            }
-            recommendationsBasedOnItemView.viewAllItemsCallback = { items in
-                self.presenter?.viewAllButtonTapped(sectionTitle: "Related to \(tvShow.originalName)", movies: items)
-            }
-        }
 
         recommendationsBasedOnItemView.itemSelectedCallback = { item in
             self.presenter?.recommendedItemTapped(item: item)
         }
     }
 
-    func update(recommendedMovies: [Movie]) {
+    func update(recommendedMovies: [Show]) {
         recommendationsBasedOnItemView.configureViewItems(items: recommendedMovies)
     }
 
-    func update(recommendedTVShows: [TVShow]) {
+    func update(recommendedTVShows: [Show]) {
         recommendationsBasedOnItemView.configureViewItems(items: recommendedTVShows)
     }
 

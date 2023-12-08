@@ -8,15 +8,19 @@
 import Foundation
 import UIKit
 
-protocol TVShowsRouter: AnyObject, AnyRouter {
-    var entry: EntryPoint? { get }
+protocol TVShowsRouter: AnyObject {
+    var entry: UIViewController? { get }
 
     static func route() -> TVShowsRouter
+    
+    func navigateToDetailVC(item: Show)
+
+    func navigateToReusableTableVC(sectionTitle: String, items: [Show])
 }
 
 class TVShowsRouterImpl: TVShowsRouter {
 
-    var entry: EntryPoint?
+    var entry: UIViewController?
 
     static func route() -> TVShowsRouter {
         let router = TVShowsRouterImpl()
@@ -46,9 +50,22 @@ class TVShowsRouterImpl: TVShowsRouter {
         return router
     }
 
-    func push(to route: UIViewController, from vc: UIViewController) {
-        vc.navigationController?.pushViewController(route, animated: true)
+    func navigateToDetailVC(item: Show) {
+        guard let detailVC = Routes.detail.vc as? DetailViewController else {
+            debugPrint("Failed to navigate to DetailViewController")
+            return
+        }
+        
+        detailVC.hidesBottomBarWhenPushed = true
+        detailVC.initializeViewData(show: item)
+        entry?.navigationController?.pushViewController(detailVC, animated: true)
     }
 
-    func pop(from vc: UIViewController) {}
+    func navigateToReusableTableVC(sectionTitle: String, items: [Show]) {
+        let reusableTableVC = ReusableTableViewController()
+        reusableTableVC.title = sectionTitle
+        reusableTableVC.hidesBottomBarWhenPushed = true
+        reusableTableVC.items.accept(items)
+        entry?.navigationController?.pushViewController(reusableTableVC, animated: true)
+    }
 }

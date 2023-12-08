@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-protocol LibraryRouter: AnyObject, AnyRouter {
-    var entry: EntryPoint? { get }
+protocol LibraryRouter: AnyObject {
+    var entry: UIViewController? { get }
 
     static func route() -> LibraryRouter
 }
 
 class LibraryRouterImpl: LibraryRouter {
 
-    var entry: EntryPoint?
+    var entry: UIViewController?
 
     static func route() -> LibraryRouter {
         let router = LibraryRouterImpl()
@@ -45,8 +45,4 @@ class LibraryRouterImpl: LibraryRouter {
         router.entry = view
         return router
     }
-
-    func push(to route: UIViewController, from vc: UIViewController) {}
-
-    func pop(from vc: UIViewController) {}
 }

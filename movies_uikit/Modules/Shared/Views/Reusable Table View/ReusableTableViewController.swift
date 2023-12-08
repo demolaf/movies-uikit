@@ -9,11 +9,17 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ReusableTableViewController: UIViewController {
+protocol ReusableTableViewControllerDelegate: AnyObject {
+    func didTapItem(item: Show)
+}
 
-    var items = BehaviorRelay<[AnyObject]>(value: [])
+class ReusableTableViewController: UIViewController, UITableViewDelegate {
+
+    var items = BehaviorRelay<[Show]>(value: [])
 
     private var bag = DisposeBag()
+
+    var delegate: ReusableTableViewControllerDelegate?
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -44,14 +50,17 @@ class ReusableTableViewController: UIViewController {
     }
 
     private func bindTableData() {
-        if items.value.isEmpty {
-            tableView.setEmptyView(
-                title: "No bookmarked \(title?.lowercased() ?? "shows") yet",
-                message: "Bookmark your favorite \(title?.lowercased() ?? "shows") and they'll show up here"
-            )
-        } else {
-            tableView.restore()
-        }
+        items.debug("items in resuable vc")
+            .subscribe(onNext: {[weak self] items in
+                if items.isEmpty {
+                    self?.tableView.setEmptyView(
+                        title: "No Items",
+                        message: ""
+                    )
+                } else {
+                    self?.tableView.restore()
+                }
+            }).disposed(by: bag)
 
         // Bind items to table
         items.bind(
@@ -60,27 +69,19 @@ class ReusableTableViewController: UIViewController {
                 cellType: ReusableTableViewCell.self)
         ) { _, item, cell in
             cell.selectionStyle = .none
-            if let item = item as? Movie {
-                cell.configureViewData(movie: item)
-            }
-
-            if let item = item as? TVShow {
-                cell.configureViewData(tv: item)
-            }
+            cell.configureViewData(show: item)
         }.disposed(by: bag)
 
         // Bind a model selected handler
-        tableView.rx.modelSelected(AnyObject.self).bind { item in
-            let detailVC = Routes.detail.vc as? DetailViewController
-            if let detailVC = detailVC {
-                if let item = item as? Movie {
-                    detailVC.initializeViewData(movie: item, tvShow: nil)
+        tableView.rx.modelSelected(Show.self).bind { [weak self] item in
+            if let delegate = self?.delegate {
+                delegate.didTapItem(item: item)
+            } else {
+                if let detailVC = Routes.detail.vc as? DetailViewController {
+                    detailVC.initializeViewData(show: item)
+                    detailVC.hidesBottomBarWhenPushed = true
+                    self?.navigationController?.pushViewController(detailVC, animated: true)
                 }
-                if let item = item as? TVShow {
-                    detailVC.initializeViewData(movie: nil, tvShow: item)
-                }
-                detailVC.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(detailVC, animated: true)
             }
         }.disposed(by: bag)
 
@@ -88,9 +89,7 @@ class ReusableTableViewController: UIViewController {
             .rx.setDelegate(self)
             .disposed(by: bag)
     }
-}
 
-extension ReusableTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 215
     }

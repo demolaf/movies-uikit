@@ -17,12 +17,12 @@ protocol MoviesPresenter: AnyObject {
     var group: DispatchGroup? { get set }
 
     func initialize()
-    func interactorDidFetchPopularMovies(with movies: [Movie])
-    func interactorDidFetchNewMovies(with movies: [Movie])
-    func interactorDidFetchUpcomingMovies(with movies: [Movie])
+    func interactorDidFetchPopularMovies(with movies: [Show])
+    func interactorDidFetchNewMovies(with movies: [Show])
+    func interactorDidFetchUpcomingMovies(with movies: [Show])
 
-    func movieItemTapped(movie: Movie?)
-    func viewAllButtonTapped(sectionTitle: String, movies: [Movie])
+    func movieItemTapped(item: Show)
+    func viewAllButtonTapped(sectionTitle: String, items: [Show])
 }
 
 class MoviesPresenterImpl: MoviesPresenter {
@@ -32,9 +32,9 @@ class MoviesPresenterImpl: MoviesPresenter {
 
     var group: DispatchGroup?
 
-    var popular: [Movie] = []
-    var new: [Movie] = []
-    var upcoming: [Movie] = []
+    var popular: [Show] = []
+    var new: [Show] = []
+    var upcoming: [Show] = []
 
     func initialize() {
         group = DispatchGroup()
@@ -44,15 +44,15 @@ class MoviesPresenterImpl: MoviesPresenter {
         interactor?.getUpcomingMovies()
     }
 
-    func interactorDidFetchPopularMovies(with movies: [Movie]) {
+    func interactorDidFetchPopularMovies(with movies: [Show]) {
         popular = movies
     }
 
-    func interactorDidFetchNewMovies(with movies: [Movie]) {
+    func interactorDidFetchNewMovies(with movies: [Show]) {
         new = movies
     }
 
-    func interactorDidFetchUpcomingMovies(with movies: [Movie]) {
+    func interactorDidFetchUpcomingMovies(with movies: [Show]) {
         upcoming = movies
 
         group?.notify(queue: .main) { [self] in
@@ -64,26 +64,14 @@ class MoviesPresenterImpl: MoviesPresenter {
         }
     }
 
-    func movieItemTapped(movie: Movie?) {
-        if let vc = self.view as? MoviesViewController {
-            if let detailVC = Routes.detail.vc as? DetailViewController {
-                detailVC.initializeViewData(movie: movie, tvShow: nil)
-                detailVC.hidesBottomBarWhenPushed = true
-                self.router?.push(to: detailVC, from: vc)
-            }
-        }
+    func movieItemTapped(item: Show) {
+        router?.navigateToDetailVC(item: item)
     }
 
     func viewAllButtonTapped(
         sectionTitle: String,
-        movies: [Movie]
+        items: [Show]
     ) {
-        if let vc = self.view as? MoviesViewController {
-            let reusableTableVC = ReusableTableViewController()
-            reusableTableVC.title = sectionTitle
-            reusableTableVC.hidesBottomBarWhenPushed = true
-            reusableTableVC.items.accept(movies)
-            router?.push(to: reusableTableVC, from: vc)
-        }
+        router?.navigateToReusableTableVC(sectionTitle: sectionTitle, items: items)
     }
 }

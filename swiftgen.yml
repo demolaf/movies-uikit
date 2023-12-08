@@ -1,0 +1,5 @@
+fonts:
+  inputs: movies_uikit/Resources/Fonts/Montserrat
+  outputs:
+    templateName: swift5
+    output: movies_uikit/Resources/Fonts.swift

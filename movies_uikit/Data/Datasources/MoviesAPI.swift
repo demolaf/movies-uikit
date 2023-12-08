@@ -19,7 +19,7 @@ class MoviesAPI {
 
     func getMovies(
         categoryType: String,
-        completion: @escaping (Result<[Movie], Error>) -> Void
+        completion: @escaping (Result<[MovieDTO], Error>) -> Void
     ) {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
@@ -43,7 +43,7 @@ class MoviesAPI {
 
     func getTVShows(
         categoryType: String,
-        completion: @escaping (Result<[TVShow], Error>) -> Void
+        completion: @escaping (Result<[TVShowDTO], Error>) -> Void
     ) {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
@@ -67,7 +67,7 @@ class MoviesAPI {
 
     func getRecommendedShowsByMovie(
         id: String,
-        completion: @escaping (Result<[Movie], Error>) -> Void
+        completion: @escaping (Result<[MovieDTO], Error>) -> Void
     ) {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
         httpClient.get(
@@ -90,7 +90,7 @@ class MoviesAPI {
 
     func getRecommendedShowsByTVShow(
         id: String,
-        completion: @escaping (Result<[TVShow], Error>) -> Void
+        completion: @escaping (Result<[TVShowDTO], Error>) -> Void
     ) {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
@@ -102,6 +102,54 @@ class MoviesAPI {
             headers: headers,
             parameters: nil,
             response: TVShowsResponse.self
+        ) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.results))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getTVShowsSearchResults(
+        from query: String,
+        completion: @escaping (Result<[TVShowDTO], Error>) -> Void
+    ) {
+        let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
+
+        httpClient.get(
+            url: HTTPConstants.Endpoints.search(
+                showType: "tv",
+                name: query
+            ).url,
+            headers: headers,
+            parameters: nil,
+            response: TVShowsResponse.self
+        ) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.results))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getMovieSearchResults(
+        from query: String,
+        completion: @escaping (Result<[MovieDTO], Error>) -> Void
+    ) {
+        let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
+
+        httpClient.get(
+            url: HTTPConstants.Endpoints.search(
+                showType: "movie",
+                name: query
+            ).url,
+            headers: headers,
+            parameters: nil,
+            response: MoviesResponse.self
         ) { result in
             switch result {
             case .success(let response):
