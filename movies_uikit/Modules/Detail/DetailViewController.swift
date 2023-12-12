@@ -86,19 +86,19 @@ class DetailViewController: UIViewController, DetailView {
 
     func initializeViewData(show: Show) {
         // TODO: Check if movie or tvShow is in db for "saveForLater" button
-            // self.title = movie.originalTitle
-            detailHeaderView.configureViewData(show: show)
-            detailDescriptionView.configureViewData(show: show)
-            presenter?.getRecommendedMovies(id: String(show.id))
-            detailHeaderView.saveForLaterPressedCallback = {
-                // self.presenter?.bookmarkButtonPressed(movie: )
-            }
-            recommendationsBasedOnItemView.viewAllItemsCallback = { items in
-                self.presenter?.viewAllButtonTapped(
-                    sectionTitle: "Related to \(show.title)",
-                    items: items
-                )
-            }
+        // self.title = movie.originalTitle
+        detailHeaderView.configureViewData(show: show)
+        detailDescriptionView.configureViewData(show: show)
+        presenter?.getRecommendedMovies(id: String(show.id))
+        detailHeaderView.saveForLaterPressedCallback = {
+            self.presenter?.bookmarkButtonPressed(show: show)
+        }
+        recommendationsBasedOnItemView.viewAllItemsCallback = { items in
+            self.presenter?.viewAllButtonTapped(
+                sectionTitle: "Related to \(show.title)",
+                items: items
+            )
+        }
 
         recommendationsBasedOnItemView.itemSelectedCallback = { item in
             self.presenter?.recommendedItemTapped(item: item)

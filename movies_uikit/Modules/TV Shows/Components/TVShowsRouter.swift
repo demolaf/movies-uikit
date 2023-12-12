@@ -12,7 +12,7 @@ protocol TVShowsRouter: AnyObject {
     var entry: UIViewController? { get }
 
     static func route() -> TVShowsRouter
-    
+
     func navigateToDetailVC(item: Show)
 
     func navigateToReusableTableVC(sectionTitle: String, items: [Show])
@@ -55,7 +55,7 @@ class TVShowsRouterImpl: TVShowsRouter {
             debugPrint("Failed to navigate to DetailViewController")
             return
         }
-        
+
         detailVC.hidesBottomBarWhenPushed = true
         detailVC.initializeViewData(show: item)
         entry?.navigationController?.pushViewController(detailVC, animated: true)

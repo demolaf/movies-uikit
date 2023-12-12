@@ -6,11 +6,12 @@
 //
 
 import XCTest
+import RxRelay
 @testable import movies_uikit
 
-class MockMovie: Movie {}
+class MockMovie: MovieDTO {}
 
-class MockTVShow: TVShow {}
+class MockTVShow: TVShowDTO {}
 
 class MockLocalStorage: LocalStorage {
     func create(object: AnyObject) {}
@@ -32,6 +33,14 @@ class MockLocalStorage: LocalStorage {
     func updateProperty(
         callback: @escaping () -> Void
     ) {}
+
+    func readAllWithChanges<ObjectType>(
+        object: ObjectType.Type,
+        sortBy: String,
+        predicate: NSPredicate?
+    ) -> BehaviorRelay<[ObjectType]> where ObjectType: AnyObject {
+        return BehaviorRelay<[ObjectType]>(value: [])
+    }
 }
 
 class MockHTTPClient: HTTPClient {
@@ -56,7 +65,7 @@ class MockHTTPClient: HTTPClient {
 }
 
 class MockMoviesAPI: MoviesAPI {
-    override func getMovies(categoryType: String, completion: @escaping (Result<[movies_uikit.Movie], Error>) -> Void) {
+    override func getMovies(categoryType: String, completion: @escaping (Result<[MovieDTO], Error>) -> Void) {
         if categoryType == "movie" {
             let mockMovie = MockMovie()
             completion(.success([mockMovie]))
@@ -66,7 +75,7 @@ class MockMoviesAPI: MoviesAPI {
     }
 
     override
-    func getTVShows(categoryType: String, completion: @escaping (Result<[movies_uikit.TVShow], Error>) -> Void) {
+    func getTVShows(categoryType: String, completion: @escaping (Result<[TVShowDTO], Error>) -> Void) {
         if categoryType == "tv" {
             let mockTVShow = MockTVShow()
             completion(.success([mockTVShow]))

@@ -11,8 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol UserRepository {
-    func bookmarkItem(movie: MovieDTO)
-    func bookmarkItem(tvShow: TVShowDTO)
-    func getBookmarkedMovies() -> BehaviorRelay<[MovieDTO]>
-    func getBookmarkedTVShows() -> BehaviorRelay<[TVShowDTO]>
+    func bookmarkItem(show: Show)
+    func getBookmarkedMovies() -> Observable<[Show]>
+    func getBookmarkedTVShows() -> Observable<[Show]>
 }

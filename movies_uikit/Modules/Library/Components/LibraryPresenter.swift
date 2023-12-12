@@ -15,8 +15,8 @@ protocol LibraryPresenter: AnyObject {
     var router: LibraryRouter? { get set }
 
     func initialize()
-    func interactorDidFetchBookmarkedMovies(with movies: BehaviorRelay<[Show]>)
-    func interactorDidFetchBookmarkedTVShows(with tvShows: BehaviorRelay<[Show]>)
+    func interactorDidFetchBookmarkedMovies(with movies: Observable<[Show]>)
+    func interactorDidFetchBookmarkedTVShows(with tvShows: Observable<[Show]>)
 }
 
 class LibraryPresenterImpl: LibraryPresenter {
@@ -29,11 +29,11 @@ class LibraryPresenterImpl: LibraryPresenter {
         interactor?.getBookmarkedTVShows()
     }
 
-    func interactorDidFetchBookmarkedMovies(with movies: BehaviorRelay<[Show]>) {
+    func interactorDidFetchBookmarkedMovies(with movies: Observable<[Show]>) {
         view?.update(movies: movies)
     }
 
-    func interactorDidFetchBookmarkedTVShows(with tvShows: BehaviorRelay<[Show]>) {
+    func interactorDidFetchBookmarkedTVShows(with tvShows: Observable<[Show]>) {
         view?.update(tvShows: tvShows)
     }
 }

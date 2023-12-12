@@ -54,4 +54,25 @@ class TVShowDTO: Object, Codable {
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
+
+    convenience init(
+        backdropPath: String? = nil,
+        firstAirDate: String? = nil,
+        tvShowId: Int,
+        originalName: String,
+        overview: String,
+        posterPath: String,
+        voteAverage: Double,
+        bookmarked: Bool
+    ) {
+        self.init()
+        self.backdropPath = backdropPath
+        self.firstAirDate = firstAirDate
+        self.tvShowId = tvShowId
+        self.originalName = originalName
+        self.overview = overview
+        self.posterPath = posterPath
+        self.voteAverage = voteAverage
+        self.bookmarked = bookmarked
+    }
 }

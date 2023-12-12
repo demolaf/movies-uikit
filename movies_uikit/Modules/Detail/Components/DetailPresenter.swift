@@ -40,7 +40,7 @@ class DetailPresenterImpl: DetailPresenter {
     }
 
     func bookmarkButtonPressed(show: Show) {
-        // interactor?.bookmarkItem(show: show)
+        interactor?.bookmarkItem(show: show)
     }
 
     func fetchRecommendedShowsByShow(id: String) {

@@ -7,6 +7,10 @@
 
 import Foundation
 
+// Interactor usually uses two protocols:
+// 1. for actions from the presenter
+// 2. for actions from itself
+// i.e interactor input and output protocols
 protocol MoviesInteractor: AnyObject {
      var presenter: MoviesPresenter? { get set }
 

@@ -12,7 +12,7 @@ protocol MoviesRouter: AnyObject {
     var entry: UIViewController? { get }
 
     static func route() -> MoviesRouter
-    
+
     func navigateToDetailVC(item: Show)
 
     func navigateToReusableTableVC(sectionTitle: String, items: [Show])
@@ -55,12 +55,12 @@ class MoviesRouterImpl: MoviesRouter {
             debugPrint("Failed to navigate to DetailViewController")
             return
         }
-        
+
         detailVC.hidesBottomBarWhenPushed = true
         detailVC.initializeViewData(show: item)
         entry?.navigationController?.pushViewController(detailVC, animated: true)
     }
-    
+
     func navigateToReusableTableVC(sectionTitle: String, items: [Show]) {
         let reusableTableVC = ReusableTableViewController()
         reusableTableVC.title = sectionTitle

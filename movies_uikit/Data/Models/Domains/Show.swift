@@ -22,6 +22,32 @@ struct Show {
     let posterPath: String
     let backdropPath: String?
     let bookmarked: Bool
+
+    func toMovieDTO() -> MovieDTO {
+        return MovieDTO(
+            backdropPath: backdropPath ?? "",
+            movieId: id,
+            originalTitle: title,
+            overview: overview,
+            posterPath: posterPath,
+            releaseDate: releaseDate ?? "",
+            voteAverage: rating,
+            bookmarked: bookmarked
+        )
+    }
+
+    func toTVShowDTO() -> TVShowDTO {
+        return TVShowDTO(
+            backdropPath: backdropPath ?? "",
+            firstAirDate: releaseDate ?? "",
+            tvShowId: id,
+            originalName: title,
+            overview: overview,
+            posterPath: posterPath,
+            voteAverage: rating,
+            bookmarked: bookmarked
+        )
+    }
 }
 
 extension TVShowDTO {

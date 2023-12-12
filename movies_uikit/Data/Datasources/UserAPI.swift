@@ -27,8 +27,8 @@ class UserAPI {
 
     func getBookmarkedItems<T: AnyObject>(
         object: T.Type
-    ) -> BehaviorRelay<[T]> {
-        return localStorage.readAllWithChanges(
+    ) -> Observable<[T]> {
+        return localStorage.readAll(
             object: T.self,
             sortBy: "createdAt",
             predicate: NSPredicate(format: "bookmarked == %d", true)

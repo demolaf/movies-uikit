@@ -16,25 +16,37 @@ class UserRepositoryImpl: UserRepository {
         self.userAPI = userAPI
     }
 
-    func bookmarkItem(movie: MovieDTO) {
-        userAPI.bookmarkItem(object: movie)
-        userAPI.bookmarkItem {
-            movie.bookmarked = !movie.bookmarked
+    func bookmarkItem(show: Show) {
+        switch show.type {
+        case .movie:
+            let movie = show.toMovieDTO()
+            userAPI.bookmarkItem(object: movie)
+            self.userAPI.bookmarkItem {
+                movie.bookmarked = !movie.bookmarked
+            }
+
+        case .tv:
+            let tvShow = show.toTVShowDTO()
+            userAPI.bookmarkItem(object: tvShow)
+            self.userAPI.bookmarkItem {
+                tvShow.bookmarked = !tvShow.bookmarked
+            }
         }
     }
 
-    func bookmarkItem(tvShow: TVShowDTO) {
-        userAPI.bookmarkItem(object: tvShow)
-        userAPI.bookmarkItem {
-            tvShow.bookmarked = !tvShow.bookmarked
+    func getBookmarkedMovies() -> Observable<[Show]> {
+        return userAPI.getBookmarkedItems(object: MovieDTO.self).map { movies in
+            movies.map { movie in
+                movie.toShow()
+            }
         }
     }
 
-    func getBookmarkedMovies() -> BehaviorRelay<[MovieDTO]> {
-        return userAPI.getBookmarkedItems(object: MovieDTO.self)
-    }
-
-    func getBookmarkedTVShows() -> BehaviorRelay<[TVShowDTO]> {
-        return userAPI.getBookmarkedItems(object: TVShowDTO.self)
+    func getBookmarkedTVShows() -> Observable<[Show]> {
+        return userAPI.getBookmarkedItems(object: TVShowDTO.self).map { tvShows in
+            tvShows.map { tvShow in
+                tvShow.toShow()
+            }
+        }
     }
 }

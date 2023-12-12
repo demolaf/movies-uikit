@@ -12,8 +12,6 @@ import RxCocoa
 class LocalStorageImpl: LocalStorage {
     let realm: Realm?
 
-    var notificationToken: NotificationToken?
-
     init() {
         self.realm = try? Realm()
         debugPrint(Realm.Configuration.defaultConfiguration.fileURL ?? "No realm path")
@@ -56,71 +54,64 @@ class LocalStorageImpl: LocalStorage {
     // swiftlint:disable force_cast
     func read<ObjectType: AnyObject>(
         object: ObjectType.Type,
-        completion: @escaping (AnyObject?, Error?) -> Void
+        completion: @escaping (Result<ObjectType, Error>) -> Void
     ) {
-        do {
-            realm?.object(
-                ofType: (ObjectType.self as! Object.Type).self,
-                forPrimaryKey: (ObjectType.self as! Object.Type).primaryKey()
-            )
-        } catch {
-            debugPrint(error)
-            completion(nil, error)
-        }
+        let result = realm?.object(
+            ofType: (ObjectType.self as! Object.Type).self,
+            forPrimaryKey: (ObjectType.self as! Object.Type).primaryKey()
+        )
+        completion(.success(result as! ObjectType))
     }
 
     func readAll<ObjectType: AnyObject>(
         object: ObjectType.Type,
         sortBy: String,
         predicate: NSPredicate?,
-        completion: @escaping ([ObjectType], Error?) -> Void
+        completion: @escaping (Result<[ObjectType], Error>) -> Void
     ) {
-        do {
-            var results = realm?.objects((ObjectType.self as! Object.Type).self)
-            if let predicate = predicate {
-                results = results?.filter(predicate)
-            }
-            var convertToObjects = [ObjectType]()
-            results?.sorted(byKeyPath: sortBy).forEach({ object in
-                convertToObjects.append(object as! ObjectType)
-            })
-            completion(convertToObjects, nil)
-        } catch {
-            debugPrint(error)
-            completion([], error)
-        }
-    }
-
-    func readAllWithChanges<ObjectType: AnyObject>(
-        object: ObjectType.Type,
-        sortBy: String,
-        predicate: NSPredicate?
-    ) -> BehaviorRelay<[ObjectType]> {
-        let relay = BehaviorRelay<[ObjectType]>(value: [])
         var results = realm?.objects((ObjectType.self as! Object.Type).self)
         if let predicate = predicate {
             results = results?.filter(predicate)
         }
-        notificationToken = results?.observe { changes in
-            switch changes {
-            case .initial(let values):
-                let sortedValues = values.sorted(byKeyPath: sortBy)
-                debugPrint("Initial values: \(sortedValues)")
-                relay.accept(Array(sortedValues) as! [ObjectType])
-            case .update(_, let deletions, let insertions, let modifications):
-                // Handle deletions, insertions, and modifications
-                // Update relay value accordingly
-                debugPrint("Deletions: \(deletions), Insertions: \(insertions), Modifications: \(modifications)")
-                if let sortedResults = results?.sorted(byKeyPath: sortBy) {
-                    relay.accept(Array(sortedResults) as! [ObjectType])
+        var convertToObjects = [ObjectType]()
+        results?.sorted(byKeyPath: sortBy).forEach({ object in
+            convertToObjects.append(object as! ObjectType)
+        })
+        completion(.success(convertToObjects))
+    }
+
+    func readAll<ObjectType: AnyObject>(
+        object: ObjectType.Type,
+        sortBy: String,
+        predicate: NSPredicate?
+    ) -> Observable<[ObjectType]> {
+        var results = realm?.objects((ObjectType.self as! Object.Type).self)
+
+        if let predicate = predicate {
+            results = results?.filter(predicate)
+        }
+
+        return Observable<[ObjectType]>.create {observer in
+            let notificationToken = results?.observe { changes in
+                switch changes {
+                case .initial(let values):
+                    let sortedValues = Array(values.sorted(byKeyPath: sortBy).map { $0 as! ObjectType })
+                    observer.onNext(sortedValues)
+                case .update(_, let deletions, let insertions, let modifications):
+                    // Handle deletions, insertions, and modifications
+                    // Update relay value accordingly
+                    debugPrint("Deletions: \(deletions), Insertions: \(insertions), Modifications: \(modifications)")
+                    if let sortedResults = results?.sorted(byKeyPath: sortBy).map({ $0 as! ObjectType }) {
+                        observer.onNext(Array(sortedResults))
+                    }
+                case .error(let error):
+                    debugPrint("Error occurred: \(error)")
                 }
-            case .error(let error):
-                debugPrint("Error occurred: \(error)")
+            }
+            return Disposables.create {
+                notificationToken?.invalidate()
             }
         }
-        // Retain the notification token somewhere for cleanup when needed
-        // For example: self.notificationToken = notificationToken
-        return relay
     }
     // swiftlint:enable force_cast
 }

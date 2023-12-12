@@ -19,17 +19,15 @@ class LibraryInteractorImpl: LibraryInteractor {
 
     var userRepository: UserRepository?
 
-    func getPopularMovies() {}
-
     func getBookmarkedMovies() {
-//        if let relay = userRepository?.getBookmarkedMovies() {
-//            self.presenter?.interactorDidFetchBookmarkedMovies(with: relay)
-//        }
+        if let observable = userRepository?.getBookmarkedMovies() {
+            self.presenter?.interactorDidFetchBookmarkedMovies(with: observable)
+        }
     }
 
     func getBookmarkedTVShows() {
-//        if let relay = userRepository?.getBookmarkedTVShows() {
-//            self.presenter?.interactorDidFetchBookmarkedTVShows(with: relay)
-//        }
+        if let observable = userRepository?.getBookmarkedTVShows() {
+            self.presenter?.interactorDidFetchBookmarkedTVShows(with: observable)
+        }
     }
 }

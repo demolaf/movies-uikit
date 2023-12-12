@@ -243,24 +243,7 @@ class DetailHeaderView: UIView {
             }
             debugPrint("Bookmarked \(show.bookmarked)")
             updateBookmarkedState(bookmarked: show.bookmarked)
-            // addObserverOnMovie(movie: movie)
         }
-    }
-
-    private func addObserverOnMovie(movie: Show) {
-//        notificationToken = movie.observe(keyPaths: ["bookmarked"]) { [weak self] change in
-//            switch change {
-//            case .error(let error):
-//                debugPrint("Object error \(error)")
-//            case .change(_, let properties):
-//                properties.forEach { change in
-//                    debugPrint("change \(change)")
-//                }
-//                self?.updateBookmarkedState(bookmarked: movie.bookmarked)
-//            case .deleted:
-//                debugPrint("Object deleted")
-//            }
-//        }
     }
 
     private func updateBookmarkedState(bookmarked: Bool) {

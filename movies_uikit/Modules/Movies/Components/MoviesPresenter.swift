@@ -7,9 +7,6 @@
 
 import Foundation
 
-// Presenter usually uses two protocols:
-// 1. for actions from the view
-// 2. for actions from the interactor
 protocol MoviesPresenter: AnyObject {
     var view: MoviesView? { get set }
     var interactor: MoviesInteractor? { get set }

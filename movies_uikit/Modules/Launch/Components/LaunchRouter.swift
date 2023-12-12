@@ -12,7 +12,7 @@ protocol LaunchRouter: AnyObject {
     var entry: UIViewController? { get }
 
     static func route() -> LaunchRouter
-    
+
     func navigateToMainTabVC()
 }
 
@@ -45,7 +45,7 @@ class LaunchRouterImpl: LaunchRouter {
 
         return router
     }
-    
+
     func navigateToMainTabVC() {
         entry?.navigationController?.pushViewController(Routes.mainTab.vc, animated: true)
     }

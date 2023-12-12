@@ -17,19 +17,19 @@ protocol LocalStorage {
 
     func read<ObjectType: AnyObject>(
         object: ObjectType.Type,
-        completion: @escaping (AnyObject?, Error?) -> Void
+        completion: @escaping (Result<ObjectType, Error>) -> Void
     )
 
     func readAll<ObjectType: AnyObject>(
         object: ObjectType.Type,
         sortBy: String,
         predicate: NSPredicate?,
-        completion: @escaping ([ObjectType], Error?) -> Void
+        completion: @escaping (Result<[ObjectType], Error>) -> Void
     )
 
-    func readAllWithChanges<ObjectType: AnyObject>(
+    func readAll<ObjectType: AnyObject>(
         object: ObjectType.Type,
         sortBy: String,
         predicate: NSPredicate?
-    ) -> BehaviorRelay<[ObjectType]>
+    ) -> Observable<[ObjectType]>
 }

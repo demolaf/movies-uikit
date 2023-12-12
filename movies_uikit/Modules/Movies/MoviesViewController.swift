@@ -17,7 +17,11 @@ enum MoviesSectionType {
 protocol MoviesView: AnyObject {
     var presenter: MoviesPresenter? { get set }
 
-    func update(popularMovies: [Show], newMovies: [Show], upcomingMovies: [Show])
+    func update(
+        popularMovies: [Show],
+        newMovies: [Show],
+        upcomingMovies: [Show]
+    )
 }
 
 class MoviesViewController: UIViewController, MoviesView {
@@ -135,11 +139,6 @@ extension MoviesViewController {
         navigationItem.setLeftBarButtonItems(leadingBarButtonItems, animated: true)
         navigationItem.hidesBackButton = true
         navigationItem.searchController = searchController
-        if #available(iOS 16.0, *) {
-            navigationItem.preferredSearchBarPlacement = .inline
-        } else {
-            // Fallback on earlier versions
-        }
     }
 
     private func applyConstraints() {
@@ -363,7 +362,7 @@ extension MoviesViewController: UISearchResultsUpdating {
             return
         }
 
-        //presenter?.searchForTVShow(with: text)
+        // presenter?.searchForTVShow(with: text)
 
 //        let vc = searchController.searchResultsController as? ReusableTableViewController
 //        searchResults.subscribe(onNext: { tvShows in

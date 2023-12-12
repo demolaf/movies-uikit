@@ -53,4 +53,25 @@ class MovieDTO: Object, Codable {
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
+
+    convenience init(
+        backdropPath: String,
+        movieId: Int,
+        originalTitle: String,
+        overview: String,
+        posterPath: String,
+        releaseDate: String,
+        voteAverage: Double,
+        bookmarked: Bool
+    ) {
+        self.init()
+        self.backdropPath = backdropPath
+        self.movieId = movieId
+        self.originalTitle = originalTitle
+        self.overview = overview
+        self.posterPath = posterPath
+        self.releaseDate = releaseDate
+        self.voteAverage = voteAverage
+        self.bookmarked = bookmarked
+    }
 }

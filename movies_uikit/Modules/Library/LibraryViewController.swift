@@ -12,8 +12,8 @@ import RxRelay
 protocol LibraryView: AnyObject {
     var presenter: LibraryPresenter? { get set }
 
-    func update(movies: BehaviorRelay<[Show]>)
-    func update(tvShows: BehaviorRelay<[Show]>)
+    func update(movies: Observable<[Show]>)
+    func update(tvShows: Observable<[Show]>)
 }
 
 enum LibrarySectionType: Int {
@@ -81,6 +81,8 @@ class LibraryViewController: UIViewController, LibraryView {
 
     var presenter: LibraryPresenter?
 
+    private let bag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -97,12 +99,17 @@ class LibraryViewController: UIViewController, LibraryView {
         applyConstraints()
     }
 
-    func update(movies: BehaviorRelay<[Show]>) {
-        viewControllers[0].items.accept(movies.value)
+    func update(movies: Observable<[Show]>) {
+        movies.bind(
+            to: viewControllers[0].items
+        )
+        .disposed(by: bag)
     }
 
-    func update(tvShows: BehaviorRelay<[Show]>) {
-        viewControllers[1].items.accept(tvShows.value)
+    func update(tvShows: Observable<[Show]>) {
+        tvShows.bind(
+            to: viewControllers[1].items
+        ).disposed(by: bag)
     }
 }
 

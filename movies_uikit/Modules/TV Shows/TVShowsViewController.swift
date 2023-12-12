@@ -187,7 +187,9 @@ extension TVShowsViewController: UISearchResultsUpdating {
 
         let vc = searchController.searchResultsController as? ReusableTableViewController
         searchResults.subscribe(onNext: { tvShows in
-            vc?.items.accept(tvShows)
+            DispatchQueue.main.async {
+                vc?.items.accept(tvShows)
+            }
         }).disposed(by: disposeBag)
     }
 }
