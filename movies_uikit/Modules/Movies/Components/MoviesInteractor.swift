@@ -17,6 +17,7 @@ protocol MoviesInteractor: AnyObject {
      func getPopularMovies()
      func getNewMovies()
      func getUpcomingMovies()
+    func searchForMovie(with query: String)
 }
 
 class MoviesInteractorImpl: MoviesInteractor {
@@ -51,12 +52,20 @@ class MoviesInteractorImpl: MoviesInteractor {
     func getUpcomingMovies() {
         presenter?.group?.enter()
         moviesRepository?.getMovies(
-            categoryType: "popular"
+            categoryType: "top_rated"
         ) { [weak self] movies in
             defer {
                 self?.presenter?.group?.leave()
             }
             self?.presenter?.interactorDidFetchUpcomingMovies(with: movies)
+        }
+    }
+
+    func searchForMovie(with query: String) {
+        moviesRepository?.getMovieSearchResults(
+            from: query
+        ) { [weak self] movies in
+            self?.presenter?.interactorDidFetchSearchResults(with: movies)
         }
     }
 }

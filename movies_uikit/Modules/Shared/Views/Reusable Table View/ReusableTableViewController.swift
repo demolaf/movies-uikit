@@ -14,12 +14,11 @@ protocol ReusableTableViewControllerDelegate: AnyObject {
 }
 
 class ReusableTableViewController: UIViewController, UITableViewDelegate {
-
-    var items = BehaviorRelay<[Show]>(value: [])
-
-    private var bag = DisposeBag()
-
-    var delegate: ReusableTableViewControllerDelegate?
+    private var loadingIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
+    }()
 
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -32,25 +31,54 @@ class ReusableTableViewController: UIViewController, UITableViewDelegate {
         return tableView
     }()
 
+    var items = BehaviorRelay<[Show]>(value: [])
+
+    private let bag = DisposeBag()
+
+    var delegate: ReusableTableViewControllerDelegate?
+
+    private let showLoadingIndicatorSubject = BehaviorSubject<Bool>(value: false)
+    var showLoadingIndicator: BehaviorSubject<Bool> {
+        return showLoadingIndicatorSubject
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         view.backgroundColor = .systemBackground
 
-        self.view.addSubview(tableView)
+        view.addSubview(tableView)
+        view.addSubview(loadingIndicator)
 
-        bindTableData()
+        bindLoadingIndicator()
+        bindTableView()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         tableView.frame = self.view.bounds
+        loadingIndicator.center = view.center
     }
 
-    private func bindTableData() {
-        items.debug("items in resuable vc")
+    private func bindLoadingIndicator() {
+        showLoadingIndicatorSubject
+            .subscribe { [weak self] loading in
+                if loading {
+                    self?.tableView.isHidden = true
+                    self?.loadingIndicator.startAnimating()
+                } else {
+                    self?.tableView.isHidden = false
+                    self?.loadingIndicator.stopAnimating()
+                }
+            }
+            .disposed(by: bag)
+    }
+
+    private func bindTableView() {
+        items
+            .debug("items in resuable vc")
             .subscribe(onNext: {[weak self] items in
                 if items.isEmpty {
                     self?.tableView.setEmptyView(
@@ -60,7 +88,8 @@ class ReusableTableViewController: UIViewController, UITableViewDelegate {
                 } else {
                     self?.tableView.restore()
                 }
-            }).disposed(by: bag)
+            })
+            .disposed(by: bag)
 
         // Bind items to table
         items.bind(
@@ -70,7 +99,8 @@ class ReusableTableViewController: UIViewController, UITableViewDelegate {
         ) { _, item, cell in
             cell.selectionStyle = .none
             cell.configureViewData(show: item)
-        }.disposed(by: bag)
+        }
+        .disposed(by: bag)
 
         // Bind a model selected handler
         tableView.rx.modelSelected(Show.self).bind { [weak self] item in
@@ -83,7 +113,8 @@ class ReusableTableViewController: UIViewController, UITableViewDelegate {
                     self?.navigationController?.pushViewController(detailVC, animated: true)
                 }
             }
-        }.disposed(by: bag)
+        }
+        .disposed(by: bag)
 
         tableView
             .rx.setDelegate(self)

@@ -1,14 +1,14 @@
 //
-//  TVShowsViewController+CollectionView.swift
+//  MoviesViewController+CollectionView.swift
 //  movies_uikit
 //
-//  Created by Ademola Fadumo on 03/12/2023.
+//  Created by Ademola Fadumo on 12/12/2023.
 //
 
 import Foundation
 import UIKit
 
-extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func numberOfSections(
         in collectionView: UICollectionView
@@ -22,12 +22,12 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
     ) -> Int {
         let section = sections[section]
         switch section {
-        case .carousel(let tvShows):
-            return tvShows.count
-        case .topSection(let tvShows):
-            return tvShows.count > 5 ? 5 : tvShows.count
-        case .bottomSection(let tvShows):
-            return tvShows.count > 5 ? 5 : tvShows.count
+        case .carousel(let movies):
+            return movies.count
+        case .topSection(let movies):
+            return movies.count > 5 ? 5 : movies.count
+        case .bottomSection(let movies):
+            return movies.count > 5 ? 5 : movies.count
         }
     }
 
@@ -40,7 +40,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
         let type = self.sections[indexPath.section]
 
         switch type {
-        case .carousel(let tvShows):
+        case .carousel(let movies):
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: CarouselItemCollectionViewCell.reuseId,
                 for: indexPath
@@ -48,10 +48,10 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return UICollectionViewCell()
             }
 
-            let tvShow = tvShows[indexPath.row]
-            cell.configureViewData(show: tvShow)
+            let movie = movies[indexPath.row]
+            cell.configureViewData(show: movie)
             return cell
-        case .topSection(let tvShows):
+        case .topSection(let movies):
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: SubSectionItemCollectionViewCell.reuseId,
                 for: indexPath
@@ -59,10 +59,10 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return UICollectionViewCell()
             }
 
-            let tvShow = tvShows[indexPath.row]
-            cell.configureViewData(show: tvShow)
+            let movie = movies[indexPath.row]
+            cell.configureViewData(show: movie)
             return cell
-        case .bottomSection(let tvShows):
+        case .bottomSection(let movies):
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: SubSectionItemCollectionViewCell.reuseId,
                 for: indexPath
@@ -70,22 +70,26 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return UICollectionViewCell()
             }
 
-            let tvShow = tvShows[indexPath.row]
-            cell.configureViewData(show: tvShow)
+            let movie = movies[indexPath.row]
+            cell.configureViewData(show: movie)
             return cell
         }
+
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         let section = sections[indexPath.section]
 
         switch section {
-        case .carousel(tvShows: let tvShows):
-            self.presenter?.tvShowItemTapped(item: tvShows[indexPath.row])
-        case .topSection(tvShows: let tvShows):
-            self.presenter?.tvShowItemTapped(item: tvShows[indexPath.row])
-        case .bottomSection(tvShows: let tvShows):
-            self.presenter?.tvShowItemTapped(item: tvShows[indexPath.row])
+        case .carousel(movies: let movies):
+            self.presenter?.movieItemTapped(item: movies[indexPath.row])
+        case .topSection(movies: let movies):
+            self.presenter?.movieItemTapped(item: movies[indexPath.row])
+        case .bottomSection(movies: let movies):
+            self.presenter?.movieItemTapped(item: movies[indexPath.row])
         }
     }
 
@@ -106,20 +110,20 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
 
         switch section {
         case .carousel: break
-        case .topSection(let tvShows):
+        case .topSection(let movies):
             headerView.configureHeaderLeadingText(leadingText: section.titleValue)
             headerView.viewAllButtonPressedCallback = {
                 self.presenter?.viewAllButtonTapped(
                     sectionTitle: section.titleValue,
-                    items: tvShows
+                    items: movies
                 )
             }
-        case .bottomSection(let tvShows):
+        case .bottomSection(let movies):
             headerView.configureHeaderLeadingText(leadingText: section.titleValue)
             headerView.viewAllButtonPressedCallback = {
                 self.presenter?.viewAllButtonTapped(
                     sectionTitle: section.titleValue,
-                    items: tvShows
+                    items: movies
                 )
             }
         }
@@ -130,9 +134,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
     func createSectionLayout(
         section: Int
     ) -> NSCollectionLayoutSection {
-
         let type = sections[section]
-
         switch type {
         case .carousel:
             // Item
@@ -143,12 +145,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 )
             )
 
-            item.contentInsets = NSDirectionalEdgeInsets(
-                top: 0,
-                leading: 0,
-                bottom: 0,
-                trailing: 24
-            )
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 24)
 
             let group = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(
@@ -171,12 +168,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 )
             )
 
-            item.contentInsets = NSDirectionalEdgeInsets(
-                top: 0,
-                leading: 0,
-                bottom: 0,
-                trailing: 24
-            )
+            item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 24)
             let group = NSCollectionLayoutGroup.horizontal(
                 layoutSize: NSCollectionLayoutSize(
                     widthDimension: .absolute(150),
@@ -192,6 +184,7 @@ extension TVShowsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .absolute(50.0)
             )
+
             let header = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: footerHeaderSize,
                 elementKind: UICollectionView.elementKindSectionHeader,

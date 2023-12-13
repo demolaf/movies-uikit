@@ -6,14 +6,14 @@
 //
 
 import UIKit
+import RxSwift
 
 class DetailDescriptionView: UIView {
 
     private let rootStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 24
-        stackView.alignment = .fill
+        stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
@@ -30,12 +30,27 @@ class DetailDescriptionView: UIView {
         return label
     }()
 
-    private let seeMoreButton: UIButton = {
-        let button = UIButton()
+    private lazy var seeMoreButton: UIButton = {
+        let button = UIButton(type: .custom)
         button.setTitle("See More", for: .normal)
-        button.setTitleColor(.label, for: .normal)
+        button.setTitleColor(.systemGray, for: .normal)
         button.sizeToFit()
+        button.configuration = .plain()
+        button.configuration?.contentInsets = .zero
         button.backgroundColor = .clear
+        button.addAction(
+            UIAction(handler: {[weak self] _ in
+                if self?.descriptionLabel.numberOfLines != 0 {
+                    self?.descriptionLabel.numberOfLines = 0
+                    button.setTitle("See Less", for: .normal)
+                } else {
+                    self?.descriptionLabel.numberOfLines = 3
+                    button.setTitle("See More", for: .normal)
+                }
+
+            }),
+            for: .primaryActionTriggered
+        )
         return button
     }()
 
@@ -65,8 +80,9 @@ class DetailDescriptionView: UIView {
 
     private func initializeSubviews() {
         self.addSubview(rootStackView)
+        self.addSubview(separator)
         rootStackView.addArrangedSubview(descriptionLabel)
-        rootStackView.addArrangedSubview(separator)
+        rootStackView.addArrangedSubview(seeMoreButton)
     }
 
     private func applyConstraints() {
@@ -74,13 +90,24 @@ class DetailDescriptionView: UIView {
             rootStackView.topAnchor.constraint(equalTo: self.topAnchor),
             rootStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             rootStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            rootStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            rootStackView.bottomAnchor.constraint(equalTo: self.separator.topAnchor, constant: -24),
+            //
+            separator.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
+            separator.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
+            separator.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
 
     func configureViewData(show: Show?) {
         if let show = show {
             self.descriptionLabel.text = show.overview
+            if show.overview.count > 100 {
+                self.descriptionLabel.numberOfLines = 3
+                seeMoreButton.isHidden = false
+            } else {
+                self.descriptionLabel.numberOfLines = 0
+                seeMoreButton.isHidden = true
+            }
         }
     }
 }

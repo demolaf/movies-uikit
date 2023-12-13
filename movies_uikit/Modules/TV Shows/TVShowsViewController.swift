@@ -11,16 +11,30 @@ import RxRelay
 
 protocol TVShowsView: AnyObject {
     var presenter: TVShowsPresenter? { get set }
-    // this is a computed property?
     var searchResults: BehaviorSubject<[Show]> { get }
 
-    func update(popularTVShows: [Show], topRatedTVShows: [Show], onTheAirTVShows: [Show])
+    func update(
+        popularTVShows: [Show],
+        topRatedTVShows: [Show],
+        onTheAirTVShows: [Show]
+    )
 }
 
 enum TVSectionType {
-    case popular(tvShows: [Show])
-    case topRated(tvShows: [Show])
-    case onTheAir(tvShows: [Show])
+    case carousel(tvShows: [Show])
+    case topSection(tvShows: [Show])
+    case bottomSection(tvShows: [Show])
+
+    var titleValue: String {
+        switch self {
+        case .carousel:
+            return ""
+        case .topSection:
+            return "Top Rated"
+        case .bottomSection:
+            return "On The Air"
+        }
+    }
 }
 
 class TVShowsViewController: UIViewController, TVShowsView {
@@ -85,7 +99,7 @@ class TVShowsViewController: UIViewController, TVShowsView {
 
     let searchResults = BehaviorSubject<[Show]>(value: [])
 
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
 
     // MARK: Initialization
 
@@ -125,9 +139,9 @@ class TVShowsViewController: UIViewController, TVShowsView {
         topRatedTVShows: [Show],
         onTheAirTVShows: [Show]
     ) {
-        sections.append(.popular(tvShows: popularTVShows))
-        sections.append(.topRated(tvShows: topRatedTVShows))
-        sections.append(.onTheAir(tvShows: onTheAirTVShows))
+        sections.append(.carousel(tvShows: popularTVShows))
+        sections.append(.topSection(tvShows: topRatedTVShows))
+        sections.append(.bottomSection(tvShows: onTheAirTVShows))
 
         loadingIndicator.stopAnimating()
         collectionView.reloadData()
@@ -179,18 +193,34 @@ extension TVShowsViewController {
 
 extension TVShowsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else {
-            return
-        }
-
-        presenter?.searchForTVShow(with: text)
-
         let vc = searchController.searchResultsController as? ReusableTableViewController
-        searchResults.subscribe(onNext: { tvShows in
-            DispatchQueue.main.async {
-                vc?.items.accept(tvShows)
+
+        searchResults
+            .debounce(.seconds(2), scheduler: MainScheduler())
+            .subscribe(onNext: { tvShows in
+                DispatchQueue.main.async {
+                    vc?.showLoadingIndicator.onNext(false)
+                    vc?.items.accept(tvShows)
+                }
+        })
+        .disposed(by: disposeBag)
+
+        searchController
+            .searchBar.rx
+            .text
+            .do(onNext: { _ in
+                DispatchQueue.main.async {
+                    vc?.showLoadingIndicator.onNext(true)
+                }
+            })
+            .debounce(.seconds(2), scheduler: MainScheduler())
+            .subscribe { [weak self] text in
+                guard let text = text else {
+                    return
+                }
+                self?.presenter?.searchForTVShow(with: text)
             }
-        }).disposed(by: disposeBag)
+            .disposed(by: disposeBag)
     }
 }
 

@@ -66,6 +66,7 @@
 		7E6428E82AA9685800CF1752 /* sith-de-mayo.riv in Resources */ = {isa = PBXBuildFile; fileRef = 7E6428E72AA9685800CF1752 /* sith-de-mayo.riv */; };
 		7E70DB1A2A9960230024FE23 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70DB192A9960230024FE23 /* AppRouter.swift */; };
 		7E8AE0A92AE0938400F8176B /* TableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8AE0A82AE0938400F8176B /* TableView+Extensions.swift */; };
+		7E9F0D6E2B28053C00607806 /* MoviesViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F0D6D2B28053C00607806 /* MoviesViewController+CollectionView.swift */; };
 		7EA58C822B0D1C11001E0C03 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */; };
 		7EA58C832B0D1C11001E0C03 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; };
@@ -201,6 +202,7 @@
 		7E6428E72AA9685800CF1752 /* sith-de-mayo.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sith-de-mayo.riv"; sourceTree = "<group>"; };
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		7E8AE0A82AE0938400F8176B /* TableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extensions.swift"; sourceTree = "<group>"; };
+		7E9F0D6D2B28053C00607806 /* MoviesViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		7EC468BD2AA2AA2200B6D28F /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
@@ -532,6 +534,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7E9F0D6C2B28052000607806 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7E9F0D6D2B28053C00607806 /* MoviesViewController+CollectionView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		7EC468B52AA2AA1C00B6D28F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,6 +711,7 @@
 			isa = PBXGroup;
 			children = (
 				7EEAAD762A9930A50087AF46 /* Components */,
+				7E9F0D6C2B28052000607806 /* Extensions */,
 				7EEAAD732A9922FF0087AF46 /* Views */,
 				7EEAAD712A9920950087AF46 /* MoviesViewController.swift */,
 			);
@@ -776,7 +787,6 @@
 			isa = PBXGroup;
 			children = (
 				7EF4AFBB2A82DC970001B902 /* movies_uikit */,
-				7E320BCF2AA7E5B30048750F /* Tests */,
 				7EF4AFBA2A82DC970001B902 /* Products */,
 				7EC468B52AA2AA1C00B6D28F /* Frameworks */,
 			);
@@ -800,6 +810,7 @@
 				7EEAAD612A98E1F00087AF46 /* Data */,
 				7EEAAD5F2A98E1800087AF46 /* Modules */,
 				7EF4AFCA2A82DC980001B902 /* Info.plist */,
+				7E320BCF2AA7E5B30048750F /* Tests */,
 				7EC468D82AA2C29200B6D28F /* Development.xcconfig */,
 			);
 			path = movies_uikit;
@@ -988,6 +999,7 @@
 				7E320BBD2AA7903F0048750F /* AuthAPI.swift in Sources */,
 				7E0807FD2AA4242400E6E5C2 /* TVShowsBarButtonItem.swift in Sources */,
 				7E320BC02AA790550048750F /* CreateSession.swift in Sources */,
+				7E9F0D6E2B28053C00607806 /* MoviesViewController+CollectionView.swift in Sources */,
 				7E0807EF2AA410C000E6E5C2 /* LibraryRouter.swift in Sources */,
 				7E0807E02AA40C1200E6E5C2 /* TVShowsViewController.swift in Sources */,
 				7EC468D22AA2AE0200B6D28F /* LocalStorage.swift in Sources */,

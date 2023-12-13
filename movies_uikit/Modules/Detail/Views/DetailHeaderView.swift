@@ -16,12 +16,6 @@ class DetailHeaderView: UIView {
 
     private let rootView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 24
-        view.backgroundColor = .systemBackground
-        view.layer.maskedCorners = [
-            .layerMinXMinYCorner,
-            .layerMaxXMinYCorner
-        ]
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -63,14 +57,6 @@ class DetailHeaderView: UIView {
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         return stackView
-    }()
-
-    private let posterImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
     }()
 
     private let titleLabel: UILabel = {
@@ -125,7 +111,7 @@ class DetailHeaderView: UIView {
         return button
     }()
 
-    private let saveForLaterButton: UIButton = {
+    private let plusButton: UIButton = {
         let button = UIButton()
         button.configuration = .plain()
         button.setImage(
@@ -168,20 +154,19 @@ class DetailHeaderView: UIView {
     private func initializeSubviews() {
         self.clipsToBounds = true
 
-        self.addSubview(posterImageView)
         self.addSubview(rootView)
 
         //
         rootView.addSubview(rootStackView)
+        rootView.addSubview(separator)
 
         //
         rootStackView.addArrangedSubview(topStackView)
         rootStackView.addArrangedSubview(bottomStackView)
-        rootStackView.addArrangedSubview(separator)
 
         //
         topStackView.addArrangedSubview(titleLabel)
-        topStackView.addArrangedSubview(saveForLaterButton)
+        topStackView.addArrangedSubview(plusButton)
 
         //
         bottomStackView.addArrangedSubview(subTitleStackView)
@@ -195,15 +180,10 @@ class DetailHeaderView: UIView {
     private func applyConstraints() {
         NSLayoutConstraint.activate([
             //
-            posterImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            posterImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            posterImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            posterImageView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.7),
-
-            //
-            rootView.topAnchor.constraint(equalTo: self.posterImageView.bottomAnchor, constant: -24),
+            rootView.topAnchor.constraint(equalTo: self.topAnchor),
             rootView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             rootView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            rootView.bottomAnchor.constraint(equalTo: self.separator.topAnchor),
 
             //
             rootStackView.topAnchor.constraint(equalTo: self.rootView.topAnchor),
@@ -212,12 +192,14 @@ class DetailHeaderView: UIView {
             rootStackView.bottomAnchor.constraint(equalTo: self.rootView.bottomAnchor),
 
             //
-            topStackView.heightAnchor.constraint(equalToConstant: self.frame.height * 0.1)
+            separator.leadingAnchor.constraint(equalTo: self.rootView.leadingAnchor, constant: 24),
+            separator.trailingAnchor.constraint(equalTo: self.rootView.trailingAnchor, constant: -24),
+            separator.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -24)
         ])
     }
 
     private func initializeTapGestureRecognizers() {
-        saveForLaterButton.addTarget(
+        plusButton.addTarget(
             self,
             action: #selector(saveForLaterButtonPressed),
             for: .touchUpInside
@@ -233,14 +215,6 @@ class DetailHeaderView: UIView {
         if let show = show {
             self.titleLabel.text = show.title
             self.releaseDateLabel.text = show.releaseDate
-            if let backdropPath = show.backdropPath {
-                self.posterImageView.sd_setImage(
-                    with: HTTPConstants.Endpoints.posterPath(
-                        url: backdropPath,
-                        quality: "original"
-                    ).url
-                )
-            }
             debugPrint("Bookmarked \(show.bookmarked)")
             updateBookmarkedState(bookmarked: show.bookmarked)
         }
@@ -248,10 +222,10 @@ class DetailHeaderView: UIView {
 
     private func updateBookmarkedState(bookmarked: Bool) {
         if bookmarked {
-            saveForLaterButton.imageView?.image = UIImage(systemName: "checkmark")?.withTintColor(
+            plusButton.imageView?.image = UIImage(systemName: "checkmark")?.withTintColor(
                 .systemRed, renderingMode: .alwaysOriginal)
         } else {
-            saveForLaterButton.imageView?.image = UIImage(systemName: "plus")?.withTintColor(
+            plusButton.imageView?.image = UIImage(systemName: "plus")?.withTintColor(
                 .systemRed, renderingMode: .alwaysOriginal)
         }
     }

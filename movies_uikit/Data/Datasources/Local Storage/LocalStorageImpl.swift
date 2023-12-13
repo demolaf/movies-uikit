@@ -80,6 +80,7 @@ class LocalStorageImpl: LocalStorage {
         completion(.success(convertToObjects))
     }
 
+    // TODO: refactor this to not directly interact with RxSwift but let UserAPI do it
     func readAll<ObjectType: AnyObject>(
         object: ObjectType.Type,
         sortBy: String,

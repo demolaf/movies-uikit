@@ -16,6 +16,12 @@ protocol DetailView: AnyObject {
 
 class DetailViewController: UIViewController, DetailView {
 
+    private let rootView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
     private let rootScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -25,21 +31,32 @@ class DetailViewController: UIViewController, DetailView {
 
     private let rootScrollStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.layer.cornerRadius = 24
+        stackView.backgroundColor = .systemBackground
+        stackView.layer.maskedCorners = [
+            .layerMinXMinYCorner,
+            .layerMaxXMinYCorner
+        ]
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 24
+        stackView.backgroundColor = .systemBackground
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+
+    private let headerImageView: UIImageView = {
+        let imageView = UIImageView()
+        // without this causes the imageview to bleed out of the frame
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
     private let detailHeaderView: DetailHeaderView = {
         let headerView = DetailHeaderView()
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.heightAnchor.constraint(
-            equalTo: headerView.widthAnchor,
-            multiplier: 1.5
-        ).isActive = true
         return headerView
     }()
 
@@ -76,17 +93,24 @@ class DetailViewController: UIViewController, DetailView {
     }
 
     private func initializeSubviews() {
-        self.view.addSubview(rootScrollView)
+        self.view.addSubview(rootView)
+        rootView.addSubview(headerImageView)
+        rootView.addSubview(rootScrollView)
         rootScrollView.addSubview(rootScrollStackView)
-
         rootScrollStackView.addArrangedSubview(detailHeaderView)
         rootScrollStackView.addArrangedSubview(detailDescriptionView)
         rootScrollStackView.addArrangedSubview(recommendationsBasedOnItemView)
     }
 
     func initializeViewData(show: Show) {
-        // TODO: Check if movie or tvShow is in db for "saveForLater" button
-        // self.title = movie.originalTitle
+        if let backdropPath = show.backdropPath {
+            self.headerImageView.sd_setImage(
+                with: HTTPConstants.Endpoints.posterPath(
+                    url: backdropPath,
+                    quality: "original"
+                ).url
+            )
+        }
         detailHeaderView.configureViewData(show: show)
         detailDescriptionView.configureViewData(show: show)
         presenter?.getRecommendedMovies(id: String(show.id))
@@ -99,7 +123,6 @@ class DetailViewController: UIViewController, DetailView {
                 items: items
             )
         }
-
         recommendationsBasedOnItemView.itemSelectedCallback = { item in
             self.presenter?.recommendedItemTapped(item: item)
         }
@@ -115,24 +138,40 @@ class DetailViewController: UIViewController, DetailView {
 
     private func applyConstraints() {
         NSLayoutConstraint.activate([
-            //
-            rootScrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            rootScrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            rootScrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            rootScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                //
+                rootView.topAnchor.constraint(equalTo: view.topAnchor),
+                rootView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                rootView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                rootView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            //
-            rootScrollStackView.topAnchor.constraint(
-                equalTo: self.rootScrollView.contentLayoutGuide.topAnchor
-            ),
-            rootScrollStackView.leadingAnchor.constraint(
-                equalTo: self.rootScrollView.contentLayoutGuide.leadingAnchor
-            ),
-            rootScrollStackView.trailingAnchor.constraint(
-                equalTo: self.rootScrollView.contentLayoutGuide.trailingAnchor
-            ),
-            rootScrollStackView.bottomAnchor.constraint(equalTo: self.rootScrollView.contentLayoutGuide.bottomAnchor),
-            rootScrollStackView.widthAnchor.constraint(equalTo: self.rootScrollView.frameLayoutGuide.widthAnchor)
-        ])
+                headerImageView.topAnchor.constraint(equalTo: rootView.topAnchor),
+                headerImageView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor),
+                headerImageView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor),
+                headerImageView.heightAnchor.constraint(equalTo: rootView.heightAnchor, multiplier: 0.5),
+
+                //
+                rootScrollView.topAnchor.constraint(equalTo: rootView.topAnchor),
+                rootScrollView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor),
+                rootScrollView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor),
+                rootScrollView.bottomAnchor.constraint(equalTo: rootView.bottomAnchor),
+
+                //
+                rootScrollStackView.topAnchor.constraint(
+                    equalTo: self.rootScrollView.contentLayoutGuide.topAnchor,
+                    constant: 300
+                ),
+                rootScrollStackView.leadingAnchor.constraint(
+                    equalTo: self.rootScrollView.contentLayoutGuide.leadingAnchor
+                ),
+                rootScrollStackView.trailingAnchor.constraint(
+                    equalTo: self.rootScrollView.contentLayoutGuide.trailingAnchor
+                ),
+                rootScrollStackView.bottomAnchor.constraint(
+                    equalTo: self.rootScrollView.contentLayoutGuide.bottomAnchor
+                ),
+                rootScrollStackView.widthAnchor.constraint(
+                    equalTo: self.rootScrollView.frameLayoutGuide.widthAnchor
+                )
+            ])
     }
 }
