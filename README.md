@@ -1,4 +1,4 @@
-### (WIP) A Movies iOS application built with UIKit (ViewCode), VIPER, Realm, Alamofire and RxSwift.
+### A Movies iOS application built with UIKit (ViewCode), VIPER, Realm, Alamofire and RxSwift.
 [![HitCount](https://hits.dwyl.com/demolaf/movies-uikit.svg?style=flat-square&show=unique)](http://hits.dwyl.com/demolaf/movies-uikit)
 
 ### Content
@@ -11,7 +11,7 @@
 An example iOS project built using UIKit (View Code) and shows how to implement the VIPER architecture.
 
 ## Preview
-https://github.com/demolaf/movies-uikit/assets/48495111/eee18e7c-8e47-405b-a42a-f2e943f07310
+https://github.com/demolaf/movies-uikit/assets/48495111/27f57d39-c782-43b1-9153-617d425e71a5
 
 ## Running the App
 
