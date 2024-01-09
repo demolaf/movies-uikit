@@ -41,8 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 context.url.absoluteString
                 .localizedCaseInsensitiveContains("authenticate") {
 
-                (UIApplication.shared.delegate as? AppDelegate)?
-                    .repositoryProvider
+                RepositoryProvider.shared
                     .authRepository
                     .getSessionId { success in
                     if success {

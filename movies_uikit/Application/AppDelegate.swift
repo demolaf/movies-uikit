@@ -8,7 +8,4 @@
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    let repositoryProvider = RepositoryProvider()
-}
+class AppDelegate: UIResponder, UIApplicationDelegate {}

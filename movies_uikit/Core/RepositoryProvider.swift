@@ -8,6 +8,8 @@
 import Foundation
 
 class RepositoryProvider {
+    static let shared = RepositoryProvider()
+
     let authRepository: AuthRepository
     let moviesRepository: MoviesRepository
     let userRepository: UserRepository
@@ -18,9 +20,9 @@ class RepositoryProvider {
     private let moviesAPI: MoviesAPI
     private let userAPI: UserAPI
 
-    init() {
+    private init() {
         // External services
-        self.httpClient = HTTPClientImpl()
+        self.httpClient = HTTPURLSessionClientImpl()
         self.localStorage = LocalStorageImpl()
 
         // APIs interact with http client and local storage
