@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol HTTPClient {
     /// GET Method
@@ -13,16 +14,15 @@ protocol HTTPClient {
         url: URL?,
         headers: [String: String]?,
         parameters: [String: String]?,
-        response: ResponseType.Type,
-        completion: @escaping (Result<ResponseType, Error>
-    ) -> Void) -> URLSessionTask?
+        response: ResponseType.Type
+    ) -> Observable<Result<ResponseType, APIError>>
 
     /// POST Method
     @discardableResult
     func post<ResponseType: Decodable>(
         url: URL?,
+        headers: [String: String]?,
         parameters: Encodable,
-        response: ResponseType.Type,
-        completion: @escaping (Result<ResponseType, Error>
-    ) -> Void) -> URLSessionTask?
+        response: ResponseType.Type
+    ) -> Observable<Result<ResponseType, APIError>>
 }
