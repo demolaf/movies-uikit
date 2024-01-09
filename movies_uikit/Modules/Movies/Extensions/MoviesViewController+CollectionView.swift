@@ -13,14 +13,14 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func numberOfSections(
         in collectionView: UICollectionView
     ) -> Int {
-        return sections.count
+        return items.value.count
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        let section = sections[section]
+        let section = items.value[section]
         switch section {
         case .carousel(let movies):
             return movies.count
@@ -37,7 +37,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         indexPath: IndexPath
     ) -> UICollectionViewCell {
 
-        let type = self.sections[indexPath.section]
+        let type = self.items.value[indexPath.section]
 
         switch type {
         case .carousel(let movies):
@@ -81,7 +81,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let section = sections[indexPath.section]
+        let section = items.value[indexPath.section]
 
         switch section {
         case .carousel(movies: let movies):
@@ -106,7 +106,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             return UICollectionReusableView()
         }
 
-        let section = sections[indexPath.section]
+        let section = items.value[indexPath.section]
 
         switch section {
         case .carousel: break
@@ -134,7 +134,7 @@ extension MoviesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func createSectionLayout(
         section: Int
     ) -> NSCollectionLayoutSection {
-        let type = sections[section]
+        let type = items.value[section]
         switch type {
         case .carousel:
             // Item

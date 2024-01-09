@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class MoviesRepositoryImpl: MoviesRepository {
     private let moviesAPI: MoviesAPI
@@ -14,102 +15,80 @@ class MoviesRepositoryImpl: MoviesRepository {
         self.moviesAPI = moviesAPI
     }
 
-    func getMovies(
-        categoryType: String,
-        completion: @escaping ([Show]) -> Void
-    ) {
-        moviesAPI.getMovies(
-            categoryType: categoryType
-        ) { result in
+    func getMovies(categoryType: String) -> Observable<Result<[Show], APIError>> {
+        moviesAPI.getMovies(categoryType: categoryType).map { result in
             switch result {
             case .success(let movies):
                 let result = movies.map { $0.toShow() }
-                completion(result)
+                return .success(result)
             case .failure(let error):
                 debugPrint("Failed to fetch movies \(error)")
-                completion([])
+                return .failure(error)
             }
         }
     }
 
-    func getTVShows(
-        categoryType: String,
-        completion: @escaping ([Show]) -> Void
-    ) {
-        moviesAPI.getTVShows(
-            categoryType: categoryType
-        ) { result in
+    func getTVShows(categoryType: String) -> Observable<Result<[Show], APIError>> {
+        moviesAPI.getTVShows(categoryType: categoryType).map { result in
             switch result {
             case .success(let tvShows):
                 let result = tvShows.map { $0.toShow() }
-                completion(result)
+                return .success(result)
             case .failure(let error):
                 debugPrint("Failed to fetch tvShows \(error)")
-                completion([])
+                return .failure(error)
             }
         }
     }
 
-    func getRecommendedShowsForMovie(
-        id: String,
-        completion: @escaping ([Show]) -> Void
-    ) {
-        moviesAPI.getRecommendedShowsByMovie(id: id) { result in
+    func getRecommendedShowsForMovie(id: String) -> Observable<Result<[Show], APIError>> {
+        moviesAPI.getRecommendedShowsByMovie(id: id).map { result in
             switch result {
             case .success(let movies):
                 let result = movies.map { $0.toShow() }
-                completion(result)
+                return .success(result)
             case .failure(let error):
                 debugPrint("Failed to fetch recommended movies \(error)")
-                completion([])
+                return .failure(error)
             }
         }
     }
 
-    func getRecommendedShowsForTVShow(
-        id: String,
-        completion: @escaping ([Show]) -> Void
-    ) {
-        moviesAPI.getRecommendedShowsByTVShow(id: id) { result in
+    func getRecommendedShowsForTVShow(id: String) -> Observable<Result<[Show], APIError>> {
+        moviesAPI.getRecommendedShowsByTVShow(id: id).map { result in
             switch result {
             case .success(let tvShows):
                 let result = tvShows.map { $0.toShow() }
-                completion(result)
+                return .success(result)
             case .failure(let error):
                 debugPrint("Failed to fetch recommended tvshows \(error)")
-                completion([])
+                return .failure(error)
             }
         }
     }
 
-    func getMovieSearchResults(
-        from query: String,
-        completion: @escaping ([Show]) -> Void
-    ) {
-        moviesAPI.getMovieSearchResults(from: query) { result in
+    func getMovieSearchResults(from query: String) -> Observable<Result<[Show], APIError>> {
+        moviesAPI.getMovieSearchResults(from: query).map { result in
             switch result {
             case .success(let movies):
                 let result = movies.map { $0.toShow() }
-                completion(result)
+                return .success(result)
             case .failure(let error):
                 debugPrint("Failed to fetch movie search results \(error)")
-                completion([])
+                return .failure(error)
             }
         }
     }
 
-    func getTVShowsSearchResults(
-        from query: String,
-        completion: @escaping ([Show]) -> Void
-    ) {
-        moviesAPI.getTVShowsSearchResults(from: query) { result in
+    func getTVShowsSearchResults(from query: String) -> Observable<Result<[Show], APIError>> {
+        moviesAPI.getTVShowsSearchResults(from: query).map { result in
             switch result {
             case .success(let tvShows):
                 let result = tvShows.map { $0.toShow() }
-                completion(result)
+                return .success(result)
             case .failure(let error):
                 debugPrint("Failed to fetch tv show search results \(error)")
-                completion([])
+                return .failure(error)
             }
         }
     }

@@ -12,11 +12,9 @@ import Foundation
 // 2. for actions from itself
 // i.e interactor input and output protocols
 protocol MoviesInteractor: AnyObject {
-     var presenter: MoviesPresenter? { get set }
+    var presenter: MoviesPresenter? { get set }
 
-     func getPopularMovies()
-     func getNewMovies()
-     func getUpcomingMovies()
+    func getMovies()
     func searchForMovie(with query: String)
 }
 
@@ -25,47 +23,21 @@ class MoviesInteractorImpl: MoviesInteractor {
 
     var moviesRepository: MoviesRepository?
 
-    func getPopularMovies() {
-        presenter?.group?.enter()
-        moviesRepository?.getMovies(
-            categoryType: "popular"
-        ) { [weak self] movies in
-            defer {
-                self?.presenter?.group?.leave()
-            }
-            self?.presenter?.interactorDidFetchPopularMovies(with: movies)
+    func getMovies() {
+        guard let moviesRepository = moviesRepository else {
+            fatalError("MoviesRepository dependency was not provided")
         }
-    }
-
-    func getNewMovies() {
-        presenter?.group?.enter()
-        moviesRepository?.getMovies(
-            categoryType: "now_playing"
-        ) { [weak self] movies in
-            defer {
-                self?.presenter?.group?.leave()
-            }
-            self?.presenter?.interactorDidFetchNewMovies(with: movies)
-        }
-    }
-
-    func getUpcomingMovies() {
-        presenter?.group?.enter()
-        moviesRepository?.getMovies(
-            categoryType: "top_rated"
-        ) { [weak self] movies in
-            defer {
-                self?.presenter?.group?.leave()
-            }
-            self?.presenter?.interactorDidFetchUpcomingMovies(with: movies)
-        }
+        let popular = moviesRepository.getMovies(categoryType: "popular")
+        let new = moviesRepository.getMovies(categoryType: "now_playing")
+        let upcoming = moviesRepository.getMovies(categoryType: "top_rated")
+        self.presenter?.interactorDidFetchMovies(popular: popular, new: new, upcoming: upcoming)
     }
 
     func searchForMovie(with query: String) {
-        moviesRepository?.getMovieSearchResults(
-            from: query
-        ) { [weak self] movies in
-            self?.presenter?.interactorDidFetchSearchResults(with: movies)
-        }
+//        moviesRepository?.getMovieSearchResults(
+//            from: query
+//        ) { [weak self] movies in
+//            self?.presenter?.interactorDidFetchSearchResults(with: movies)
+//        }
     }
 }

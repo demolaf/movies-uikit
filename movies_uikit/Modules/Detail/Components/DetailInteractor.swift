@@ -27,18 +27,18 @@ class DetailInteractorImpl: DetailInteractor {
     }
 
     func getRecommendedShows(movie id: String) {
-        moviesRepository?.getRecommendedShowsForMovie(
-            id: id
-        ) { [weak self] movies in
-                self?.presenter?.interactorDidFetchRecommendedShows(movies: movies)
-        }
+//        moviesRepository?.getRecommendedShowsForMovie(
+//            id: id
+//        ) { [weak self] movies in
+//                self?.presenter?.interactorDidFetchRecommendedShows(movies: movies)
+//        }
     }
 
     func getRecommendedShows(tvShow id: String) {
-        moviesRepository?.getRecommendedShowsForTVShow(
-            id: id
-        ) { [weak self] tvShows in
-                self?.presenter?.interactorDidFetchRecommendedShows(tvShows: tvShows)
-        }
+//        moviesRepository?.getRecommendedShowsForTVShow(
+//            id: id
+//        ) { [weak self] tvShows in
+//                self?.presenter?.interactorDidFetchRecommendedShows(tvShows: tvShows)
+//        }
     }
 }

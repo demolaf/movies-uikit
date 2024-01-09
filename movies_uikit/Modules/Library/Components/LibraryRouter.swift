@@ -31,10 +31,7 @@ class LibraryRouterImpl: LibraryRouter {
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.userRepository =
-        (UIApplication.shared.delegate as? AppDelegate)?
-            .repositoryProvider
-            .userRepository
+        interactor.userRepository = RepositoryProvider.shared.userRepository
 
         // setup presenter with router, view and interactor
         presenter.router = router

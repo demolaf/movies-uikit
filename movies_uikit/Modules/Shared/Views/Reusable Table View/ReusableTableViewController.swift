@@ -64,13 +64,16 @@ class ReusableTableViewController: UIViewController, UITableViewDelegate {
 
     private func bindLoadingIndicator() {
         showLoadingIndicatorSubject
+            .distinctUntilChanged()
             .subscribe { [weak self] loading in
-                if loading {
-                    self?.tableView.isHidden = true
-                    self?.loadingIndicator.startAnimating()
-                } else {
-                    self?.tableView.isHidden = false
-                    self?.loadingIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    if loading {
+                        self?.tableView.isHidden = true
+                        self?.loadingIndicator.startAnimating()
+                    } else {
+                        self?.tableView.isHidden = false
+                        self?.loadingIndicator.stopAnimating()
+                    }
                 }
             }
             .disposed(by: bag)
@@ -80,13 +83,15 @@ class ReusableTableViewController: UIViewController, UITableViewDelegate {
         items
             .debug("items in resuable vc")
             .subscribe(onNext: {[weak self] items in
-                if items.isEmpty {
-                    self?.tableView.setEmptyView(
-                        title: "No Items",
-                        message: ""
-                    )
-                } else {
-                    self?.tableView.restore()
+                DispatchQueue.main.async {
+                    if items.isEmpty {
+                        self?.tableView.setEmptyView(
+                            title: "No Items",
+                            message: ""
+                        )
+                    } else {
+                        self?.tableView.restore()
+                    }
                 }
             })
             .disposed(by: bag)

@@ -37,7 +37,6 @@ class HeaderCollectionResuableView: UICollectionReusableView {
             range: NSRange(titleRange, in: title)
         )
         button.setAttributedTitle(attributedString, for: .normal)
-
         return button
     }()
 

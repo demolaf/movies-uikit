@@ -6,19 +6,23 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol MoviesPresenter: AnyObject {
     var view: MoviesView? { get set }
     var interactor: MoviesInteractor? { get set }
     var router: MoviesRouter? { get set }
-    var group: DispatchGroup? { get set }
 
-    func initialize()
-    func interactorDidFetchPopularMovies(with movies: [Show])
-    func interactorDidFetchNewMovies(with movies: [Show])
-    func interactorDidFetchUpcomingMovies(with movies: [Show])
+    // Interactor Inputs
+    func interactorDidFetchMovies(
+        popular: Observable<Result<[Show], APIError>>,
+        new: Observable<Result<[Show], APIError>>,
+        upcoming: Observable<Result<[Show], APIError>>
+    )
     func interactorDidFetchSearchResults(with movies: [Show])
 
+    // View Inputs
+    func initialize()
     func movieItemTapped(item: Show)
     func viewAllButtonTapped(sectionTitle: String, items: [Show])
     func searchForMovie(with text: String)
@@ -29,37 +33,57 @@ class MoviesPresenterImpl: MoviesPresenter {
     var interactor: MoviesInteractor?
     var view: MoviesView?
 
-    var group: DispatchGroup?
-
-    var popular: [Show] = []
-    var new: [Show] = []
-    var upcoming: [Show] = []
-
     func initialize() {
-        group = DispatchGroup()
-
-        interactor?.getPopularMovies()
-        interactor?.getNewMovies()
-        interactor?.getUpcomingMovies()
+        interactor?.getMovies()
     }
 
-    func interactorDidFetchPopularMovies(with movies: [Show]) {
-        popular = movies
+    func interactorDidFetchMovies(
+        popular: Observable<Result<[Show], APIError>>,
+        new: Observable<Result<[Show], APIError>>,
+        upcoming: Observable<Result<[Show], APIError>>
+    ) {
+        let fetchedSections = Observable.combineLatest(popular, new, upcoming) { [weak self]
+            popular,
+            new,
+            upcoming -> [MoviesSectionType] in
+            guard let self = self else {
+                return []
+            }
+            let popularSection = self.handleFetchingPopularMovies(items: popular)
+            let newSection = self.handleFetchingNewMovies(items: new)
+            let upcomingSection = self.handleFetchingUpcomingMovies(items: upcoming)
+            return [popularSection, newSection, upcomingSection]
+        }
+        view?.update(fetchedSections: fetchedSections)
     }
 
-    func interactorDidFetchNewMovies(with movies: [Show]) {
-        new = movies
+    func handleFetchingPopularMovies(items: Result<[Show], APIError>) -> MoviesSectionType {
+        switch items {
+        case .success(let popular):
+            return .carousel(movies: popular)
+        case .failure(let error):
+            debugPrint("Error fetching popular movies \(error)")
+            return .carousel(movies: [])
+        }
     }
 
-    func interactorDidFetchUpcomingMovies(with movies: [Show]) {
-        upcoming = movies
+    func handleFetchingNewMovies(items: Result<[Show], APIError>) -> MoviesSectionType {
+        switch items {
+        case .success(let new):
+            return .topSection(movies: new)
+        case .failure(let error):
+            debugPrint("Error fetching new movies \(error)")
+            return .topSection(movies: [])
+        }
+    }
 
-        group?.notify(queue: .main) { [self] in
-            view?.update(
-                popularMovies: popular,
-                newMovies: new,
-                upcomingMovies: upcoming
-            )
+    func handleFetchingUpcomingMovies(items: Result<[Show], APIError>) -> MoviesSectionType {
+        switch items {
+        case .success(let upcoming):
+            return .bottomSection(movies: upcoming)
+        case .failure(let error):
+            debugPrint("Error fetching upcoming movies \(error)")
+            return .bottomSection(movies: [])
         }
     }
 

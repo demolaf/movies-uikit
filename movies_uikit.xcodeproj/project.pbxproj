@@ -60,7 +60,6 @@
 		7E320BC42AA790600048750F /* CreateSessionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC22AA790600048750F /* CreateSessionResponse.swift */; };
 		7E320BC82AA790690048750F /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC62AA790690048750F /* AuthRepositoryImpl.swift */; };
 		7E320BC92AA790690048750F /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BC72AA790690048750F /* AuthRepository.swift */; };
-		7E320BD82AA7FF110048750F /* MoviesRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E320BD72AA7FF110048750F /* MoviesRepositoryTests.swift */; };
 		7E6428E22AA9651C00CF1752 /* RiveRuntime.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6428E12AA9651C00CF1752 /* RiveRuntime.xcframework */; };
 		7E6428E32AA9651C00CF1752 /* RiveRuntime.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6428E12AA9651C00CF1752 /* RiveRuntime.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7E6428E82AA9685800CF1752 /* sith-de-mayo.riv in Resources */ = {isa = PBXBuildFile; fileRef = 7E6428E72AA9685800CF1752 /* sith-de-mayo.riv */; };
@@ -69,11 +68,13 @@
 		7E9F0D6E2B28053C00607806 /* MoviesViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9F0D6D2B28053C00607806 /* MoviesViewController+CollectionView.swift */; };
 		7EA58C822B0D1C11001E0C03 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */; };
 		7EA58C832B0D1C11001E0C03 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F152AAAA05E00C9055F /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7EB207E82B4C2688008CCF21 /* HTTPURLSessionClientImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB207E72B4C2688008CCF21 /* HTTPURLSessionClientImpl.swift */; };
+		7EB207EB2B4C294E008CCF21 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB207EA2B4C294E008CCF21 /* APIError.swift */; };
 		7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; };
 		7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EC468BB2AA2AA2000B6D28F /* Realm.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */; };
 		7EC468BC2AA2AA2000B6D28F /* Realm.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7EC468C42AA2AAAD00B6D28F /* HTTPClientImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468C12AA2AAAD00B6D28F /* HTTPClientImpl.swift */; };
+		7EC468C42AA2AAAD00B6D28F /* HTTPAFClientImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468C12AA2AAAD00B6D28F /* HTTPAFClientImpl.swift */; };
 		7EC468C52AA2AAAD00B6D28F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468C22AA2AAAD00B6D28F /* HTTPClient.swift */; };
 		7EC468C62AA2AAAD00B6D28F /* HTTPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468C32AA2AAAD00B6D28F /* HTTPConstants.swift */; };
 		7EC468CC2AA2ADC700B6D28F /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC468CB2AA2ADC700B6D28F /* UserAPI.swift */; };
@@ -89,8 +90,6 @@
 		7EE72F1A2AAAA05E00C9055F /* RxCocoa.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F162AAAA05E00C9055F /* RxCocoa.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EE72F1E2AAAA22500C9055F /* RxRelay.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1B2AAAA22500C9055F /* RxRelay.xcframework */; };
 		7EE72F1F2AAAA22500C9055F /* RxRelay.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1B2AAAA22500C9055F /* RxRelay.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7EE72F222AAAA22600C9055F /* RxBlocking.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1D2AAAA22500C9055F /* RxBlocking.xcframework */; };
-		7EE72F232AAAA22600C9055F /* RxBlocking.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE72F1D2AAAA22500C9055F /* RxBlocking.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7EEAAD722A9920950087AF46 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD712A9920950087AF46 /* MoviesViewController.swift */; };
 		7EEAAD752A9923390087AF46 /* CarouselItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD742A9923390087AF46 /* CarouselItemCollectionViewCell.swift */; };
 		7EEAAD792A99321C0087AF46 /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEAAD782A99321C0087AF46 /* MoviesRouter.swift */; };
@@ -111,7 +110,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7E320BD22AA7E5B30048750F /* PBXContainerItemProxy */ = {
+		7E80C03F2B431DB8000679ED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7EF4AFB12A82DC970001B902 /* Project object */;
 			proxyType = 1;
@@ -129,7 +128,6 @@
 			files = (
 				7EC468B82AA2AA1C00B6D28F /* Alamofire.xcframework in Embed Frameworks */,
 				7ED3674B2AAEAB1F00D3EF3F /* RealmSwift.xcframework in Embed Frameworks */,
-				7EE72F232AAAA22600C9055F /* RxBlocking.xcframework in Embed Frameworks */,
 				7EE72F1A2AAAA05E00C9055F /* RxCocoa.xcframework in Embed Frameworks */,
 				7E0807C72AA3997E00E6E5C2 /* SDWebImage.xcframework in Embed Frameworks */,
 				7EE72F1F2AAAA22500C9055F /* RxRelay.xcframework in Embed Frameworks */,
@@ -195,18 +193,20 @@
 		7E320BC22AA790600048750F /* CreateSessionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSessionResponse.swift; sourceTree = "<group>"; };
 		7E320BC62AA790690048750F /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
 		7E320BC72AA790690048750F /* AuthRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
-		7E320BCE2AA7E5B30048750F /* movies_uikitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movies_uikitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E320BD72AA7FF110048750F /* MoviesRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepositoryTests.swift; sourceTree = "<group>"; };
 		7E47BEC32B0B6E8C0041F786 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = movies_uikit/RxSwift.playground/Resources/RxSwift.xcframework; sourceTree = "<group>"; };
 		7E6428E12AA9651C00CF1752 /* RiveRuntime.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RiveRuntime.xcframework; path = Carthage/Build/RiveRuntime.xcframework; sourceTree = "<group>"; };
 		7E6428E72AA9685800CF1752 /* sith-de-mayo.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sith-de-mayo.riv"; sourceTree = "<group>"; };
 		7E70DB192A9960230024FE23 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		7E80C03B2B431DB8000679ED /* movies_uikitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = movies_uikitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8AE0A82AE0938400F8176B /* TableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extensions.swift"; sourceTree = "<group>"; };
 		7E9F0D6D2B28053C00607806 /* MoviesViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoviesViewController+CollectionView.swift"; sourceTree = "<group>"; };
+		7EB207E72B4C2688008CCF21 /* HTTPURLSessionClientImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPURLSessionClientImpl.swift; sourceTree = "<group>"; };
+		7EB207EA2B4C294E008CCF21 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		7EC468B62AA2AA1C00B6D28F /* Alamofire.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Alamofire.xcframework; path = Carthage/Build/Alamofire.xcframework; sourceTree = "<group>"; };
 		7EC468BA2AA2AA2000B6D28F /* Realm.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Realm.xcframework; path = Carthage/Build/Realm.xcframework; sourceTree = "<group>"; };
 		7EC468BD2AA2AA2200B6D28F /* RealmSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RealmSwift.xcframework; path = Carthage/Build/RealmSwift.xcframework; sourceTree = "<group>"; };
-		7EC468C12AA2AAAD00B6D28F /* HTTPClientImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientImpl.swift; sourceTree = "<group>"; };
+		7EC468C12AA2AAAD00B6D28F /* HTTPAFClientImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPAFClientImpl.swift; sourceTree = "<group>"; };
 		7EC468C22AA2AAAD00B6D28F /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		7EC468C32AA2AAAD00B6D28F /* HTTPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPConstants.swift; sourceTree = "<group>"; };
 		7EC468CB2AA2ADC700B6D28F /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7E320BCB2AA7E5B30048750F /* Frameworks */ = {
+		7E80C0382B431DB8000679ED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -258,7 +258,6 @@
 			files = (
 				7EC468B72AA2AA1C00B6D28F /* Alamofire.xcframework in Frameworks */,
 				7ED3674A2AAEAB1F00D3EF3F /* RealmSwift.xcframework in Frameworks */,
-				7EE72F222AAAA22600C9055F /* RxBlocking.xcframework in Frameworks */,
 				7EE72F192AAAA05E00C9055F /* RxCocoa.xcframework in Frameworks */,
 				7E0807C62AA3997E00E6E5C2 /* SDWebImage.xcframework in Frameworks */,
 				7EE72F1E2AAAA22500C9055F /* RxRelay.xcframework in Frameworks */,
@@ -303,6 +302,7 @@
 		7E0807D42AA3AEB700E6E5C2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7EB207E92B4C28DE008CCF21 /* Enums */,
 				7EEB76AF2AA2D436009634FB /* RepositoryProvider.swift */,
 				7E70DB192A9960230024FE23 /* AppRouter.swift */,
 				7EC468DA2AA2C38600B6D28F /* Environment.swift */,
@@ -467,15 +467,6 @@
 			path = "Auth Repository";
 			sourceTree = "<group>";
 		};
-		7E320BCF2AA7E5B30048750F /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7ED7B8122AAC9D9B008C84CD /* Data */,
-				7ED7B8142AAC9DBE008C84CD /* Modules */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		7E6428E42AA9681100CF1752 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,8 +497,6 @@
 		7E70DB412A996E2C0024FE23 /* Datasources */ = {
 			isa = PBXGroup;
 			children = (
-				7EC468CF2AA2AE0200B6D28F /* Local Storage */,
-				7EC468C02AA2AAAD00B6D28F /* HTTP Client */,
 				7E320BBC2AA7903F0048750F /* AuthAPI.swift */,
 				7EC468CB2AA2ADC700B6D28F /* UserAPI.swift */,
 				7EC468CD2AA2ADD500B6D28F /* MoviesAPI.swift */,
@@ -526,6 +515,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7E80C03C2B431DB8000679ED /* movies_uikitTests */ = {
+			isa = PBXGroup;
+			children = (
+				7ED7B8122AAC9D9B008C84CD /* Data */,
+				7ED7B8142AAC9DBE008C84CD /* Modules */,
+			);
+			path = movies_uikitTests;
+			sourceTree = "<group>";
+		};
 		7E8AE0A72AE0936D00F8176B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +538,23 @@
 				7E9F0D6D2B28053C00607806 /* MoviesViewController+CollectionView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7EB207E62B4C261A008CCF21 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7EC468CF2AA2AE0200B6D28F /* Local Storage */,
+				7EC468C02AA2AAAD00B6D28F /* HTTP Client */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7EB207E92B4C28DE008CCF21 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				7EB207EA2B4C294E008CCF21 /* APIError.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		7EC468B52AA2AA1C00B6D28F /* Frameworks */ = {
@@ -565,8 +580,9 @@
 		7EC468C02AA2AAAD00B6D28F /* HTTP Client */ = {
 			isa = PBXGroup;
 			children = (
-				7EC468C12AA2AAAD00B6D28F /* HTTPClientImpl.swift */,
+				7EC468C12AA2AAAD00B6D28F /* HTTPAFClientImpl.swift */,
 				7EC468C22AA2AAAD00B6D28F /* HTTPClient.swift */,
+				7EB207E72B4C2688008CCF21 /* HTTPURLSessionClientImpl.swift */,
 			);
 			path = "HTTP Client";
 			sourceTree = "<group>";
@@ -700,6 +716,7 @@
 		7EEAAD612A98E1F00087AF46 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				7EB207E62B4C261A008CCF21 /* Services */,
 				7E70DB412A996E2C0024FE23 /* Datasources */,
 				7E70DB3E2A996DEE0024FE23 /* Repositories */,
 				7E70DB3D2A996DE70024FE23 /* Models */,
@@ -787,6 +804,7 @@
 			isa = PBXGroup;
 			children = (
 				7EF4AFBB2A82DC970001B902 /* movies_uikit */,
+				7E80C03C2B431DB8000679ED /* movies_uikitTests */,
 				7EF4AFBA2A82DC970001B902 /* Products */,
 				7EC468B52AA2AA1C00B6D28F /* Frameworks */,
 			);
@@ -796,7 +814,7 @@
 			isa = PBXGroup;
 			children = (
 				7EF4AFB92A82DC970001B902 /* movies_uikit.app */,
-				7E320BCE2AA7E5B30048750F /* movies_uikitTests.xctest */,
+				7E80C03B2B431DB8000679ED /* movies_uikitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -810,7 +828,6 @@
 				7EEAAD612A98E1F00087AF46 /* Data */,
 				7EEAAD5F2A98E1800087AF46 /* Modules */,
 				7EF4AFCA2A82DC980001B902 /* Info.plist */,
-				7E320BCF2AA7E5B30048750F /* Tests */,
 				7EC468D82AA2C29200B6D28F /* Development.xcconfig */,
 			);
 			path = movies_uikit;
@@ -819,22 +836,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7E320BCD2AA7E5B30048750F /* movies_uikitTests */ = {
+		7E80C03A2B431DB8000679ED /* movies_uikitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7E320BD42AA7E5B30048750F /* Build configuration list for PBXNativeTarget "movies_uikitTests" */;
+			buildConfigurationList = 7E80C0412B431DB8000679ED /* Build configuration list for PBXNativeTarget "movies_uikitTests" */;
 			buildPhases = (
-				7E320BCA2AA7E5B30048750F /* Sources */,
-				7E320BCB2AA7E5B30048750F /* Frameworks */,
-				7E320BCC2AA7E5B30048750F /* Resources */,
+				7E80C0372B431DB8000679ED /* Sources */,
+				7E80C0382B431DB8000679ED /* Frameworks */,
+				7E80C0392B431DB8000679ED /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7E320BD32AA7E5B30048750F /* PBXTargetDependency */,
+				7E80C0402B431DB8000679ED /* PBXTargetDependency */,
 			);
 			name = movies_uikitTests;
 			productName = movies_uikitTests;
-			productReference = 7E320BCE2AA7E5B30048750F /* movies_uikitTests.xctest */;
+			productReference = 7E80C03B2B431DB8000679ED /* movies_uikitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7EF4AFB82A82DC970001B902 /* movies_uikit */ = {
@@ -864,12 +881,11 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					7E320BCD2AA7E5B30048750F = {
-						CreatedOnToolsVersion = 14.3.1;
-						LastSwiftMigration = 1430;
+					7E80C03A2B431DB8000679ED = {
+						CreatedOnToolsVersion = 15.1;
 						TestTargetID = 7EF4AFB82A82DC970001B902;
 					};
 					7EF4AFB82A82DC970001B902 = {
@@ -891,13 +907,13 @@
 			projectRoot = "";
 			targets = (
 				7EF4AFB82A82DC970001B902 /* movies_uikit */,
-				7E320BCD2AA7E5B30048750F /* movies_uikitTests */,
+				7E80C03A2B431DB8000679ED /* movies_uikitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7E320BCC2AA7E5B30048750F /* Resources */ = {
+		7E80C0392B431DB8000679ED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -980,11 +996,10 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7E320BCA2AA7E5B30048750F /* Sources */ = {
+		7E80C0372B431DB8000679ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E320BD82AA7FF110048750F /* MoviesRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -993,6 +1008,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E320BC92AA790690048750F /* AuthRepository.swift in Sources */,
+				7EB207E82B4C2688008CCF21 /* HTTPURLSessionClientImpl.swift in Sources */,
 				7E0807E82AA40F2500E6E5C2 /* TVShowsInteractor.swift in Sources */,
 				7EC468DB2AA2C38600B6D28F /* Environment.swift in Sources */,
 				7E0807F12AA410CD00E6E5C2 /* LibraryInteractor.swift in Sources */,
@@ -1017,7 +1033,7 @@
 				7EC468C52AA2AAAD00B6D28F /* HTTPClient.swift in Sources */,
 				7E20E0EE2B1D32C900EA93C3 /* Show.swift in Sources */,
 				7E1B87992AA6853C0023A20D /* RecommendedBasedOnItemView.swift in Sources */,
-				7EC468C42AA2AAAD00B6D28F /* HTTPClientImpl.swift in Sources */,
+				7EC468C42AA2AAAD00B6D28F /* HTTPAFClientImpl.swift in Sources */,
 				7ECCCACC2A999A1B005F1138 /* MoviesBarButtonItem.swift in Sources */,
 				7E20E0E92B1CBC1800EA93C3 /* TVShowsViewController+CollectionView.swift in Sources */,
 				7EEB76CB2AA3830D009634FB /* MoviesRepositoryImpl.swift in Sources */,
@@ -1029,6 +1045,7 @@
 				7E320BC32AA790600048750F /* RequestTokenResponse.swift in Sources */,
 				7E0807F32AA410D600E6E5C2 /* LibraryPresenter.swift in Sources */,
 				7E0807EA2AA40F3500E6E5C2 /* TVShowsRouter.swift in Sources */,
+				7EB207EB2B4C294E008CCF21 /* APIError.swift in Sources */,
 				7EEB76B02AA2D436009634FB /* RepositoryProvider.swift in Sources */,
 				7E1B87942AA58F680023A20D /* ReusableTableViewCell.swift in Sources */,
 				7E320BB12AA746790048750F /* DetailDescriptionView.swift in Sources */,
@@ -1061,10 +1078,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7E320BD32AA7E5B30048750F /* PBXTargetDependency */ = {
+		7E80C0402B431DB8000679ED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7EF4AFB82A82DC970001B902 /* movies_uikit */;
-			targetProxy = 7E320BD22AA7E5B30048750F /* PBXContainerItemProxy */;
+			targetProxy = 7E80C03F2B431DB8000679ED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1080,35 +1097,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7E320BD52AA7E5B30048750F /* Debug */ = {
+		7E80C0422B431DB8000679ED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3G33A99C47;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aob.movies-uikitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/movies_uikit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/movies_uikit";
 			};
 			name = Debug;
 		};
-		7E320BD62AA7E5B30048750F /* Release */ = {
+		7E80C0432B431DB8000679ED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3G33A99C47;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.aob.movies-uikitTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1300,11 +1325,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7E320BD42AA7E5B30048750F /* Build configuration list for PBXNativeTarget "movies_uikitTests" */ = {
+		7E80C0412B431DB8000679ED /* Build configuration list for PBXNativeTarget "movies_uikitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7E320BD52AA7E5B30048750F /* Debug */,
-				7E320BD62AA7E5B30048750F /* Release */,
+				7E80C0422B431DB8000679ED /* Debug */,
+				7E80C0432B431DB8000679ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

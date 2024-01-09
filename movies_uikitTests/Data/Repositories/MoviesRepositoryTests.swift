@@ -6,7 +6,10 @@
 //
 
 import XCTest
+import RxTest
+import RxSwift
 import RxRelay
+
 @testable import movies_uikit
 
 class MockMovie: MovieDTO {}
@@ -20,15 +23,23 @@ class MockLocalStorage: LocalStorage {
 
     func read<ObjectType>(
         object: ObjectType.Type,
-        completion: @escaping (AnyObject?, Error?) -> Void
+        completion: @escaping (Result<ObjectType, Error>) -> Void
     ) where ObjectType: AnyObject {}
 
     func readAll<ObjectType>(
         object: ObjectType.Type,
         sortBy: String,
         predicate: NSPredicate?,
-        completion: @escaping ([ObjectType], Error?) -> Void
+        completion: @escaping (Result<[ObjectType], Error>) -> Void
     ) where ObjectType: AnyObject {}
+
+    func readAll<ObjectType>(
+        object: ObjectType.Type,
+        sortBy: String,
+        predicate: NSPredicate?
+    ) -> RxSwift.Observable<[ObjectType]> where ObjectType: AnyObject {
+        return Observable.from<[ObjectType]>(optional: [])
+    }
 
     func updateProperty(
         callback: @escaping () -> Void
@@ -38,8 +49,8 @@ class MockLocalStorage: LocalStorage {
         object: ObjectType.Type,
         sortBy: String,
         predicate: NSPredicate?
-    ) -> BehaviorRelay<[ObjectType]> where ObjectType: AnyObject {
-        return BehaviorRelay<[ObjectType]>(value: [])
+    ) -> RxSwift.Observable<[ObjectType]> where ObjectType: AnyObject {
+        return Observable.from<[ObjectType]>(optional: [])
     }
 }
 

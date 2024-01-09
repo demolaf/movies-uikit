@@ -52,7 +52,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7E320BCD2AA7E5B30048750F"
+               BlueprintIdentifier = "7E80C03A2B431DB8000679ED"
                BuildableName = "movies_uikitTests.xctest"
                BlueprintName = "movies_uikitTests"
                ReferencedContainer = "container:movies_uikit.xcodeproj">

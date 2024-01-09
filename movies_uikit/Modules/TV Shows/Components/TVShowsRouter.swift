@@ -35,10 +35,7 @@ class TVShowsRouterImpl: TVShowsRouter {
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.moviesRepository =
-        (UIApplication.shared.delegate as? AppDelegate)?
-            .repositoryProvider
-            .moviesRepository
+        interactor.moviesRepository = RepositoryProvider.shared.moviesRepository
 
         // setup presenter with router, view and interactor
         presenter.router = router

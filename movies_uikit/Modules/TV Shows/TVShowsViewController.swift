@@ -196,24 +196,24 @@ extension TVShowsViewController: UISearchResultsUpdating {
         let vc = searchController.searchResultsController as? ReusableTableViewController
 
         searchResults
-            .debounce(.seconds(2), scheduler: MainScheduler())
             .subscribe(onNext: { tvShows in
                 DispatchQueue.main.async {
                     vc?.showLoadingIndicator.onNext(false)
                     vc?.items.accept(tvShows)
                 }
-        })
-        .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         searchController
             .searchBar.rx
             .text
             .do(onNext: { _ in
-                DispatchQueue.main.async {
-                    vc?.showLoadingIndicator.onNext(true)
-                }
+                vc?.showLoadingIndicator.onNext(true)
             })
-            .debounce(.seconds(2), scheduler: MainScheduler())
+            // You have a search text field subscription, which sends its current text to a server API.
+            // By using throttle, you can let the user quickly type in words and only send a request to
+            // your server after the user has finished typing.
+            .throttle(.seconds(2), scheduler: MainScheduler.instance)
             .subscribe { [weak self] text in
                 guard let text = text else {
                     return

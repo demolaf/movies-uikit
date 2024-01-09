@@ -5,9 +5,9 @@
 //  Created by Ademola Fadumo on 25/08/2023.
 //
 
-import Foundation
 import UIKit
 import RxSwift
+import RxCocoa
 
 enum MoviesSectionType {
     case carousel(movies: [Show])
@@ -29,12 +29,7 @@ enum MoviesSectionType {
 protocol MoviesView: AnyObject {
     var presenter: MoviesPresenter? { get set }
     var searchResults: BehaviorSubject<[Show]> { get }
-
-    func update(
-        popularMovies: [Show],
-        newMovies: [Show],
-        upcomingMovies: [Show]
-    )
+    func update(fetchedSections: Observable<[MoviesSectionType]>)
 }
 
 class MoviesViewController: UIViewController, MoviesView {
@@ -73,6 +68,18 @@ class MoviesViewController: UIViewController, MoviesView {
         return collectionView
     }()
 
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.darkGray
+        refreshControl.addAction(
+            UIAction { [weak self] _ in
+                self?.presenter?.initialize()
+            },
+            for: .valueChanged
+        )
+        return refreshControl
+    }()
+
     private lazy var searchController: UISearchController = {
         let resuableTableVC = ReusableTableViewController()
         resuableTableVC.delegate = self
@@ -94,7 +101,7 @@ class MoviesViewController: UIViewController, MoviesView {
 
     var presenter: MoviesPresenter?
 
-    var sections = [MoviesSectionType]()
+    let items = BehaviorRelay<[MoviesSectionType]>(value: [])
 
     let searchResults = BehaviorSubject<[Show]>(value: [])
 
@@ -133,14 +140,19 @@ class MoviesViewController: UIViewController, MoviesView {
         collectionView.isHidden = true
     }
 
-    func update(popularMovies: [Show], newMovies: [Show], upcomingMovies: [Show]) {
-        sections.append(.carousel(movies: popularMovies))
-        sections.append(.topSection(movies: newMovies))
-        sections.append(.bottomSection(movies: upcomingMovies))
+    func update(fetchedSections: Observable<[MoviesSectionType]>) {
+        fetchedSections.bind(to: items)
+            .disposed(by: disposeBag)
 
-        loadingIndicator.stopAnimating()
-        collectionView.reloadData()
-        collectionView.isHidden = false
+        fetchedSections
+            .subscribe(onNext: { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.loadingIndicator.stopAnimating()
+                    self?.collectionView.reloadData()
+                    self?.collectionView.isHidden = false
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -185,7 +197,7 @@ extension MoviesViewController: UISearchResultsUpdating {
         searchController
             .searchBar.rx
             .text
-            .debounce(.seconds(2), scheduler: MainScheduler())
+            .debounce(.seconds(2), scheduler: MainScheduler.instance)
             .subscribe { [weak self] text in
                 guard let text = text else {
                     return

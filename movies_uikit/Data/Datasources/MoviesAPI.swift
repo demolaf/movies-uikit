@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 /// For Movies
 class MoviesAPI {
@@ -17,13 +18,10 @@ class MoviesAPI {
         self.localStorage = localStorage
     }
 
-    func getMovies(
-        categoryType: String,
-        completion: @escaping (Result<[MovieDTO], Error>) -> Void
-    ) {
+    func getMovies(categoryType: String) -> Observable<Result<[MovieDTO], APIError>> {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
-        httpClient.get(
+        return httpClient.get(
             url: HTTPConstants.Endpoints.getShows(
                 showType: "movie",
                 categoryType: categoryType
@@ -31,23 +29,20 @@ class MoviesAPI {
             headers: headers,
             parameters: nil,
             response: MoviesResponse.self
-        ) { result in
+        ).map { result in
             switch result {
             case .success(let response):
-                completion(.success(response.results))
+                return .success(response.results)
             case .failure(let error):
-                completion(.failure(error))
+                return .failure(error)
             }
         }
     }
 
-    func getTVShows(
-        categoryType: String,
-        completion: @escaping (Result<[TVShowDTO], Error>) -> Void
-    ) {
+    func getTVShows(categoryType: String) -> Observable<Result<[TVShowDTO], APIError>> {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
-        httpClient.get(
+        return httpClient.get(
             url: HTTPConstants.Endpoints.getShows(
                 showType: "tv",
                 categoryType: categoryType
@@ -55,22 +50,20 @@ class MoviesAPI {
             headers: headers,
             parameters: nil,
             response: TVShowsResponse.self
-        ) { result in
+        ).map { result in
             switch result {
             case .success(let response):
-                completion(.success(response.results))
+                return .success(response.results)
             case .failure(let error):
-                completion(.failure(error))
+                return .failure(error)
             }
         }
     }
 
-    func getRecommendedShowsByMovie(
-        id: String,
-        completion: @escaping (Result<[MovieDTO], Error>) -> Void
-    ) {
+    func getRecommendedShowsByMovie(id: String) -> Observable<Result<[MovieDTO], APIError>> {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
-        httpClient.get(
+
+        return httpClient.get(
             url: HTTPConstants.Endpoints.getRecommendedShowsByShowId(
                 showType: "movie",
                 id: id
@@ -78,23 +71,20 @@ class MoviesAPI {
             headers: headers,
             parameters: nil,
             response: MoviesResponse.self
-        ) { result in
+        ).map { result in
             switch result {
             case .success(let response):
-                completion(.success(response.results))
+                return .success(response.results)
             case .failure(let error):
-                completion(.failure(error))
+                return .failure(error)
             }
         }
     }
 
-    func getRecommendedShowsByTVShow(
-        id: String,
-        completion: @escaping (Result<[TVShowDTO], Error>) -> Void
-    ) {
+    func getRecommendedShowsByTVShow(id: String) -> Observable<Result<[TVShowDTO], APIError>> {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
-        httpClient.get(
+        return httpClient.get(
             url: HTTPConstants.Endpoints.getRecommendedShowsByShowId(
                 showType: "tv",
                 id: id
@@ -102,23 +92,20 @@ class MoviesAPI {
             headers: headers,
             parameters: nil,
             response: TVShowsResponse.self
-        ) { result in
+        ).map { result in
             switch result {
             case .success(let response):
-                completion(.success(response.results))
+                return .success(response.results)
             case .failure(let error):
-                completion(.failure(error))
+                return .failure(error)
             }
         }
     }
 
-    func getTVShowsSearchResults(
-        from query: String,
-        completion: @escaping (Result<[TVShowDTO], Error>) -> Void
-    ) {
+    func getTVShowsSearchResults(from query: String) -> Observable<Result<[TVShowDTO], APIError>> {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
-        httpClient.get(
+        return httpClient.get(
             url: HTTPConstants.Endpoints.search(
                 showType: "tv",
                 name: query
@@ -126,23 +113,20 @@ class MoviesAPI {
             headers: headers,
             parameters: nil,
             response: TVShowsResponse.self
-        ) { result in
+        ).map { result in
             switch result {
             case .success(let response):
-                completion(.success(response.results))
+                .success(response.results)
             case .failure(let error):
-                completion(.failure(error))
+                .failure(error)
             }
         }
     }
 
-    func getMovieSearchResults(
-        from query: String,
-        completion: @escaping (Result<[MovieDTO], Error>) -> Void
-    ) {
+    func getMovieSearchResults(from query: String) -> Observable<Result<[MovieDTO], APIError>> {
         let headers = ["Authorization": "Bearer \(HTTPConstants.Auth.tmdbAuthToken)"]
 
-        httpClient.get(
+        return httpClient.get(
             url: HTTPConstants.Endpoints.search(
                 showType: "movie",
                 name: query
@@ -150,12 +134,12 @@ class MoviesAPI {
             headers: headers,
             parameters: nil,
             response: MoviesResponse.self
-        ) { result in
+        ).map { result in
             switch result {
             case .success(let response):
-                completion(.success(response.results))
+                .success(response.results)
             case .failure(let error):
-                completion(.failure(error))
+                .failure(error)
             }
         }
     }

@@ -34,13 +34,8 @@ class DetailRouterImpl: DetailRouter {
 
         // setup interactor with presenter
         interactor.presenter = presenter
-        interactor.userRepository =
-        (UIApplication.shared.delegate as? AppDelegate)?
-            .repositoryProvider
-            .userRepository
-        interactor.moviesRepository = (UIApplication.shared.delegate as? AppDelegate)?
-            .repositoryProvider
-            .moviesRepository
+        interactor.userRepository = RepositoryProvider.shared.userRepository
+        interactor.moviesRepository = RepositoryProvider.shared.moviesRepository
 
         // setup presenter with router, view and interactor
         presenter.router = router
